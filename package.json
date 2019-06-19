@@ -1,0 +1,26 @@
+{
+  "name": "cytoscape-web-service-final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cytoscape": "^3.7.2",
+    "cytoscape-avsdf": "^1.0.0",
+    "cytoscape-cola": "^2.3.0",
+    "cytoscape-cose-bilkent": "^4.0.0",
+    "cytoscape-dagre": "^2.2.2",
+    "cytoscape-euler": "^1.2.1",
+    "cytoscape-fcose": "^1.0.0",
+    "cytoscape-klay": "^3.1.2",
+    "cytoscape-spread": "^3.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  }
+}
