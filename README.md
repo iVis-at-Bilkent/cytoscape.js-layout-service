@@ -2,4 +2,4 @@
 Web-service on cytoscape.js to layout graphs
 
 Deployed at:
-https://cytoscape-web-service.herokuapp.com/
+https://cytoscape-layout-service.herokuapp.com/
