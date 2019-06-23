@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.js",
+    "debug": "node --inspect-brk src/app.js",
     "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser-xml": "^1.1.0",
+    "chalk": "^2.4.2",
     "cytoscape": "^3.7.2",
     "cytoscape-avsdf": "^1.0.0",
     "cytoscape-cola": "^2.3.0",
@@ -18,9 +21,13 @@
     "cytoscape-dagre": "^2.2.2",
     "cytoscape-euler": "^1.2.1",
     "cytoscape-fcose": "^1.0.0",
+    "cytoscape-graphml": "^1.0.6",
     "cytoscape-klay": "^3.1.2",
     "cytoscape-spread": "^3.0.0",
     "express": "^4.17.1",
-    "nodemon": "^1.19.1"
+    "jquery": "^3.4.1",
+    "jsdom": "^15.1.1",
+    "nodemon": "^1.19.1",
+    "sbgnml-to-cytoscape": "^4.0.4"
   }
 }

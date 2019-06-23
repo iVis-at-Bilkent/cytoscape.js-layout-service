@@ -2,16 +2,34 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cytoscape = require('cytoscape');
-// const cors = require('cors');
+
+// for debugging purposes
+const chalk = require('chalk');
+
+
+// to support sbgnml type of input
+let convert = require('sbgnml-to-cytoscape');
+
+// for graphml
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+
+var $ = jQuery = require('jquery')(window);
+
+const graphml = require('cytoscape-graphml');
+cytoscape.use(graphml, $);
 
 
 // for fcose
 const fcose = require('cytoscape-fcose');
-cytoscape.use( fcose );
+cytoscape.use(fcose);
 
 // for cose-bilkent
 const coseBilkent = require('cytoscape-cose-bilkent');
-cytoscape.use( coseBilkent );
+cytoscape.use(coseBilkent);
 
 // for cise layout, Needs to be fixed, some problems
 //////////////////////////////////
@@ -20,73 +38,138 @@ cytoscape.use( coseBilkent );
 
 // for dagre layout
 const dagre = require('cytoscape-dagre');
-cytoscape.use( dagre );
+cytoscape.use(dagre);
 
 // for klay layout
 const klay = require('cytoscape-klay');
-cytoscape.use( klay );
+cytoscape.use(klay);
 
 // TODO test layouts below
 // for avsdf layout
 const avsdf = require('cytoscape-avsdf');
-cytoscape.use( avsdf );
+cytoscape.use(avsdf);
 
 // cola layout
 const cola = require('cytoscape-cola');
-cytoscape.use( cola );
+cytoscape.use(cola);
 
 // euler layout
 const euler = require('cytoscape-euler');
-cytoscape.use( euler );
+cytoscape.use(euler);
 
 // spread layout
 var spread = require('cytoscape-spread');
-cytoscape.use( spread );
+cytoscape.use(spread);
 
 let cy;
-app.use(express.json());
-// app.use(cors);
+let options;
+let data;
+let body;
+let isJson;
 
-console.log( "Listening on" + port );
+// console.log( JSON.parse('{"perman":[{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}]}') )
 
-app.get('/', (req, res) => {
-    return res.send("Welcome to the web-service");
-});
+// middleware to manage the formats of files
+app.use((req, res, next) => {
+    body = '';
+    isJson = false;
+    options = '';
+    data = '';
 
-app.post( '/layout', (req, res) => {
-    
-    const data = req.body[0];
-    const options = req.body[1];
+    req.on('data', chunk => {
+        body += chunk;
+    })
 
-    if( options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose" ){
+    req.on('end', () => {
+        for (id = 0; id < body.length && body[id] != '{'; id++);
+        options = body.substring(id);
+        data = body.substring(0, id);
+
+        let foundSBGN = body.includes("sbgn");
+        let foundGML = body.includes("graphml");
+        let isJson = !(foundGML || foundSBGN);
+
+        if (isJson) {
+
+            body = JSON.parse( body );
+
+            data = body[0];
+            options = body[1];
+
+            // options.klay.direction = "UNDEFINED";
+
+            console.log( options );
+        }
+        else {
+            options = JSON.parse( options );
+
+            if (foundSBGN) { // sbgnml
+                data = convert(data);
+            }
+            else if (foundGML) { // graphml
+                // console.log(data);
+            }
+        }
+        next();
+    })
+
+})
+
+// app.use(express.json());
+
+
+app.post('/layout/:format', (req, res) => {
+    // data = req.body[0];
+    // options = req.body[1];
+
+    if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
         cy = cytoscape({
             styleEnabled: false,
             headless: true
         });
     }
-    else{
+    else {
         cy = cytoscape({
             headless: true
         })
     }
 
-    let eles = cy.add(data); 
-
-    try{
+    if (req.params.format === "graphml") {
+        cy.graphml(data);
         cy.layout(options).run();
     }
-    catch( e ){
-        return res.status(500).send( e + "" );
+    else {
+        cy.add(data);
+
+        debugger;
+
+        try {
+            debugger;
+            cy.layout(options).run();
+            debugger;
+        }
+        catch (e) {
+            // console.log( "I am here" );
+            // console.error(e);
+            return res.status(500).send(e);
+        }
     }
 
     let ret = {};
 
-    cy.filter( (element, i) => {
+    cy.filter((element, i) => {
         return element.isNode();
-    }).forEach( (node) => {
+    }).forEach((node) => {
         ret[node.id()] = node.position();
     });
 
-    return res.status(200).send( ret );
+    return res.status(200).send(ret);
 });
-app.listen(port);
+
+app.get('/', (req, res) => {
+    return res.status(200).send("Welcome to the web-service");
+});
+
+app.listen(port, () => {
+    console.log("Listening on " + port);
+});
