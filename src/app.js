@@ -67,8 +67,6 @@ let data;
 let body;
 let isJson;
 
-// console.log( JSON.parse('{"perman":[{"firstname":"Jesper","surname":"Aaberg","phone":["555-0100","555-0120"]}]}') )
-
 // middleware to manage the formats of files
 app.use((req, res, next) => {
     body = '';
@@ -90,24 +88,14 @@ app.use((req, res, next) => {
         let isJson = !(foundGML || foundSBGN);
 
         if (isJson) {
-
             body = JSON.parse( body );
-
             data = body[0];
             options = body[1];
-
-            // options.klay.direction = "UNDEFINED";
-
-            console.log( options );
         }
         else {
             options = JSON.parse( options );
-
             if (foundSBGN) { // sbgnml
                 data = convert(data);
-            }
-            else if (foundGML) { // graphml
-                // console.log(data);
             }
         }
         next();
@@ -115,12 +103,8 @@ app.use((req, res, next) => {
 
 })
 
-// app.use(express.json());
-
-
 app.post('/layout/:format', (req, res) => {
-    // data = req.body[0];
-    // options = req.body[1];
+    options.animate = false;
 
     if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
         cy = cytoscape({
@@ -141,16 +125,10 @@ app.post('/layout/:format', (req, res) => {
     else {
         cy.add(data);
 
-        debugger;
-
         try {
-            debugger;
             cy.layout(options).run();
-            debugger;
         }
         catch (e) {
-            // console.log( "I am here" );
-            // console.error(e);
             return res.status(500).send(e);
         }
     }
