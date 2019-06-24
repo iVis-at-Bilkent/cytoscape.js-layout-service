@@ -9,7 +9,7 @@ This web-server supports 3 input formats for graphs:
 2. graphml
 3. json
 
-In order to layout any graph, POST request to the: https://cytoscape-layout-service.herokuapp.com/layout/:file_format needs to be send.
+In order to layout any graph, POST request to the: https://cytoscape-layout-service.herokuapp.com/layout/:file_format needs to be send, and the type of the request must be 'text' or 'text/plain'.
 
 The format of the request is:
 One array will be sent to the server, where the first element of the array will also be an array that will consist of nodes and edges of the graph, and the second element will be JSON object where the options for the layout will be specified. Name field of the layout must be specified, while other fields are optional.
