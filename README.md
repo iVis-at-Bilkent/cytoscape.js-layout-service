@@ -42,5 +42,25 @@ The supported layouts are:
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
 - [spread](https://github.com/cytoscape/cytoscape.js-spread)
   cise(coming soon)
+  
+ # Following is a list of third-party libraries used in building this web-service:
+- [express](https://www.npmjs.com/package/express)
+- [sbgnml-to-cytoscape](https://www.npmjs.com/package/sbgnml-to-cytoscape)
+- [jsdom](https://www.npmjs.com/package/jsdom)
+- [jQuery](https://www.npmjs.com/package/jquery)
+- [cytoscape-graphml](https://www.npmjs.com/package/cytoscape-graphml)
+- [cytoscape-fcose](https://www.npmjs.com/package/cytoscape-fcose)
+- [cytoscape-cose-bilkent](https://www.npmjs.com/package/cytoscape-cose-bilkent)
+- [cytoscape-dagre](https://www.npmjs.com/package/cytoscape-dagre)
+- [cytoscape-klay](https://www.npmjs.com/package/cytoscape-klay)
+- [cytoscape-avsdf](https://www.npmjs.com/package/cytoscape-avsdf)
+- [cytoscape-cola](https://www.npmjs.com/package/cytoscape-cola)
+- [cytoscape-euler](https://www.npmjs.com/package/cytoscape-euler)
+- [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
+
+
+
+ 
+
  
 
