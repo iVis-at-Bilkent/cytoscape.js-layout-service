@@ -75,6 +75,11 @@ app.use((req, res, next) => {
 
     req.on('end', () => {
         let format = req.path.replace("/layout/", "");
+        
+        for (id = 0; id < body.length && body[id] != '{'; id++);
+        options = body.substring(id);
+        data = body.substring(0, id);
+
 
         if (format === "json") {
             body = JSON.parse(body);
@@ -82,10 +87,6 @@ app.use((req, res, next) => {
             options = body[1];
         }
         else {
-            for (id = 0; id < body.length && body[id] != '{'; id++);
-            options = body.substring(id);
-            data = body.substring(0, id);
-
             options = JSON.parse(options);
             if (format === "sbgnml" )
                 data = convert(data);
