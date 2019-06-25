@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
     req.on('end', () => {
         let format = req.path.replace("/layout/", "");
-        
+
         for (id = 0; id < body.length && body[id] != '{'; id++);
         options = body.substring(id);
         data = body.substring(0, id);
@@ -96,46 +96,46 @@ app.use((req, res, next) => {
 
 })
 
-app.post('/layout/:format', (req, res) => {
-    options.animate = false;
+// app.post('/layout/:format', (req, res) => {
+//     options.animate = false;
 
-    if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
-        cy = cytoscape({
-            styleEnabled: false,
-            headless: true
-        });
-    }
-    else {
-        cy = cytoscape({
-            headless: true
-        })
-    }
+//     if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
+//         cy = cytoscape({
+//             styleEnabled: false,
+//             headless: true
+//         });
+//     }
+//     else {
+//         cy = cytoscape({
+//             headless: true
+//         })
+//     }
 
-    if (req.params.format === "graphml") {
-        cy.graphml(data);
-        cy.layout(options).run();
-    }
-    else {
-        cy.add(data);
+//     if (req.params.format === "graphml") {
+//         cy.graphml(data);
+//         cy.layout(options).run();
+//     }
+//     else {
+//         cy.add(data);
 
-        try {
-            cy.layout(options).run();
-        }
-        catch (e) {
-            return res.status(500).send(e);
-        }
-    }
+//         try {
+//             cy.layout(options).run();
+//         }
+//         catch (e) {
+//             return res.status(500).send(e);
+//         }
+//     }
 
-    let ret = {};
+//     let ret = {};
 
-    cy.filter((element, i) => {
-        return element.isNode();
-    }).forEach((node) => {
-        ret[node.id()] = node.position();
-    });
+//     cy.filter((element, i) => {
+//         return element.isNode();
+//     }).forEach((node) => {
+//         ret[node.id()] = node.position();
+//     });
 
-    return res.status(200).send(ret);
-});
+//     return res.status(200).send(ret);
+// });
 
 app.get('/', (req, res) => {
     return res.status(200).send("Welcome to the web-service");
