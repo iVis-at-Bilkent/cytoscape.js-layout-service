@@ -24,7 +24,6 @@
     "cytoscape-klay": "^3.1.2",
     "cytoscape-spread": "^3.0.0",
     "express": "^4.17.1",
-    "forever": "^1.0.0",
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
     "nodemon": "^1.19.1",
