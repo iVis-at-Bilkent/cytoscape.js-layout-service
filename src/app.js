@@ -3,9 +3,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cytoscape = require('cytoscape');
 
-// for debugging purposes
-const chalk = require('chalk');
-
 
 // to support sbgnml type of input
 let convert = require('sbgnml-to-cytoscape');
@@ -65,12 +62,10 @@ let cy;
 let options;
 let data;
 let body;
-let isJson;
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
     body = '';
-    isJson = false;
     options = '';
     data = '';
 
@@ -79,24 +74,21 @@ app.use((req, res, next) => {
     })
 
     req.on('end', () => {
-        for (id = 0; id < body.length && body[id] != '{'; id++);
-        options = body.substring(id);
-        data = body.substring(0, id);
+        let format = req.path.replace("/layout/", "");
 
-        let foundSBGN = body.includes("sbgn");
-        let foundGML = body.includes("graphml");
-        let isJson = !(foundGML || foundSBGN);
-
-        if (isJson) {
-            body = JSON.parse( body );
+        if (format === "json") {
+            body = JSON.parse(body);
             data = body[0];
             options = body[1];
         }
         else {
-            options = JSON.parse( options );
-            if (foundSBGN) { // sbgnml
+            for (id = 0; id < body.length && body[id] != '{'; id++);
+            options = body.substring(id);
+            data = body.substring(0, id);
+
+            options = JSON.parse(options);
+            if (format === "sbgnml" )
                 data = convert(data);
-            }
         }
         next();
     })
