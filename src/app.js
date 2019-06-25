@@ -64,78 +64,78 @@ let data;
 let body;
 
 // middleware to manage the formats of files
-app.use((req, res, next) => {
-    body = '';
-    options = '';
-    data = '';
+// app.use((req, res, next) => {
+//     body = '';
+//     options = '';
+//     data = '';
 
-    req.on('data', chunk => {
-        body += chunk;
-    })
+//     req.on('data', chunk => {
+//         body += chunk;
+//     })
 
-    req.on('end', () => {
-        let format = req.path.replace("/layout/", "");
+//     req.on('end', () => {
+//         let format = req.path.replace("/layout/", "");
 
-        for (id = 0; id < body.length && body[id] != '{'; id++);
-        options = body.substring(id);
-        data = body.substring(0, id);
+//         for (id = 0; id < body.length && body[id] != '{'; id++);
+//         options = body.substring(id);
+//         data = body.substring(0, id);
 
 
-        if (format === "json") {
-            body = JSON.parse(body);
-            data = body[0];
-            options = body[1];
-        }
-        else {
-            options = JSON.parse(options);
-            if (format === "sbgnml" )
-                data = convert(data);
-        }
-        next();
-    })
-
-})
-
-// app.post('/layout/:format', (req, res) => {
-//     options.animate = false;
-
-//     if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
-//         cy = cytoscape({
-//             styleEnabled: false,
-//             headless: true
-//         });
-//     }
-//     else {
-//         cy = cytoscape({
-//             headless: true
-//         })
-//     }
-
-//     if (req.params.format === "graphml") {
-//         cy.graphml(data);
-//         cy.layout(options).run();
-//     }
-//     else {
-//         cy.add(data);
-
-//         try {
-//             cy.layout(options).run();
+//         if (format === "json") {
+//             body = JSON.parse(body);
+//             data = body[0];
+//             options = body[1];
 //         }
-//         catch (e) {
-//             return res.status(500).send(e);
+//         else {
+//             options = JSON.parse(options);
+//             if (format === "sbgnml" )
+//                 data = convert(data);
 //         }
-//     }
+//         next();
+//     })
 
-//     let ret = {};
+// })
 
-//     cy.filter((element, i) => {
-//         return element.isNode();
-//     }).forEach((node) => {
-//         ret[node.id()] = node.position();
-//     });
+app.post('/layout/:format', (req, res) => {
+    options.animate = false;
 
-//     return res.status(200).send(ret);
-// });
+    if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
+        cy = cytoscape({
+            styleEnabled: false,
+            headless: true
+        });
+    }
+    else {
+        cy = cytoscape({
+            headless: true
+        })
+    }
+
+    if (req.params.format === "graphml") {
+        cy.graphml(data);
+        cy.layout(options).run();
+    }
+    else {
+        cy.add(data);
+
+        try {
+            cy.layout(options).run();
+        }
+        catch (e) {
+            return res.status(500).send(e);
+        }
+    }
+
+    let ret = {};
+
+    cy.filter((element, i) => {
+        return element.isNode();
+    }).forEach((node) => {
+        ret[node.id()] = node.position();
+    });
+
+    return res.status(200).send(ret);
+});
 
 app.get('/', (req, res) => {
     return res.status(200).send("Welcome to the web-service");
