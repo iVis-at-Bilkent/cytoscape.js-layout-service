@@ -81,7 +81,7 @@ app.use((req, res, next) => {
         options = body.substring(id);
         data = body.substring(0, id);
 
-        let isGraphml = ( body.search("graphml") !== -1);
+        let isGraphml = ( body.search("graphml") !== -1 );
         let isSbgnml = ( body.search("sbgn") !== -1 );
         let isJSON = !( isSbgnml || isGraphml );
 
@@ -92,7 +92,7 @@ app.use((req, res, next) => {
         }
         else {
             options = JSON.parse(options);
-            if (format === "sbgnml" )
+            if ( isSbgnml )
                 data = convert(data);
         }
         next();
