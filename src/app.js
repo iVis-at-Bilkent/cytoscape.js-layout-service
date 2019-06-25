@@ -64,37 +64,41 @@ let data;
 let body;
 
 // middleware to manage the formats of files
-// app.use((req, res, next) => {
-//     body = '';
-//     options = '';
-//     data = '';
+app.use((req, res, next) => {
+    body = '';
+    options = '';
+    data = '';
 
-//     req.on('data', chunk => {
-//         body += chunk;
-//     })
+    req.on('data', chunk => {
+        body += chunk;
+    })
 
-//     req.on('end', () => {
-//         let format = req.path.replace("/layout/", "");
+    req.on('end', () => {
+        let format = req.path.replace("/layout/", "");
 
-//         for (id = 0; id < body.length && body[id] != '{'; id++);
-//         options = body.substring(id);
-//         data = body.substring(0, id);
+        for (id = 0; id < body.length && body[id] != '{'; id++);
 
+        options = body.substring(id);
+        data = body.substring(0, id);
 
-//         if (format === "json") {
-//             body = JSON.parse(body);
-//             data = body[0];
-//             options = body[1];
-//         }
-//         else {
-//             options = JSON.parse(options);
-//             if (format === "sbgnml" )
-//                 data = convert(data);
-//         }
-//         next();
-//     })
+        let isGraphml = ( body.search("graphml") !== -1);
+        let isSbgnml = ( body.search("sbgn") !== -1 );
+        let isJSON = !( isSbgnml || isGraphml );
 
-// })
+        if ( isJSON ) {
+            body = JSON.parse(body);
+            data = body[0];
+            options = body[1];
+        }
+        else {
+            options = JSON.parse(options);
+            if (format === "sbgnml" )
+                data = convert(data);
+        }
+        next();
+    })
+
+})
 
 app.post('/layout/:format', (req, res) => {
     options.animate = false;
