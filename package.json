@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser-xml": "^1.1.0",
-    "chalk": "^2.4.2",
     "cytoscape": "^3.7.2",
     "cytoscape-avsdf": "^1.0.0",
     "cytoscape-cola": "^2.3.0",

@@ -3,9 +3,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cytoscape = require('cytoscape');
 
-// for debugging purposes
-const chalk = require('chalk');
-
 
 // to support sbgnml type of input
 let convert = require('sbgnml-to-cytoscape');
