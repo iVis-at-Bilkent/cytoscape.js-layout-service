@@ -68,17 +68,17 @@ let body;
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
-    body = '';
-    isJson = false;
-    options = '';
-    data = '';
+    if (req.method === "POST") {
+        body = '';
+        isJson = false;
+        options = '';
+        data = '';
 
-    req.on('data', chunk => {
-        body += chunk;
-    })
+        req.on('data', chunk => {
+            body += chunk;
+        })
 
-    req.on('end', () => {
-        if (req.method === "POST") {
+        req.on('end', () => {
             for (id = 0; id < body.length && body[id] != '{'; id++);
             options = body.substring(id);
             data = body.substring(0, id);
@@ -88,20 +88,20 @@ app.use((req, res, next) => {
             let isJson = !(foundGML || foundSBGN);
 
             if (isJson) {
-                body = JSON.parse( body );
+                body = JSON.parse(body);
                 data = body[0];
                 options = body[1];
             }
             else {
-                options = JSON.parse( options );
+                options = JSON.parse(options);
                 if (foundSBGN) { // sbgnml
                     data = convert(data);
                 }
             }
             next();
-        }
-    })
-
+        })
+    }
+    next();
 })
 
 app.post('/layout/:format', (req, res) => {
