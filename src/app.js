@@ -61,7 +61,7 @@ cytoscape.use(spread);
 let cy;
 let options;
 let data;
-let body;
+let body = '';
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
@@ -74,25 +74,23 @@ app.use((req, res, next) => {
     })
 
     req.on('end', () => {
-        let format = req.path.replace("/layout/", "");
-
-        for (id = 0; id < body.length && body[id] != '{'; id++);
-
+        // let format = req.path.replace("/layout/", "");
+        for (id = 0; id < body.length && body[id] != '{'; id++); let format = req.path.replace("/layout/", "");
         options = body.substring(id);
         data = body.substring(0, id);
 
-        let isGraphml = ( body.search("graphml") !== -1 );
-        let isSbgnml = ( body.search("sbgn") !== -1 );
-        let isJSON = !( isSbgnml || isGraphml );
+        let foundSBGN = body.includes("sbgn");
+        let foundGML = body.includes("graphml");
+        let isJson = !(foundGML || foundSBGN);
 
-        if ( isJSON ) {
+        if (isJson) {
             body = JSON.parse(body);
             data = body[0];
             options = body[1];
         }
         else {
             options = JSON.parse(options);
-            if ( isSbgnml )
+            if (foundSBGN)
                 data = convert(data);
         }
         next();
