@@ -78,26 +78,28 @@ app.use((req, res, next) => {
     })
 
     req.on('end', () => {
-        for (id = 0; id < body.length && body[id] != '{'; id++);
-        options = body.substring(id);
-        data = body.substring(0, id);
+        if (req.method === "POST") {
+            for (id = 0; id < body.length && body[id] != '{'; id++);
+            options = body.substring(id);
+            data = body.substring(0, id);
 
-        let foundSBGN = body.includes("sbgn");
-        let foundGML = body.includes("graphml");
-        let isJson = !(foundGML || foundSBGN);
+            let foundSBGN = body.includes("sbgn");
+            let foundGML = body.includes("graphml");
+            let isJson = !(foundGML || foundSBGN);
 
-        // if (isJson) {
-        //     body = JSON.parse( body );
-        //     data = body[0];
-        //     options = body[1];
-        // }
-        // else {
-        //     options = JSON.parse( options );
-        //     if (foundSBGN) { // sbgnml
-        //         data = convert(data);
-        //     }
-        // }
-        next();
+            if (isJson) {
+                body = JSON.parse( body );
+                data = body[0];
+                options = body[1];
+            }
+            else {
+                options = JSON.parse( options );
+                if (foundSBGN) { // sbgnml
+                    data = convert(data);
+                }
+            }
+            next();
+        }
     })
 
 })
