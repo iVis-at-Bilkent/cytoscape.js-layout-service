@@ -101,7 +101,8 @@ app.use((req, res, next) => {
             next();
         })
     }
-    next();
+    else
+        next();
 })
 
 app.post('/layout/:format', (req, res) => {
