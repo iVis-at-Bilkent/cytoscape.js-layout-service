@@ -65,7 +65,6 @@ let cy;
 let options;
 let data;
 let body;
-let isJson;
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
@@ -87,17 +86,17 @@ app.use((req, res, next) => {
         let foundGML = body.includes("graphml");
         let isJson = !(foundGML || foundSBGN);
 
-        if (isJson) {
-            body = JSON.parse( body );
-            data = body[0];
-            options = body[1];
-        }
-        else {
-            options = JSON.parse( options );
-            if (foundSBGN) { // sbgnml
-                data = convert(data);
-            }
-        }
+        // if (isJson) {
+        //     body = JSON.parse( body );
+        //     data = body[0];
+        //     options = body[1];
+        // }
+        // else {
+        //     options = JSON.parse( options );
+        //     if (foundSBGN) { // sbgnml
+        //         data = convert(data);
+        //     }
+        // }
         next();
     })
 
