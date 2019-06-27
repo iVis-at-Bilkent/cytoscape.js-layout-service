@@ -34,6 +34,7 @@ If an error occurs, the response of the server will consist of the error's body.
 The supported layouts are:
 - [fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose)
 - [cose-bilkent](https://github.com/cytoscape/cytoscape.js-cose-bilkent)
+- [cise](https://github.com/iVis-at-Bilkent/cytoscape.js-cise)
 - [cose](https://github.com/iVis-at-Bilkent/cytoscape.js-cose)
 - [dagre](https://github.com/cytoscape/cytoscape.js-dagre)
 - [klay](https://github.com/cytoscape/cytoscape.js-klay)
@@ -41,7 +42,6 @@ The supported layouts are:
 - [cola](https://github.com/cytoscape/cytoscape.js-cola)
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
 - [spread](https://github.com/cytoscape/cytoscape.js-spread)
-- [cise](https://github.com/iVis-at-Bilkent/cytoscape.js-cise)
   
  # Following is a list of third-party libraries used in building this web-service:
 - [express](https://www.npmjs.com/package/express)
@@ -58,6 +58,7 @@ The supported layouts are:
 - [cytoscape-euler](https://www.npmjs.com/package/cytoscape-euler)
 - [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
 - [cytoscape-cise](https://www.npmjs.com/package/cytoscape-cise)
+
 
 
 
