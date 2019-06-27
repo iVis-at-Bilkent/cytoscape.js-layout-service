@@ -41,7 +41,7 @@ The supported layouts are:
 - [cola](https://github.com/cytoscape/cytoscape.js-cola)
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
 - [spread](https://github.com/cytoscape/cytoscape.js-spread)
-  cise(coming soon)
+- [cise](https://github.com/iVis-at-Bilkent/cytoscape.js-cise)
   
  # Following is a list of third-party libraries used in building this web-service:
 - [express](https://www.npmjs.com/package/express)
@@ -57,6 +57,7 @@ The supported layouts are:
 - [cytoscape-cola](https://www.npmjs.com/package/cytoscape-cola)
 - [cytoscape-euler](https://www.npmjs.com/package/cytoscape-euler)
 - [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
+- [cytoscape-cise](https://www.npmjs.com/package/cytoscape-cise)
 
 
 
