@@ -1,0 +1,170 @@
+#cy {
+    margin: auto;
+    border: 1px solid #ddd;
+    height: 680px;
+    width: 1000px;
+    overflow: auto !important;
+    border-radius: 0.25em;
+}
+
+i.shortcut {
+    font-size: 8px;
+    color: #ddd;
+    float: right;
+    padding: 5px 0 0 0;
+}
+.cy-panzoom {
+    position: relative!important;
+    float: right;
+    margin-right: 5%;
+}
+.right-caret {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #000000;
+    display: inline-block;
+    height: 0;
+    opacity:0.3;
+    vertical-align: middle;
+    width: 0;
+}
+.open > .dropdown-menu {
+    animation-name: slidenavAnimation;
+    animation-duration:.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    -webkit-animation-name: slidenavAnimation;
+    -webkit-animation-duration:.2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+
+    -moz-animation-name: slidenavAnimation;
+    -moz-animation-duration:.2s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards;
+}
+@keyframes slidenavAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes slidenavAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.nav-menu {
+    border: 1px solid #ddd;
+    border-radius: 0.25em;
+    margin: auto;
+    height: 40px;
+    width: 1000px;
+}
+
+.nav li.dropdown ul.dropdown-menu li:HOVER ul {
+    display:block;
+    position:absolute;
+    left:100%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.nav li.dropdown ul.dropdown-menu ul {
+    display: none;
+    float:right;
+    position: relative;
+    top: auto;
+    margin-top: -30px;
+}
+.dropdown .dropdown-menu{
+    z-index:3000;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    color: #555555;
+    background-color: #0B9BCD;
+    text-shadow: none !important;
+}
+
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0B9BCD;
+    background-image: none;
+    filter: none;
+}
+.input-file{
+    float:left;
+    text-align: right;
+    color: #5e5e5e !important;
+    font-size: 12px !important;
+}
+.label{
+    float:right;
+    text-align: right;
+    color: #5e5e5e !important;
+}
+#info-content{
+    margin: auto;
+    height: 25px;
+    width: 1000px;
+    overflow: auto !important;
+}
+.menu-container {
+    border: 1px solid #ddd;
+    border-radius: 0.25em;
+    margin: auto;
+    height: 80px;
+    width: 1000px;
+}
+.my-nav-bar {
+    margin: auto;
+    width: 1000px;
+    overflow: visible !important;
+    font-size: 12px !important;
+}
+#add-node-dialog{
+    position: relative;
+    width: 15%
+}
+#cose-bilkent-settings-template{
+    position: absolute;
+    width: 750px;
+}
+
+
+.sbgn-text {
+    color :#4a4a4a;
+    text-align: center;
+    font-weight:bold;
+}
+
+.quick-help-content {
+    font-size: 11px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sbgn-frame {
+    border: 2px solid #4a4a4a;
+    padding-bottom : 10px;
+    background-color: white;
+
+}
+#fancybox-wrap {
+    z-index : 4000 !important;
+}

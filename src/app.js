@@ -3,6 +3,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cytoscape = require('cytoscape');
 
+// to serve the html
+const path = require( "path" );
+// app.set( "view engine", any );
+
+
 
 // to support sbgnml type of input
 let convert = require('sbgnml-to-cytoscape');
@@ -30,8 +35,8 @@ cytoscape.use(coseBilkent);
 
 // for cise layout, Needs to be fixed, some problems
 //////////////////////////////////
-// const cise = require('cytoscape-cise');
-// cytoscape.use( cise );
+const cise = require('cytoscape-cise');
+cytoscape.use( cise );
 
 // for dagre layout
 const dagre = require('cytoscape-dagre');
@@ -62,6 +67,8 @@ let cy;
 let options;
 let data;
 let body;
+
+app.use( express.static( path.join( __dirname, "../public" ) ) );
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
@@ -144,7 +151,7 @@ app.post('/layout/:format', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    return res.status(200).send("Welcome to the web-service");
+    res.sendFile( path.join( __dirname + '/../public_html/index.html' ) );
 });
 
 app.listen(port, () => {
