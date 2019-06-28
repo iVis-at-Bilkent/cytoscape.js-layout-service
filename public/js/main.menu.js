@@ -1,4 +1,4 @@
-var refreshUndoRedoButtonsStatus = function(){
+var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
         $("#undo").parent("li").addClass("disabled");
@@ -29,7 +29,7 @@ $("#redo").click(function (e) {
 $("#delete").click(function (e) {
     var selectedEles = cy.$(":selected");
 
-    if(selectedEles.length == 0){
+    if (selectedEles.length == 0) {
         return;
     }
     ur.do("remove", selectedEles);
@@ -37,7 +37,7 @@ $("#delete").click(function (e) {
 
 $("#addEdge").click(function (e) {
 
-    if(cy.$("node:selected").length == 2)
+    if (cy.$("node:selected").length == 2)
         ur.do("add", {
             group: "edges",
             data: {
@@ -49,12 +49,12 @@ $("#addEdge").click(function (e) {
 
 ///////////////////// VIEW ////////////////////////////
 
-var getSelectedNodesForExpandCollapse = function(){
+var getSelectedNodesForExpandCollapse = function () {
 
     var selectedNodes = cy.nodes(":selected");
 
-    for(var i = 0; i < selectedNodes.length; i++)
-        if(selectedNodes[i].data("expanded-collapsed") == null)
+    for (var i = 0; i < selectedNodes.length; i++)
+        if (selectedNodes[i].data("expanded-collapsed") == null)
             selectedNodes[i].data("expanded-collapsed", "expanded");
 
     return selectedNodes;
@@ -129,63 +129,63 @@ $("#save-file").click(function (e) {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 var tempName = "cose-bilkent";
-$("#cose-bilkent").click( function (e) {
+$("#cose-bilkent").click(function (e) {
     tempName = "cose-bilkent";
     whitenBackgrounds();
     $("#cose-bilkent").css("background-color", "grey");
 });
-$("#cose").click( function (e) {
+$("#cose").click(function (e) {
     tempName = "cose";
     whitenBackgrounds();
     $("#cose").css("background-color", "grey");
 });
-$("#cola").click( function (e) {
+$("#cola").click(function (e) {
     tempName = "cola";
     whitenBackgrounds();
     $("#cola").css("background-color", "grey");
 });
-$("#springy").click( function (e) {
+$("#springy").click(function (e) {
     tempName = "springy";
     whitenBackgrounds();
     $("#springy").css("background-color", "grey");
 });
-$("#arbor").click( function (e) {
+$("#arbor").click(function (e) {
     tempName = "arbor";
     whitenBackgrounds();
     $("#arbor").css("background-color", "grey");
 });
 // newly added
-$("#fcose").click( function (e) {
+$("#fcose").click(function (e) {
     tempName = "fcose";
     whitenBackgrounds();
     $("#fcose").css("background-color", "grey");
 });
-$("#cise").click( function (e) {
+$("#cise").click(function (e) {
     tempName = "cise";
     whitenBackgrounds();
     $("#cise").css("background-color", "grey");
 });
-$("#dagre").click( function (e) {
+$("#dagre").click(function (e) {
     tempName = "dagre";
     whitenBackgrounds();
     $("#dagre").css("background-color", "grey");
 });
-$("#klay").click( function (e) {
+$("#klay").click(function (e) {
     tempName = "klay";
     whitenBackgrounds();
     $("#klay").css("background-color", "grey");
 });
-$("#avsdf").click( function (e) {
+$("#avsdf").click(function (e) {
     tempName = "avsdf";
     whitenBackgrounds();
     $("#avsdf").css("background-color", "grey");
 });
-$("#euler").click( function (e) {
+$("#euler").click(function (e) {
     tempName = "euler";
     whitenBackgrounds();
     $("#euler").css("background-color", "grey");
 });
-$("#spread").click( function (e) {
+$("#spread").click(function (e) {
     tempName = "spread";
     whitenBackgrounds();
     $("#spread").css("background-color", "grey");
@@ -208,38 +208,60 @@ var arborLayoutProp = new ARBORLayout({
 var springyLayoutProp = new SPRINGYLayout({
     el: '#springy-layout-table'
 });
-
+// newly added
+var fcoseLayoutProp = new FCOSELayout({
+    el: '#fcose-layout-table'
+})
+// var ciseLayoutProp = new ciseLayoutProp({
+//     el: '#cise-layout-table'
+// })
+// var dagreLayoutProp = new dagreLayoutProp({
+//     el: '#dagre-layout-table'
+// })
+// var klayLayoutProp = new klayLayoutProp({
+//     el: '#klay-layout-table'
+// })
+// var avsdfLayoutProp = new avsdfLayoutProp({
+//     el: '#avsdf-layout-table'
+// })
+// var eulerLayoutProp = new eulerLayoutProp({
+//     el: '#euler-layout-table'
+// })
+// var spreadLayoutProp = new spreadLayoutProp({
+//     el: '#spread-layout-table'
+// })
 
 $("#add-node-dialog").hide();
 
-function toggleUserControl(){
-/*
-    toggleFuncs = function (fs){
-        for(var i = 0; i < fs.length; i++)
-            fs[i](!fs[i]());
-    };
-    console.log(cy);
-    toggleFuncs([*/
-/*
-    cy.panningEnabled(!cy.panningEnabled());
-        cy.zoomingEnabled(!cy.zoomingEnabled());
-        cy.boxSelectionEnabled(!cy.boxSelectionEnabled());
-        cy.autoungrabify(!cy.autoungrabify());
-        cy.autounselectify(!cy.autounselectify());
-        cy.autolock(!cy.autolock());*/
+function toggleUserControl() {
+    /*
+        toggleFuncs = function (fs){
+            for(var i = 0; i < fs.length; i++)
+                fs[i](!fs[i]());
+        };
+        console.log(cy);
+        toggleFuncs([*/
+    /*
+        cy.panningEnabled(!cy.panningEnabled());
+            cy.zoomingEnabled(!cy.zoomingEnabled());
+            cy.boxSelectionEnabled(!cy.boxSelectionEnabled());
+            cy.autoungrabify(!cy.autoungrabify());
+            cy.autounselectify(!cy.autounselectify());
+            cy.autolock(!cy.autolock());*/
 }
 
 
-$("#addNodeMenu").click(function () {    toggleUserControl();
+$("#addNodeMenu").click(function () {
+    toggleUserControl();
 
     $("#cy").css("background-image", "url('css/images/grid_background.gif')").css("cursor", "crosshair");
     $("#cy").popover({
         placement: "top",
         content: "Select the position of new node",
         template: '<div class="popover" role="tooltip">' +
-        '<div class="arrow"></div>' +
-        '<div class="popover-content"></div>' +
-        '</div>'
+            '<div class="arrow"></div>' +
+            '<div class="popover-content"></div>' +
+            '</div>'
     }).popover("show");
 
     var newNode = {
@@ -269,8 +291,8 @@ $("#addNodeMenu").click(function () {    toggleUserControl();
             var name = $("#new-node-name").val();
             var w = $("#new-node-width").val();
             var h = $("#new-node-height").val();
-          /*  var x = $("#new-node-x").val();
-            var y = $("#new-node-y").val();*/
+            /*  var x = $("#new-node-x").val();
+              var y = $("#new-node-y").val();*/
             var color = $("#new-node-color").colorpicker("getValue", "gray");
             var shape = $("#new-node-shape").val();
             var borderColor = $("#new-node-border-color").colorpicker("getValue", "black");
@@ -397,14 +419,14 @@ $("#addNodeMenu").click(function () {
     });
 });*/
 
-var addChild = function(children, theChild){
+var addChild = function (children, theChild) {
     var len = children.length;
-    for (var i = 0; i < theChild.children().length; i++){
+    for (var i = 0; i < theChild.children().length; i++) {
         children[len++] = theChild.children()[i];
     }
     children.length = len;
-    for (var i = 0 ; i < theChild.children().length; i++){
-        if (theChild.children()[i].isParent()){
+    for (var i = 0; i < theChild.children().length; i++) {
+        if (theChild.children()[i].isParent()) {
             addChild(children, theChild.children()[i]);
         }
     }
@@ -436,6 +458,28 @@ $("#layout-properties").click(function (e) {
                 break;
             case 'springy':
                 springyLayoutProp.render();
+                break;
+            // newly added
+            case 'fcose':
+                fcoseLayoutProp.render();
+                break;
+            case 'cise':
+                ciseLayoutProp.render();
+                break;
+            case 'dagre':
+                dagreLayoutProp.render();
+                break;
+            case 'klay':
+                klayLayoutProp.render();
+                break;
+            case 'avsdf':
+                avsdfLayoutProp.render();
+                break;
+            case 'euler':
+                eulerLayoutProp.render();
+                break;
+            case 'spread':
+                spreadLayoutProp.render();
                 break;
         }
     }
@@ -477,8 +521,7 @@ $("body").on("change", "#file-input", function (e) {
     var textType = /text.*/;
 
     var reader = new FileReader();
-    reader.onload = function (e)
-    {
+    reader.onload = function (e) {
         var graphmlConverter = new graphmlToJSON(textToXmlObject(this.result));
         atts = graphmlConverter.attributes;
 
@@ -499,7 +542,7 @@ $("#load-file").click(function (e) {
     $("#file-input").trigger('click');
 });
 
-$("#new").click(function(e){
+$("#new").click(function (e) {
     var graphData = new Object();
     graphData['nodes'] = undefined;
     graphData['edges'] = undefined;
@@ -508,8 +551,8 @@ $("#new").click(function(e){
 });
 
 
-$("#save-as-png").click(function(evt){
-    var pngContent = cy.png({scale : 3, full : true});
+$("#save-as-png").click(function (evt) {
+    var pngContent = cy.png({ scale: 3, full: true });
 
     // see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
     function b64toBlob(b64Data, contentType, sliceSize) {
@@ -532,7 +575,7 @@ $("#save-as-png").click(function(evt){
             byteArrays.push(byteArray);
         }
 
-        var blob = new Blob(byteArrays, {type: contentType});
+        var blob = new Blob(byteArrays, { type: contentType });
         return blob;
     }
 
@@ -545,7 +588,7 @@ $("#save-as-png").click(function(evt){
 
 
 
-var loadSample = function(fileName){
+var loadSample = function (fileName) {
     var xmlObject = loadXMLDoc("samples/" + fileName + ".xml");
     var graphmlConverter = graphmlToJSON(xmlObject);
     atts = graphmlConverter.attributes;
@@ -557,21 +600,21 @@ var loadSample = function(fileName){
     refreshCytoscape(cytoscapeJsGraph);
     setFileContent(fileName + ".graphml");
 };
-$("#sample0").click(function (e){
+$("#sample0").click(function (e) {
     loadSample("graph0");
 });
-$("#sample1").click(function (e){
+$("#sample1").click(function (e) {
     loadSample("graph1");
 });
-$("#sample2").click(function (e){
+$("#sample2").click(function (e) {
     loadSample("graph2");
 });
-$("#sample3").click(function (e){
+$("#sample3").click(function (e) {
     loadSample("graph3");
 });
-$("#sample4").click(function (e){
+$("#sample4").click(function (e) {
     loadSample("graph4");
 });
-$("#sample5").click(function (e){
+$("#sample5").click(function (e) {
     loadSample("graph5");
 });

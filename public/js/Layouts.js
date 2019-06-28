@@ -1,11 +1,11 @@
 var graph = {};
 var edgeNodes = [];
-var setFileContent = function(fileName){
+var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
-    while( span.firstChild ) {
-        span.removeChild( span.firstChild );
+    while (span.firstChild) {
+        span.removeChild(span.firstChild);
     }
-    span.appendChild( document.createTextNode(fileName) );
+    span.appendChild(document.createTextNode(fileName));
 };
 $(function () {
 
@@ -39,7 +39,8 @@ $(function () {
         sliderHandleIcon: 'fa fa-minus',
         zoomInIcon: 'fa fa-plus',
         zoomOutIcon: 'fa fa-minus',
-        resetIcon: 'fa fa-expand'    });
+        resetIcon: 'fa fa-expand'
+    });
     cy.panzoom(panProps);
 
 });
@@ -97,8 +98,8 @@ function refreshCytoscape(graphData) { // on dom ready
                     'background-color': 'green',
                     'line-color': 'green',
                     'width': 5,
-                    'opacity':1,
-                    'color' : 'green'
+                    'opacity': 1,
+                    'color': 'green'
                 }
             },
         ],
@@ -115,13 +116,13 @@ function refreshCytoscape(graphData) { // on dom ready
         boxSelectionEnabled: true,
         motionBlur: true,
         wheelSensitivity: 0.1,
-        ready: function(){
+        ready: function () {
             var i = 0;
-            this.on('tap', 'node', function(evt){
-                if (i < 2){
+            this.on('tap', 'node', function (evt) {
+                if (i < 2) {
                     edgeNodes[i++] = this._private.data.id;
                 }
-                else{
+                else {
                     edgeNodes = [];
                     i = 0;
                 }
@@ -224,7 +225,8 @@ function refreshCytoscape(graphData) { // on dom ready
         sliderHandleIcon: 'fa fa-minus',
         zoomInIcon: 'fa fa-plus',
         zoomOutIcon: 'fa fa-minus',
-        resetIcon: 'fa fa-expand'    });
+        resetIcon: 'fa fa-expand'
+    });
     cy.panzoom(panProps);
 
     ur = cy.undoRedo({
@@ -315,7 +317,7 @@ var COSEBilkentLayout = Backbone.View.extend({
 
         $(self.el).dialog();
 
-        $("#save-layout4").click( function (evt) {
+        $("#save-layout4").click(function (evt) {
             self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("node-repulsion4").value);
             self.currentLayoutProperties.nodeOverlap = Number(document.getElementById("node-overlap4").value);
             self.currentLayoutProperties.idealEdgeLength = Number(document.getElementById("ideal-edge-length4").value);
@@ -339,7 +341,7 @@ var COSEBilkentLayout = Backbone.View.extend({
 
         });
 
-        $("#default-layout4").click( function (evt) {
+        $("#default-layout4").click(function (evt) {
             self.copyProperties();
             console.log("asd");
             var temp = _.template($("#cose-bilkent-settings-template").html());
@@ -400,7 +402,7 @@ var COSELayout = Backbone.View.extend({
 
         $(self.el).dialog();
 
-        $("#save-layout").click( function (evt) {
+        $("#save-layout").click(function (evt) {
             self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("node-repulsion").value);
             self.currentLayoutProperties.nodeOverlap = Number(document.getElementById("node-overlap").value);
             self.currentLayoutProperties.idealEdgeLength = Number(document.getElementById("ideal-edge-length").value);
@@ -422,7 +424,7 @@ var COSELayout = Backbone.View.extend({
 
         });
 
-        $("#default-layout").click( function (evt) {
+        $("#default-layout").click(function (evt) {
             self.copyProperties();
             var temp = self.template = _.template($("#cose-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
@@ -487,7 +489,7 @@ var COLALayout = Backbone.View.extend({
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-//        var options = clone(this.currentLayoutProperties);
+        //        var options = clone(this.currentLayoutProperties);
         cy.layout(options);
     },
     render: function () {
@@ -498,7 +500,7 @@ var COLALayout = Backbone.View.extend({
 
         $(self.el).dialog();
 
-        $("#save-layout1").click( function (evt) {
+        $("#save-layout1").click(function (evt) {
             self.currentLayoutProperties.animate = document.getElementById("animate1").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh1").value);
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime1").value);
@@ -514,7 +516,7 @@ var COLALayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        $("#default-layout1").click( function (evt) {
+        $("#default-layout1").click(function (evt) {
             self.copyProperties();
             var temp = _.template($("#cola-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
@@ -588,7 +590,7 @@ var ARBORLayout = Backbone.View.extend({
 
         $(self.el).dialog();
 
-        $("#save-layout2").click( function (evt) {
+        $("#save-layout2").click(function (evt) {
             self.currentLayoutProperties.animate = document.getElementById("animate2").checked;
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime2").value);
             self.currentLayoutProperties.fit = document.getElementById("fit2").checked;
@@ -602,7 +604,7 @@ var ARBORLayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        $("#default-layout2").click( function (evt) {
+        $("#default-layout2").click(function (evt) {
             self.copyProperties();
             var temp = _.template($("#arbor-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
@@ -612,7 +614,6 @@ var ARBORLayout = Backbone.View.extend({
         return this;
     }
 });
-
 var SPRINGYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'springy',
@@ -658,7 +659,7 @@ var SPRINGYLayout = Backbone.View.extend({
 
         $(self.el).dialog();
 
-        $("#save-layout3").click( function (evt) {
+        $("#save-layout3").click(function (evt) {
             self.currentLayoutProperties.animate = document.getElementById("animate3").checked;
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime3").value);
             self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating3").checked;
@@ -673,7 +674,7 @@ var SPRINGYLayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        $("#default-layout3").click( function (evt) {
+        $("#default-layout3").click(function (evt) {
             self.copyProperties();
             var temp = _.template($("#springy-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
@@ -684,14 +685,94 @@ var SPRINGYLayout = Backbone.View.extend({
     }
 });
 
+// model for fcose
+var FCOSELayout = Backbone.View.extend({
+    defaultLayoutProperties: {
+        name: "fcose",
+        quality: "default",
+        randomize: true,
+        animate: false,
+        fit: true,
+        padding: 10,
+        nodeDimensionsIncludeLabels: false,
+        samplingType: true,
+        sampleSize: 25,
+        nodeSeparation: 75,
+        piTol: 0.0000001,
+        nodeRepulsion: 4500,
+        idealEdgeLength: 50,
+        edgeElasticity: 0.45,
+        nestingFactor: 0.1,
+        gravity: 0.25,
+        numIter: 2500,
+        tile: false,
+        tilingPaddingVertical: 10,
+        tilingPaddingHorizontal: 10,
+        gravityRangeCompound: 1.5,
+        gravityCompound: 1.0,
+        gravityRange: 3.8,
+        initialEnergyOnIncremental: 0.3
+    },
+    currentLayoutProperties: null,
+    initialize: function () {
+        var self = this;
+        self.copyProperties();
+        var temp = _.template($("#fcose-settings-template").html());
+        self.template = temp(this.currentLayoutProperties);
+    },
+    copyProperties: function () {
+        this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
+    },
+    applyLayout: function () {
+        var options = {};
+        for (var prop in this.currentLayoutProperties) {
+            options[prop] = this.currentLayoutProperties[prop];
+        }
+        cy.layout(options);
+    },
+    render: function () {
+        var self = this;
+        var temp = _.template($("#fcose-settings-template").html());
+        self.template = temp(this.currentLayoutProperties);
+        $(self.el).html(self.template);
 
-var whitenBackgrounds = function(){
+        $(self.el).dialog();
+
+        $("#save-layout5").click(function (evt) {
+            // self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("node-repulsion5").value);
+            // self.currentLayoutProperties.idealEdgeLength = Number(document.getElementById("ideal-edge-length5").value);
+            // self.currentLayoutProperties.edgeElasticity = Number(document.getElementById("edge-elasticity5").value);
+            // self.currentLayoutProperties.nestingFactor = Number(document.getElementById("nesting-factor5").value);
+            // self.currentLayoutProperties.gravity = Number(document.getElementById("gravity5").value);
+            // self.currentLayoutProperties.numIter = Number(document.getElementById("num-iter5").value);
+            // self.currentLayoutProperties.animate = document.getElementById("animate5").checked;
+            // self.currentLayoutProperties.fit = document.getElementById("fit5").checked;
+            // self.currentLayoutProperties.padding = Number(document.getElementById("padding5").value);
+            // self.currentLayoutProperties.tile = document.getElementById("tile5").checked;
+            // // newly added
+
+            $(self.el).dialog('close');
+
+        }),
+        $("#default-layout3").click(function (evt) {
+            self.copyProperties();
+            var temp = _.template($("#fcose-settings-template").html());
+            self.template = temp(self.currentLayoutProperties);
+            $(self.el).html(self.template);
+        });
+
+        return this;
+
+    }
+})
+
+var whitenBackgrounds = function () {
     $("#cose-bilkent").css("background-color", "white");
     $("#cose").css("background-color", "white");
     $("#cola").css("background-color", "white");
     $("#springy").css("background-color", "white");
     $("#arbor").css("background-color", "white");
-// newly added
+    // newly added
     $("#fcose").css("background-color", "white");
     $("#cise").css("background-color", "white");
     $("#dagre").css("background-color", "white");

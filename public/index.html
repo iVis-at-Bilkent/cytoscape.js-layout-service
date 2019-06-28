@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,166 +24,172 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
 
-<nav id="myNavbar" class="navbar navbar-default my-nav-bar" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="container">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">File <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a id="new" href="#">New</a> </li>
-                    <li><input id="file-input" type="file" style="display:none" />
-                        <a href="#" type="file" id="load-file">Load ...</a></li>
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Samples
-                            <b class="right-caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a id="sample0" href="#">Sample 0</a></li>
-                            <li><a id="sample1" href="#">Sample 1</a></li>
-                            <li><a id="sample2" href="#">Sample 2</a></li>
-                            <li><a id="sample3" href="#">Sample 3</a></li>
-                            <li><a id="sample4" href="#">Sample 4</a></li>
-                            <li><a id="sample5" href="#">Sample 5</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a id="save-file" href="#">Save</a></li>
-                    <li class="divider"></li>
-                    <li>
-                        <a id="save-as-png" href="#">Save as PNG</a>
-                    </li>
-                </ul>
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a id="addNodeMenu" href="#">Add Node ...</a></li>
-                    <li><a id="makeCompound" href="#">Add Compound For Selected</a></li>
-                    <li><a id="addEdge" href="#">Add Edge Between Selected</a></li>
-                    <li class="divider"></li>
-                    <li><a id="delete" href="#">Delete Selected <i class="shortcut"> (DEL)</i> </a></li>
-                    <li class="divider"></li>
-                    <li class="disabled"><a id="undo" href="#">Undo <i class="shortcut"> (CTRL + Z)</i> </a></li>
-                    <li class="disabled"><a id="redo" href="#">Redo <i class="shortcut"> (CTRL + Y)</i> </a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">View <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Collapse / Expand
-                            <b class="right-caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a id="collapse-selected" href="#">Collapse Selected</a></li>
-                            <li><a id="expand-selected" href="#">Expand Selected</a></li>
-                            <li class="divider"></li>
-                            <li><a id="collapse-all" href="#">Collapse All</a></li>
-                            <li><a id="expand-all" href="#">Expand All</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Layout <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Style
-                            <b class="right-caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a id="cose-bilkent" href="#">CoSE-Bilkent</a></li>
-                            <li><a id="cose" href="#">CoSE</a></li>
-                            <li><a id="cola" href="#">Cola</a></li>
-                            <li><a id="springy" href="#">Springy</a></li>
-                            <li><a id="arbor" href="#">Arbor</a></li>
-<!-- newly added -->
-                            <li><a id="fcose" href="#">fcose</a></li>
-                            <li><a id="cise" href="#">cise</a></li>
-                            <li><a id="dagre" href="#">dagre</a></li>
-                            <li><a id="klay" href="#">klay</a></li>
-                            <li><a id="avsdf" href="#">avsdf</a></li>
-                            <li><a id="euler" href="#">euler</a></li>
-                            <li><a id="spread" href="#">spread</a></li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a id = "perform-layout" href="#">Perform Layout</a></li>
-                    <li><a id = "layout-properties" href="#">Layout Properties ...</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-toggle="modal" data-target="#quick-help-template">
-                    Help
-                </a>
-            </li>
-        </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
+    <nav id="myNavbar" class="navbar navbar-default my-nav-bar" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">File <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="new" href="#">New</a> </li>
+                        <li><input id="file-input" type="file" style="display:none" />
+                            <a href="#" type="file" id="load-file">Load ...</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Samples
+                                <b class="right-caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="sample0" href="#">Sample 0</a></li>
+                                <li><a id="sample1" href="#">Sample 1</a></li>
+                                <li><a id="sample2" href="#">Sample 2</a></li>
+                                <li><a id="sample3" href="#">Sample 3</a></li>
+                                <li><a id="sample4" href="#">Sample 4</a></li>
+                                <li><a id="sample5" href="#">Sample 5</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="save-file" href="#">Save</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a id="save-as-png" href="#">Save as PNG</a>
+                        </li>
+                    </ul>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="addNodeMenu" href="#">Add Node ...</a></li>
+                        <li><a id="makeCompound" href="#">Add Compound For Selected</a></li>
+                        <li><a id="addEdge" href="#">Add Edge Between Selected</a></li>
+                        <li class="divider"></li>
+                        <li><a id="delete" href="#">Delete Selected <i class="shortcut"> (DEL)</i> </a></li>
+                        <li class="divider"></li>
+                        <li class="disabled"><a id="undo" href="#">Undo <i class="shortcut"> (CTRL + Z)</i> </a></li>
+                        <li class="disabled"><a id="redo" href="#">Redo <i class="shortcut"> (CTRL + Y)</i> </a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">View <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Collapse / Expand
+                                <b class="right-caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="collapse-selected" href="#">Collapse Selected</a></li>
+                                <li><a id="expand-selected" href="#">Expand Selected</a></li>
+                                <li class="divider"></li>
+                                <li><a id="collapse-all" href="#">Collapse All</a></li>
+                                <li><a id="expand-all" href="#">Expand All</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Layout <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Style
+                                <b class="right-caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="cose-bilkent" href="#">CoSE-Bilkent</a></li>
+                                <li><a id="cose" href="#">CoSE</a></li>
+                                <li><a id="cola" href="#">Cola</a></li>
+                                <li><a id="springy" href="#">Springy</a></li>
+                                <li><a id="arbor" href="#">Arbor</a></li>
+                                <!-- newly added -->
+                                <li><a id="fcose" href="#">fcose</a></li>
+                                <li><a id="cise" href="#">cise</a></li>
+                                <li><a id="dagre" href="#">dagre</a></li>
+                                <li><a id="klay" href="#">klay</a></li>
+                                <li><a id="avsdf" href="#">avsdf</a></li>
+                                <li><a id="euler" href="#">euler</a></li>
+                                <li><a id="spread" href="#">spread</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a id="perform-layout" href="#">Perform Layout</a></li>
+                        <li><a id="layout-properties" href="#">Layout Properties ...</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" data-toggle="modal" data-target="#quick-help-template">
+                        Help
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
 
-<div id="info-content">
-    <table width="100%" height="100%" align="center" valign="center">
-        <tr>
-            <td>
-                <span class="input-file" id="file-name"></span>
-            </td>
-            <td>
-                <span class="label">Cytoscape.js<i> Layout Demo</i></span>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div id="info-content">
+        <table width="100%" height="100%" align="center" valign="center">
+            <tr>
+                <td>
+                    <span class="input-file" id="file-name"></span>
+                </td>
+                <td>
+                    <span class="label">Cytoscape.js<i> Layout Demo</i></span>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-<div id="cy"></div>
+    <div id="cy"></div>
 
-<div id="quick-help-template" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Quick Help</h4>
-            </div>
-            <div class="modal-body">
-                <p><span style="font-weight: bold">File | Load ... :</span> Load a graph in GraphML</p>
-                <p><span style="font-weight: bold">File | Save :</span> Save the current graph in GraphML</p>
-                <p><span style="font-weight: bold">Add Node ...:</span> Add a simple node</p>
-                <p><span style="font-weight: bold">Add Compound For Selected:</span> Add a new compound containing selected nodes</p>
-                <p><span style="font-weight: bold">Add Edge Between Selected:</span> Add an edge between two selected nodes</p>
-                <p><span style="font-weight: bold">Delete Selected:</span> Delete selected nodes and edges</p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<div class="modal fade" id="add-node-modal" tabindex="-1" role="dialog" aria-labelledby="add-node-modal-label">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="add-node-modal-label">Add new node</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="new-node-name">Name</label>
-                    <input type="text" class="form-control" id="new-node-name" placeholder="Name" value="newNode">
+    <div id="quick-help-template" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Quick Help</h4>
                 </div>
-                <div class="form-group">
-                    <label for="new-node-width">Width</label>
-                    <input type="number" class="form-control" min="0" value="40" id="new-node-width" placeholder="Width">
+                <div class="modal-body">
+                    <p><span style="font-weight: bold">File | Load ... :</span> Load a graph in GraphML</p>
+                    <p><span style="font-weight: bold">File | Save :</span> Save the current graph in GraphML</p>
+                    <p><span style="font-weight: bold">Add Node ...:</span> Add a simple node</p>
+                    <p><span style="font-weight: bold">Add Compound For Selected:</span> Add a new compound containing
+                        selected nodes</p>
+                    <p><span style="font-weight: bold">Add Edge Between Selected:</span> Add an edge between two
+                        selected nodes</p>
+                    <p><span style="font-weight: bold">Delete Selected:</span> Delete selected nodes and edges</p>
+
                 </div>
-                <div class="form-group">
-                    <label for="new-node-height">Height</label>
-                    <input type="number" class="form-control" min="0" value="40" id="new-node-height" placeholder="Height">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                 </div>
-                <div class="form-group">
-                    <label for="new-node-shape">Shape</label>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="add-node-modal" tabindex="-1" role="dialog" aria-labelledby="add-node-modal-label">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="add-node-modal-label">Add new node</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="new-node-name">Name</label>
+                        <input type="text" class="form-control" id="new-node-name" placeholder="Name" value="newNode">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-node-width">Width</label>
+                        <input type="number" class="form-control" min="0" value="40" id="new-node-width"
+                            placeholder="Width">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-node-height">Height</label>
+                        <input type="number" class="form-control" min="0" value="40" id="new-node-height"
+                            placeholder="Height">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-node-shape">Shape</label>
                         <select id="new-node-shape" class="form-control">
                             <option value="rectangle">Rectangle</option>
                             <option value="triangle">Triangle</option>
@@ -190,23 +197,23 @@
                             <option value="roundrectangle">Round Rectangle</option>
                             <option value="pentagon">Pentagon</option>
                         </select>
-                </div>
-                <div class="form-group">
-                    <label for="new-node-color">Color</label>
-                    <div id="new-node-color" class="input-group colorpicker-component">
-                        <input type="text" value="gray" class="form-control" />
-                        <span class="input-group-addon"><i></i></span>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="new-node-border-color">Border Color</label>
+                    <div class="form-group">
+                        <label for="new-node-color">Color</label>
+                        <div id="new-node-color" class="input-group colorpicker-component">
+                            <input type="text" value="gray" class="form-control" />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-node-border-color">Border Color</label>
 
-                    <div id="new-node-border-color" class="input-group colorpicker-component">
-                        <input type="text" value="black" class="form-control" />
-                        <span class="input-group-addon"><i></i></span>
+                        <div id="new-node-border-color" class="input-group colorpicker-component">
+                            <input type="text" value="black" class="form-control" />
+                            <span class="input-group-addon"><i></i></span>
+                        </div>
                     </div>
-                </div>
-                <!--
+                    <!--
                 <div class="form-group">
                     <label for="new-node-x">X Position</label>
                     <input type="number" class="form-control" id="new-node-x" placeholder="X Position">
@@ -216,31 +223,33 @@
                     <input type="number" class="form-control" id="new-node-y" placeholder="Y Position">
                 </div>
             </div>-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="exit-new-node">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-new-node">Save changes</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                            id="exit-new-node">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-new-node">Save
+                            changes</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div id="cose-bilkent-layout-table" title="CoSE-Bilkent Properties" style="display: inline;resize: none;">
-    <!-- sbgn layout table will be shown here -->
-</div>
-<div id="cose-layout-table" title="CoSE Properties" style="display: inline;resize: none;">
-    <!-- sbgn layout table will be shown here -->
-</div>
-<div id="cola-layout-table" title="Cola Properties" style="display: inline;resize: none;">
-    <!-- sbgn layout table will be shown here -->
-</div>
-<div id="springy-layout-table" title="Springy Properties" style="display: inline;resize: none;">
-    <!-- sbgn layout table will be shown here -->
-</div>
-<div id="arbor-layout-table" title="Arbor Properties" style="display: inline;resize: none;">
-    <!-- sbgn layout table will be shown here -->
-</div>
+        <div id="cose-bilkent-layout-table" title="CoSE-Bilkent Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="cose-layout-table" title="CoSE Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="cola-layout-table" title="Cola Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="springy-layout-table" title="Springy Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="arbor-layout-table" title="Arbor Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
 
 
-<script type="text/template" id="cose-bilkent-settings-template">
+        <script type="text/template" id="cose-bilkent-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -396,7 +405,7 @@
         </tr>
     </table>
 </script>
-<script type="text/template" id="cose-settings-template">
+        <script type="text/template" id="cose-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -537,7 +546,7 @@
         </tr>
     </table>
 </script>
-<script type="text/template" id="cola-settings-template">
+        <script type="text/template" id="cola-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -636,7 +645,7 @@
         </tr>
     </table>
 </script>
-<script type="text/template" id="arbor-settings-template">
+        <script type="text/template" id="arbor-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -720,7 +729,8 @@
         </tr>
     </table>
 </script>
-<script type="text/template" id="springy-settings-template">
+
+        <script type="text/template" id="springy-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -814,40 +824,49 @@
             </td>
         </tr>
     </table>
+
 </script>
 
 
-<!-- VIEW SCRIPTS -->
-<script src="js/view_scripts/jquery-1.12.4.min.js"></script>
-<script src="js/view_scripts/jquery-ui.min.js"></script>
-<script src="js/view_scripts/bootstrap.min.js"></script>
-<script src="js/view_scripts/underscore-min.js"></script>
-<script src="js/view_scripts/backbone-min.js"></script>
-<script src="js/view_scripts/bootstrap-colorpicker.min.js"></script>
 
-<!-- CYTOSCAPE & EXTENSIONS -->
-<script src="js/main.js"></script>
-<script src="js/cytoscape/cytoscape.min.js"></script>
-<script src="js/cytoscape/extensions/ui/cytoscape-panzoom.js"></script>
-<script src="js/cytoscape/extensions/ui/cytoscape-undo-redo.js"></script>
-<script src="js/cytoscape/extensions/layout/cytoscape-cose-bilkent.js"></script>
-<script src="js/cytoscape/extensions/layout/arbor.js"></script>
-<script src="js/cytoscape/extensions/layout/cytoscape-arbor.js"></script>
-<script src="http://marvl.infotech.monash.edu/webcola/cola.v3.min.js"></script>
-<script src="js/cytoscape/extensions/layout/cytoscape-cola.js"></script>
-<script src="https://cdn.rawgit.com/dhotson/springy/2.7.1/springy.js"></script>
-<script src="js/cytoscape/extensions/layout/cytoscape-springy.js"></script>
+        <!-- newly added -->
+       
 
-<!-- CUSTOMS FOR DEMO -->
-<script src="js/utils.add-remove.js"></script>
-<script src="js/utils.expand-collapse.js"></script>
-<script src="js/utils.element.js"></script>
-<script src="js/converter.graphml-to-json.js"></script>
-<script src="js/converter.json-to-graphml.js"></script>
-<script src="js/layouts.js"></script>
-<script src="js/EditorActionsManager.js"></script>
-<script src="js/IDGenerator.js"></script>
-<script src="js/FileSaver.js"></script>
-<script src="js/main.menu.js"></script>
+
+
+
+        <!-- VIEW SCRIPTS -->
+        <script src="js/view_scripts/jquery-1.12.4.min.js"></script>
+        <script src="js/view_scripts/jquery-ui.min.js"></script>
+        <script src="js/view_scripts/bootstrap.min.js"></script>
+        <script src="js/view_scripts/underscore-min.js"></script>
+        <script src="js/view_scripts/backbone-min.js"></script>
+        <script src="js/view_scripts/bootstrap-colorpicker.min.js"></script>
+
+        <!-- CYTOSCAPE & EXTENSIONS -->
+        <script src="js/main.js"></script>
+        <script src="js/cytoscape/cytoscape.min.js"></script>
+        <script src="js/cytoscape/extensions/ui/cytoscape-panzoom.js"></script>
+        <script src="js/cytoscape/extensions/ui/cytoscape-undo-redo.js"></script>
+        <script src="js/cytoscape/extensions/layout/cytoscape-cose-bilkent.js"></script>
+        <script src="js/cytoscape/extensions/layout/arbor.js"></script>
+        <script src="js/cytoscape/extensions/layout/cytoscape-arbor.js"></script>
+        <script src="http://marvl.infotech.monash.edu/webcola/cola.v3.min.js"></script>
+        <script src="js/cytoscape/extensions/layout/cytoscape-cola.js"></script>
+        <script src="https://cdn.rawgit.com/dhotson/springy/2.7.1/springy.js"></script>
+        <script src="js/cytoscape/extensions/layout/cytoscape-springy.js"></script>
+
+        <!-- CUSTOMS FOR DEMO -->
+        <script src="js/utils.add-remove.js"></script>
+        <script src="js/utils.expand-collapse.js"></script>
+        <script src="js/utils.element.js"></script>
+        <script src="js/converter.graphml-to-json.js"></script>
+        <script src="js/converter.json-to-graphml.js"></script>
+        <script src="js/layouts.js"></script>
+        <script src="js/EditorActionsManager.js"></script>
+        <script src="js/IDGenerator.js"></script>
+        <script src="js/FileSaver.js"></script>
+        <script src="js/main.menu.js"></script>
 </body>
+
 </html>
