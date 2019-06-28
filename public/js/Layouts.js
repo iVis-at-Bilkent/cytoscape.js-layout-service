@@ -691,4 +691,13 @@ var whitenBackgrounds = function(){
     $("#cola").css("background-color", "white");
     $("#springy").css("background-color", "white");
     $("#arbor").css("background-color", "white");
+// newly added
+    $("#fcose").css("background-color", "white");
+    $("#cise").css("background-color", "white");
+    $("#dagre").css("background-color", "white");
+    $("#klay").css("background-color", "white");
+    $("#avsdf").css("background-color", "white");
+    $("#euler").css("background-color", "white");
+    $("#spread").css("background-color", "white");
+
 };

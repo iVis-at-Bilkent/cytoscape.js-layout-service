@@ -154,6 +154,43 @@ $("#arbor").click( function (e) {
     whitenBackgrounds();
     $("#arbor").css("background-color", "grey");
 });
+// newly added
+$("#fcose").click( function (e) {
+    tempName = "fcose";
+    whitenBackgrounds();
+    $("#fcose").css("background-color", "grey");
+});
+$("#cise").click( function (e) {
+    tempName = "cise";
+    whitenBackgrounds();
+    $("#cise").css("background-color", "grey");
+});
+$("#dagre").click( function (e) {
+    tempName = "dagre";
+    whitenBackgrounds();
+    $("#dagre").css("background-color", "grey");
+});
+$("#klay").click( function (e) {
+    tempName = "klay";
+    whitenBackgrounds();
+    $("#klay").css("background-color", "grey");
+});
+$("#avsdf").click( function (e) {
+    tempName = "avsdf";
+    whitenBackgrounds();
+    $("#avsdf").css("background-color", "grey");
+});
+$("#euler").click( function (e) {
+    tempName = "euler";
+    whitenBackgrounds();
+    $("#euler").css("background-color", "grey");
+});
+$("#spread").click( function (e) {
+    tempName = "spread";
+    whitenBackgrounds();
+    $("#spread").css("background-color", "grey");
+});
+
 
 var coseBilkentLayoutProp = new COSEBilkentLayout({
     el: '#cose-bilkent-layout-table'

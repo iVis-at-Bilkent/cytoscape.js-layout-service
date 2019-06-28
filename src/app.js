@@ -7,8 +7,6 @@ const cytoscape = require('cytoscape');
 const path = require( "path" );
 // app.set( "view engine", any );
 
-
-
 // to support sbgnml type of input
 let convert = require('sbgnml-to-cytoscape');
 
@@ -34,7 +32,6 @@ const coseBilkent = require('cytoscape-cose-bilkent');
 cytoscape.use(coseBilkent);
 
 // for cise layout, Needs to be fixed, some problems
-//////////////////////////////////
 const cise = require('cytoscape-cise');
 cytoscape.use( cise );
 
@@ -60,7 +57,7 @@ const euler = require('cytoscape-euler');
 cytoscape.use(euler);
 
 // spread layout
-var spread = require('cytoscape-spread');
+const spread = require('cytoscape-spread');
 cytoscape.use(spread);
 
 let cy;
