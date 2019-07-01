@@ -686,7 +686,6 @@ var SPRINGYLayout = Backbone.View.extend({
     }
 });
 
-// model for fcose
 var FCOSELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "fcose",
@@ -764,10 +763,85 @@ var FCOSELayout = Backbone.View.extend({
             self.currentLayoutProperties.initialEnergyOnIncremental = Number(document.getElementById("initialEnergyOnIncremental5").value);
             $(self.el).dialog('close');
 
-        }),
-        $("#default-layout5").click(function (evt) {
+        });
+            $("#default-layout5").click(function (evt) {
+                self.copyProperties();
+                var temp = _.template($("#fcose-settings-template").html());
+                self.template = temp(self.currentLayoutProperties);
+                $(self.el).html(self.template);
+            });
+
+        return this;
+
+    }
+});
+
+var CISELayout = Backbone.View.extend({
+    defaultLayoutProperties: {
+        name: "cise",
+        // clusters: clusterInfo,
+        animate: false,
+        refresh: 10,
+        animationDuration: undefined,
+        animationEasing: undefined,
+        fit: true,
+        padding: 30,
+        nodeSeparation: 12.5,
+        idealInterClusterEdgeLengthCoefficient: 1.4,
+        allowNodesInsideCircle: false,
+        maxRatioOfNodesInsideCircle: 0.1,
+        springCoeff: 0.45,
+        nodeRepulsion: 4500,
+        gravity: 0.25,
+        gravityRange: 3.8
+    },
+    currentLayoutProperties: null,
+    initialize: function () {
+        var self = this;
+        self.copyProperties();
+        var temp = _.template($("#cise-settings-template").html());
+        self.template = temp(this.currentLayoutProperties);
+    },
+    copyProperties: function () {
+        this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
+    },
+    applyLayout: function () {
+        var options = {};
+        for (var prop in this.currentLayoutProperties) {
+            options[prop] = this.currentLayoutProperties[prop];
+        }
+        cy.layout(options);
+    },
+    render: function () {
+        var self = this;
+        var temp = _.template($("#cise-settings-template").html());
+        self.template = temp(this.currentLayoutProperties);
+        $(self.el).html(self.template);
+
+        $(self.el).dialog();
+
+        $("#save-layout6").click(function (evt) {
+            self.currentLayoutProperties.animate = document.getElementById("animate6").checked;
+            self.currentLayoutProperties.refresh = Number(document.getElementById("refresh6").value);
+            self.currentLayoutProperties.fit = document.getElementById("fit6").checked;
+            self.currentLayoutProperties.padding = Number(document.getElementById("padding6").value);
+            self.currentLayoutProperties.nodeSeparation = Number(document.getElementById("nodeSeparation6").value);
+            self.currentLayoutProperties.idealInterClusterEdgeLengthCoefficient = Number(document.getElementById("idealInterClusterEdgeLengthCoefficient6").value);
+            self.currentLayoutProperties.allowNodesInsideCircle = document.getElementById("allowNodesInsideCircle6").checked;
+            self.currentLayoutProperties.maxRatioOfNodesInsideCircle = Number(document.getElementById("maxRatioOfNodesInsideCircle6").value); 
+            self.currentLayoutProperties.springCoeff = Number(document.getElementById("springCoeff6").value);
+            self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("nodeRepulsion6").value);
+            self.currentLayoutProperties.gravity = Number(document.getElementById("gravity6").value);
+            self.currentLayoutProperties.gravityRange = Number(document.getElementById("gravityRange6").value);
+
+            $(self.el).dialog('close');
+        });
+
+        // console.log( "Hello" );
+
+        $("#default-layout6").click(function (evt) {
             self.copyProperties();
-            var temp = _.template($("#fcose-settings-template").html());
+            var temp = _.template($("#cise-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
             $(self.el).html(self.template);
         });
@@ -775,21 +849,22 @@ var FCOSELayout = Backbone.View.extend({
         return this;
 
     }
-})
+});
+    
 
-var whitenBackgrounds = function () {
-    $("#cose-bilkent").css("background-color", "white");
-    $("#cose").css("background-color", "white");
-    $("#cola").css("background-color", "white");
-    $("#springy").css("background-color", "white");
-    $("#arbor").css("background-color", "white");
-    // newly added
-    $("#fcose").css("background-color", "white");
-    $("#cise").css("background-color", "white");
-    $("#dagre").css("background-color", "white");
-    $("#klay").css("background-color", "white");
-    $("#avsdf").css("background-color", "white");
-    $("#euler").css("background-color", "white");
+whitenBackgrounds = function () {
+$("#cose-bilkent").css("background-color", "white");
+$("#cose").css("background-color", "white");
+$("#cola").css("background-color", "white");
+$("#springy").css("background-color", "white");
+$("#arbor").css("background-color", "white");
+// newly added
+$("#fcose").css("background-color", "white");
+$("#cise").css("background-color", "white");
+$("#dagre").css("background-color", "white");
+$("#klay").css("background-color", "white");
+        $("#avsdf").css("background-color", "white");
+        $("#euler").css("background-color", "white");
     $("#spread").css("background-color", "white");
 
 };

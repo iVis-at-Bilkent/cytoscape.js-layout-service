@@ -212,9 +212,9 @@ var springyLayoutProp = new SPRINGYLayout({
 var fcoseLayoutProp = new FCOSELayout({
     el: '#fcose-layout-table'
 })
-// var ciseLayoutProp = new ciseLayoutProp({
-//     el: '#cise-layout-table'
-// })
+var ciseLayoutProp = new CISELayout({
+    el: '#cise-layout-table'
+})
 // var dagreLayoutProp = new dagreLayoutProp({
 //     el: '#dagre-layout-table'
 // })

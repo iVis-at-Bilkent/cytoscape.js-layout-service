@@ -853,6 +853,7 @@
 </script>
 
 
+        <!-- newly added -->
         <script type="text/template" id="fcose-settings-template">
     <table class="table-condensed layout-table">
         <tr>
@@ -1053,8 +1054,117 @@
     </table>
 </script>
 
+        <script type="text/template" id="cise-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate6" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Refresh </span>
+            </td>
+            <td>
+                <input id="refresh6" type="text" class="input-small layout-text" value = <%= refresh %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit6" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding6" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node Separation </span>
+            </td>
+            <td>
+                <input id="nodeSeparation6" type="text" class="input-small layout-text" value = <%= nodeSeparation %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Ideal Inter Cluster Edge Length Coefficient  </span>
+            </td>
+            <td>
+                <input id="idealInterClusterEdgeLengthCoefficient6" type="text" class="input-small layout-text" value = <%= idealInterClusterEdgeLengthCoefficient %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Allow Nodes Inside Circle  </span>
+            </td>
+            <td>
+                <input id="allowNodesInsideCircle6" type="checkbox" class="input-small layout-text" <% if(allowNodesInsideCircle){ %> checked <%}%> >
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Max Ratio Of Nodes Inside Circle   </span>
+            </td>
+            <td>
+                <input id="maxRatioOfNodesInsideCircle6" type="text" class="input-small layout-text" value = <%= maxRatioOfNodesInsideCircle %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Spring Coefficient   </span>
+            </td>
+            <td>
+                <input id="springCoeff6" type="text" class="input-small layout-text" value = <%= springCoeff %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node Repulsion </span>
+            </td>
+            <td>
+                <input id="nodeRepulsion6" type="text" class="input-small layout-text" value = <%= nodeRepulsion %> >
+            </td>
+        </tr>
 
-        <!-- newly added -->
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity </span>
+            </td>
+            <td>
+                <input id="gravity6" type="text" class="input-small layout-text" value = <%= gravity %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity Range </span>
+            </td>
+            <td>
+                <input id="gravityRange6" type="text" class="input-small layout-text" value = <%= gravityRange %> >
+            </td>
+        </tr>
+        <tr id="layout-buttons6">
+            <td>
+                <button id="save-layout6" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout6" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+
+    </table>
+</script>
 
 
         <!-- VIEW SCRIPTS -->
