@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<link rel="shortcut icon" href="#" />
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -247,6 +249,28 @@
         <div id="arbor-layout-table" title="Arbor Properties" style="display: inline;resize: none;">
             <!-- sbgn layout table will be shown here -->
         </div>
+        <!-- newly added -->
+        <div id="fcose-layout-table" title="Fcose Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="cise-layout-table" title="Cise Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="dagre-layout-table" title="dagre Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="klay-layout-table" title="Klay Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="avsdf-layout-table" title="Avsdf Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="Euler-layout-table" title="Euler Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
+        <div id="Spread-layout-table" title="Spread Properties" style="display: inline;resize: none;">
+            <!-- sbgn layout table will be shown here -->
+        </div>
 
 
         <script type="text/template" id="cose-bilkent-settings-template">
@@ -405,6 +429,7 @@
         </tr>
     </table>
 </script>
+
         <script type="text/template" id="cose-settings-template">
     <table class="table-condensed layout-table">
         <tr>
@@ -828,11 +853,208 @@
 </script>
 
 
+        <script type="text/template" id="fcose-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Quality </span>
+            </td>
+            <td>
+                <input id="quality5" type="text" class="input-small layout-text" value = <%= quality %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Randomize </span>
+            </td>
+            <td>
+                <input id="randomize5" type="checkbox" class="input-small layout-text" <% if(randomize){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate5" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit5" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding5" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node Dimensions Include Labels </span>
+            </td>
+            <td>
+                <input id="nodeDimensionsIncludeLabels5" type="checkbox" class="input-small layout-text" <% if(nodeDimensionsIncludeLabels){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Sampling Type </span>
+            </td>
+            <td>
+                <input id="samplingType5" type="checkbox" class="input-small layout-text" <% if(samplingType){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Sample Size </span>
+            </td>
+            <td>
+                <input id="sampleSize5" type="text" class="input-small layout-text" value = <%= sampleSize %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node separation </span>
+            </td>
+            <td>
+                <input id="nodeSeparation5" type="text" class="input-small layout-text" value = <%= nodeSeparation %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Pi Tol </span>
+            </td>
+            <td>
+                <input id="piTol5" type="text" class="input-small layout-text" value = <%= piTol %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Pi Tol </span>
+            </td>
+            <td>
+                <input id="nodeRepulsion5" type="text" class="input-small layout-text" value = <%= nodeRepulsion %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Ideal Edge length </span>
+            </td>
+            <td>
+                <input id="idealEdgeLength5" type="text" class="input-small layout-text" value = <%= idealEdgeLength %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Edge Elasticity </span>
+            </td>
+            <td>
+                <input id="edgeElasticity5" type="text" class="input-small layout-text" value = <%= edgeElasticity %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Nesting Factor </span>
+            </td>
+            <td>
+                <input id="nestingFactor5" type="text" class="input-small layout-text" value = <%= nestingFactor %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity </span>
+            </td>
+            <td>
+                <input id="gravity5" type="text" class="input-small layout-text" value = <%= gravity %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Num Iter </span>
+            </td>
+            <td>
+                <input id="numIter5" type="text" class="input-small layout-text" value = <%= numIter %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Tile </span>
+            </td>
+            <td>
+                <input id="tile5" type="checkbox" class="input-small layout-text" <% if(tile){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Tiling Padding Vertical </span>
+            </td>
+            <td>
+                <input id="tilingPaddingVertical5" type="text" class="input-small layout-text" value = <%= tilingPaddingVertical %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Tiling Padding Horizontal </span>
+            </td>
+            <td>
+                <input id="tilingPaddingHorizontal5" type="text" class="input-small layout-text" value = <%= tilingPaddingHorizontal %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity Range Compound </span>
+            </td>
+            <td>
+                <input id="gravityRangeCompound5" type="text" class="input-small layout-text" value = <%= gravityRangeCompound %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity Compound </span>
+            </td>
+            <td>
+                <input id="gravityCompound5" type="text" class="input-small layout-text" value = <%= gravityCompound %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity Range </span>
+            </td>
+            <td>
+                <input id="gravityRange5" type="text" class="input-small layout-text" value = <%= gravityRange %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Initial Energy On Incremental </span>
+            </td>
+            <td>
+                <input id="initialEnergyOnIncremental5" type="text" class="input-small layout-text" value = <%= initialEnergyOnIncremental %> >
+            </td>
+        </tr>
+        <tr id="layout-buttons5">
+            <td>
+                <button id="save-layout5" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout5" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+    </table>
+</script>
+
 
         <!-- newly added -->
-       
-
-
 
 
         <!-- VIEW SCRIPTS -->

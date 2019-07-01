@@ -614,6 +614,7 @@ var ARBORLayout = Backbone.View.extend({
         return this;
     }
 });
+
 var SPRINGYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'springy',
@@ -739,22 +740,32 @@ var FCOSELayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout5").click(function (evt) {
-            // self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("node-repulsion5").value);
-            // self.currentLayoutProperties.idealEdgeLength = Number(document.getElementById("ideal-edge-length5").value);
-            // self.currentLayoutProperties.edgeElasticity = Number(document.getElementById("edge-elasticity5").value);
-            // self.currentLayoutProperties.nestingFactor = Number(document.getElementById("nesting-factor5").value);
-            // self.currentLayoutProperties.gravity = Number(document.getElementById("gravity5").value);
-            // self.currentLayoutProperties.numIter = Number(document.getElementById("num-iter5").value);
-            // self.currentLayoutProperties.animate = document.getElementById("animate5").checked;
-            // self.currentLayoutProperties.fit = document.getElementById("fit5").checked;
-            // self.currentLayoutProperties.padding = Number(document.getElementById("padding5").value);
-            // self.currentLayoutProperties.tile = document.getElementById("tile5").checked;
-            // // newly added
-
+            self.currentLayoutProperties.quality = new Text(document.getElementById("quality5").value);
+            self.currentLayoutProperties.randomize = document.getElementById("randomize5").checked;
+            self.currentLayoutProperties.animate = document.getElementById("animate5").checked;
+            self.currentLayoutProperties.fit = document.getElementById("fit5").checked;
+            self.currentLayoutProperties.padding = Number(document.getElementById("padding5").value);
+            self.currentLayoutProperties.nodeDimensionsIncludeLabels = document.getElementById("nodeDimensionsIncludeLabels5").checked;
+            self.currentLayoutProperties.samplingType = document.getElementById("samplingType5").checked;
+            self.currentLayoutProperties.sampleSize = Number(document.getElementById("sampleSize5").value);
+            self.currentLayoutProperties.nodeSeparation = Number(document.getElementById("nodeSeparation5").value);
+            self.currentLayoutProperties.piTol = Number(document.getElementById("piTol5").value);
+            self.currentLayoutProperties.nodeRepulsion = Number(document.getElementById("nodeRepulsion5").value);
+            self.currentLayoutProperties.idealEdgeLength = Number(document.getElementById("idealEdgeLength5").value);
+            self.currentLayoutProperties.edgeElasticity = Number(document.getElementById("edgeElasticity5").value);
+            self.currentLayoutProperties.nestingFactor = Number(document.getElementById("nestingFactor5").value);
+            self.currentLayoutProperties.gravity = Number(document.getElementById("gravity5").value);
+            self.currentLayoutProperties.numIter = Number(document.getElementById("numIter5").value);
+            self.currentLayoutProperties.tile = document.getElementById("tile5").checked;
+            self.currentLayoutProperties.tilingPaddingVertical = Number(document.getElementById("tilingPaddingVertical5").value);
+            self.currentLayoutProperties.tilingPaddingHorizontal = Number(document.getElementById("tilingPaddingHorizontal5").value);
+            self.currentLayoutProperties.gravityRangeCompound = Number(document.getElementById("gravityRangeCompound5").value);
+            self.currentLayoutProperties.gravityRange = Number(document.getElementById("gravityRange5").value);
+            self.currentLayoutProperties.initialEnergyOnIncremental = Number(document.getElementById("initialEnergyOnIncremental5").value);
             $(self.el).dialog('close');
 
         }),
-        $("#default-layout3").click(function (evt) {
+        $("#default-layout5").click(function (evt) {
             self.copyProperties();
             var temp = _.template($("#fcose-settings-template").html());
             self.template = temp(self.currentLayoutProperties);

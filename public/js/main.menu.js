@@ -511,6 +511,28 @@ $("#perform-layout").click(function (e) {
         case 'springy':
             springyLayoutProp.applyLayout();
             break;
+        // newly added
+        case 'fcose':
+            fcoseLayoutProp.applyLayout();
+            break;
+        case 'cise':
+            ciseLayoutProp.applyLayout();
+            break;
+        case 'dagre':
+            dagreLayoutProp.applyLayout();
+            break;
+        case 'klay':
+            klayLayoutProp.applyLayout();
+            break;
+        case 'avsdf':
+            avsdfLayoutProp.applyLayout();
+            break;
+        case 'euler':
+            eulerLayoutProp.applyLayout();
+            break;
+        case 'spread':
+            spreadLayoutProp.applyLayout();
+            break;
     }
 });
 var atts;
