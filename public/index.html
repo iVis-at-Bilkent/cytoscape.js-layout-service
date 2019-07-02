@@ -670,6 +670,7 @@
         </tr>
     </table>
 </script>
+
         <script type="text/template" id="arbor-settings-template">
     <table class="table-condensed layout-table">
         <tr>
@@ -1165,6 +1166,77 @@
 
     </table>
 </script>
+
+
+<script type="text/template" id="avsdf-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate9" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Refresh </span>
+            </td>
+            <td>
+                <input id="refresh9" type="text" class="input-small layout-text" value = <%= refresh %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit9" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding9" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node Separation </span>
+            </td>
+            <td>
+                <input id="nodeSeparation9" type="text" class="input-small layout-text" value = <%= nodeSeparation %> >
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Ungrabify While Simulating </span>
+            </td>
+            <td>
+                <input id="ungrabifyWhileSimulating9" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){ %> checked <%}%> >
+            </td>
+        </tr>
+
+
+
+
+        <tr id="layout-buttons6">
+            <td>
+                <button id="save-layout6" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout6" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+
+
+
+    </table>
+</script>
+
 
 
         <!-- VIEW SCRIPTS -->

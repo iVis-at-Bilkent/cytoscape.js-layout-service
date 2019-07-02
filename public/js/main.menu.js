@@ -221,9 +221,9 @@ var ciseLayoutProp = new CISELayout({
 // var klayLayoutProp = new klayLayoutProp({
 //     el: '#klay-layout-table'
 // })
-// var avsdfLayoutProp = new avsdfLayoutProp({
-//     el: '#avsdf-layout-table'
-// })
+var avsdfLayoutProp = new AVSDFLayout({
+    el: '#avsdf-layout-table'
+})
 // var eulerLayoutProp = new eulerLayoutProp({
 //     el: '#euler-layout-table'
 // })
