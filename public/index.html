@@ -265,10 +265,10 @@
         <div id="avsdf-layout-table" title="Avsdf Properties" style="display: inline;resize: none;">
             <!-- sbgn layout table will be shown here -->
         </div>
-        <div id="Euler-layout-table" title="Euler Properties" style="display: inline;resize: none;">
+        <div id="euler-layout-table" title="Euler Properties" style="display: inline;resize: none;">
             <!-- sbgn layout table will be shown here -->
         </div>
-        <div id="Spread-layout-table" title="Spread Properties" style="display: inline;resize: none;">
+        <div id="spread-layout-table" title="Spread Properties" style="display: inline;resize: none;">
             <!-- sbgn layout table will be shown here -->
         </div>
 
@@ -571,6 +571,7 @@
         </tr>
     </table>
 </script>
+
         <script type="text/template" id="cola-settings-template">
     <table class="table-condensed layout-table">
         <tr>
@@ -716,10 +717,6 @@
             </td>
         </tr>
 
-
-
-
-
         <tr>
             <td>
                 <span class="add-on layout-text"> Gravity </span>
@@ -852,7 +849,6 @@
     </table>
 
 </script>
-
 
         <!-- newly added -->
         <script type="text/template" id="fcose-settings-template">
@@ -1168,7 +1164,7 @@
 </script>
 
 
-<script type="text/template" id="avsdf-settings-template">
+        <script type="text/template" id="avsdf-settings-template">
     <table class="table-condensed layout-table">
         <tr>
             <td>
@@ -1233,6 +1229,457 @@
         </tr>
 
 
+
+    </table>
+</script>
+
+        <script type="text/template" id="dagre-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate7" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit7" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding7" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Node Dimensions Include Labels </span>
+            </td>
+            <td>
+                <input id="nodeDimensionsIncludeLabels7" type="checkbox" class="input-small layout-text" <% if(nodeDimensionsIncludeLabels){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr id="layout-buttons7">
+            <td>
+                <button id="save-layout7" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout7" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+
+    </table>
+</script>
+
+        <script type="text/template" id="klay-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit8" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding8" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate8" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>    
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Add Unnecessary Bendpoints </span>
+            </td>
+            <td>
+                <input id="addUnnecessaryBendpoints8" type="checkbox" class="input-small layout-text" <% if(klay.addUnnecessaryBendpoints){ %> checked <%}%> >
+            </td>
+        </tr>    
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Aspect Ratio </span>
+            </td>
+            <td>
+                <input id="aspectRatio8" type="text" class="input-small layout-text" value = <%= klay.aspectRatio %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Border Spacing </span>
+            </td>
+            <td>
+                <input id="borderSpacing8" type="text" class="input-small layout-text" value = <%= klay.borderSpacing %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Compact Components </span>
+            </td>
+            <td>
+                <input id="compactComponents8" type="checkbox" class="input-small layout-text" <% if(klay.compactComponents){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Edge Spacing Factor </span>
+            </td>
+            <td>
+                <input id="edgeSpacingFactor8" type="text" class="input-small layout-text" value = <%= klay.edgeSpacingFactor %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Feedback Edges </span>
+            </td>
+            <td>
+                <input id="feedbackEdges8" type="checkbox" class="input-small layout-text" <% if(klay.feedbackEdges){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> In Layer Spacing Factor </span>
+            </td>
+            <td>
+                <input id="inLayerSpacingFactor8" type="text" class="input-small layout-text" value = <%= klay.inLayerSpacingFactor %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Layout Hierarchy </span>
+            </td>
+            <td>
+                <input id="layoutHierarchy8" type="checkbox" class="input-small layout-text" <% if(klay.layoutHierarchy){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Linear Segments Deflection Dampening </span>
+            </td>
+            <td>
+                <input id="linearSegmentsDeflectionDampening8" type="text" class="input-small layout-text" value = <%= klay.linearSegmentsDeflectionDampening %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Merge edges </span>
+            </td>
+            <td>
+                <input id="mergeEdges8" type="checkbox" class="input-small layout-text" <% if(klay.mergeEdges){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Merge Hierarchy Crossing Edges </span>
+            </td>
+            <td>
+                <input id="mergeHierarchyCrossingEdges8" type="checkbox" class="input-small layout-text" <% if(klay.mergeHierarchyCrossingEdges){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Randomization Seed </span>
+            </td>
+            <td>
+                <input id="randomizationSeed8" type="text" class="input-small layout-text" value = <%= klay.randomizationSeed %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Route Self Loop Inside </span>
+            </td>
+            <td>
+                <input id="routeSelfLoopInside8" type="checkbox" class="input-small layout-text" <% if(klay.routeSelfLoopInside8){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Separate Connected Components </span>
+            </td>
+            <td>
+                <input id="separateConnectedComponents8" type="checkbox" class="input-small layout-text" <% if(klay.separateConnectedComponents){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Spacing </span>
+            </td>
+            <td>
+                <input id="spacing8" type="text" class="input-small layout-text" value = <%= klay.spacing %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Thoroughness </span>
+            </td>
+            <td>
+                <input id="thoroughness8" type="text" class="input-small layout-text" value = <%= klay.thoroughness %> >
+            </td>
+        </tr>
+
+        <tr id="layout-buttons8">
+            <td>
+                <button id="save-layout8" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout8" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+
+    </table>
+</script>
+
+        <script type="text/template" id="euler-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate10" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit10" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding10" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Gravity </span>
+            </td>
+            <td>
+                <input id="gravity10" type="text" class="input-small layout-text" value = <%= gravity %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Pull </span>
+            </td>
+            <td>
+                <input id="pull10" type="text" class="input-small layout-text" value = <%= pull %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Theta </span>
+            </td>
+            <td>
+                <input id="theta10" type="text" class="input-small layout-text" value = <%= theta %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Drag Coefficient </span>
+            </td>
+            <td>
+                <input id="dragCoeff10" type="text" class="input-small layout-text" value = <%= dragCoeff %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Movement Threshold </span>
+            </td>
+            <td>
+                <input id="movementThreshold10" type="text" class="input-small layout-text" value = <%= movementThreshold %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Time Step </span>
+            </td>
+            <td>
+                <input id="timeStep10" type="text" class="input-small layout-text" value = <%= timeStep %> >
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Refresh </span>
+            </td>
+            <td>
+                <input id="refresh10" type="text" class="input-small layout-text" value = <%= refresh %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Max Iterations </span>
+            </td>
+            <td>
+                <input id="maxIterations10" type="text" class="input-small layout-text" value = <%= maxIterations %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Max Simulation Time </span>
+            </td>
+            <td>
+                <input id="maxSimulationTime10" type="text" class="input-small layout-text" value = <%= maxSimulationTime %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Ungrabify While Simulating </span>
+            </td>
+            <td>
+                <input id="ungrabifyWhileSimulating10" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Randomize </span>
+            </td>
+            <td>
+                <input id="randomize10" type="checkbox" class="input-small layout-text" <% if(randomize){ %> checked <%}%> >
+            </td>
+        </tr>
+
+
+        <tr id="layout-buttons10">
+            <td>
+                <button id="save-layout10" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout10" class="btn btn-default">Default</button>
+            </td>
+        </tr>
+
+    </table>
+</script>
+
+<script type="text/template" id="spread-settings-template">
+    <table class="table-condensed layout-table">
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Animate </span>
+            </td>
+            <td>
+                <input id="animate11" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Fit </span>
+            </td>
+            <td>
+                <input id="fit11" type="checkbox" class="input-small layout-text" <% if(fit){ %> checked <%}%> >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Padding </span>
+            </td>
+            <td>
+                <input id="padding11" type="text" class="input-small layout-text" value = <%= padding %> >
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Max Expand Iterations </span>
+            </td>
+            <td>
+                <input id="maxExpandIterations11" type="text" class="input-small layout-text" value = <%= maxExpandIterations %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Randomize </span>
+            </td>
+            <td>
+                <input id="randomize11" type="checkbox" class="input-small layout-text" <% if(randomize){ %> checked <%}%> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Min Distance </span>
+            </td>
+            <td>
+                <input id="minDist11" type="text" class="input-small layout-text" value = <%= minDist %> >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <span class="add-on layout-text"> Expanding Factor </span>
+            </td>
+            <td>
+                <input id="expandingFactor11" type="text" class="input-small layout-text" value = <%= expandingFactor %> >
+            </td>
+        </tr>
+
+        <tr id="layout-buttons11">
+            <td>
+                <button id="save-layout11" class="btn btn-default" >Save</button>
+            </td>
+            <td>
+                <button id="default-layout11" class="btn btn-default">Default</button>
+            </td>
+        </tr>
 
     </table>
 </script>

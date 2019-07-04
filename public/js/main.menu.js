@@ -1,7 +1,7 @@
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
-        $("#undo").parent("li").addClass("disabled");
+        $("#undo").parent("li").addClass("disabled"); 
     }
     else {
         $("#undo").parent("li").removeClass("disabled");
@@ -215,21 +215,21 @@ var fcoseLayoutProp = new FCOSELayout({
 var ciseLayoutProp = new CISELayout({
     el: '#cise-layout-table'
 })
-// var dagreLayoutProp = new dagreLayoutProp({
-//     el: '#dagre-layout-table'
-// })
-// var klayLayoutProp = new klayLayoutProp({
-//     el: '#klay-layout-table'
-// })
+var dagreLayoutProp = new DAGRELayout({
+    el: '#dagre-layout-table'
+})
+var klayLayoutProp = new KLAYLayout({
+    el: '#klay-layout-table'
+})
 var avsdfLayoutProp = new AVSDFLayout({
     el: '#avsdf-layout-table'
 })
-// var eulerLayoutProp = new eulerLayoutProp({
-//     el: '#euler-layout-table'
-// })
-// var spreadLayoutProp = new spreadLayoutProp({
-//     el: '#spread-layout-table'
-// })
+var eulerLayoutProp = new EULERLayout({
+    el: '#euler-layout-table'
+})
+var spreadLayoutProp = new SPREADLayout({
+    el: '#spread-layout-table'
+})
 
 $("#add-node-dialog").hide();
 
