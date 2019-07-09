@@ -105,7 +105,8 @@ app.use((req, res, next) => {
     else
         next();
 })
-
+// whether to include edges in the output or not
+// POST /layout/:format?edges=true 
 app.post('/layout/:format', (req, res) => {
     options.animate = false;
 
@@ -138,11 +139,31 @@ app.post('/layout/:format', (req, res) => {
 
     let ret = {};
 
-    cy.filter((element, i) => {
-        return element.isNode();
-    }).forEach((node) => {
-        ret[node.id()] = node.position();
-    });
+    // whether to return edges or not
+    if(req.query.edges){
+        // can be updated
+
+        cy.filter((element, i) => {
+            return true;
+        }).forEach((ele) => {
+            if(ele.isNode())
+                ret[ele.id()] = ele.position();
+            else{
+                ret[ele.id()] = ele.data();
+                // delete the id field to not repeat it both in the object name and the field
+                delete ret[ele.id()].id;
+            }
+        });
+
+    }
+    else{
+        cy.filter((element, i) => {
+            return element.isNode();
+        }).forEach((node) => {
+            ret[node.id()] = node.position();
+        });
+    
+    }
 
     return res.status(200).send(ret);
 });

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <map language="process description">
+        <glyph class="macromolecule" id="http___pathwaycommons_org_pc2_Protein_e390810ac5c9e1fac8d14e7e3cf20994">
+            <label text="CNR1"/>
+            <bbox w="48.0" h="25.0" x="10.234358" y="18.650263"/>
+            <glyph class="state variable" id="http___pathwaycommons_org_pc2_Protein_e390810ac5c9e1fac8d14e7e3cf20994.info.1">
+                <state value="active"/>
+                <bbox w="35.0" h="10.0" x="16.73436" y="13.650263"/>
+            </glyph>
+        </glyph>
+        <glyph class="simple chemical" id="http___pathwaycommons_org_pc2_SmallMolecule_b245cf505b451e03a08ffa5ddaef5d39">
+            <label text="Win 55212-2"/>
+            <bbox w="48.0" h="20.0" x="99.39982" y="103.63853"/>
+        </glyph>
+        <glyph class="process" id="http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT">
+            <bbox w="15.0" h="15.0" x="118.04126" y="24.759386"/>
+            <port id="InputPort_http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT" x="135.54126" y="32.259384"/>
+            <port id="OutputPort_http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT" x="115.54126" y="32.259384"/>
+        </glyph>
+        <glyph class="macromolecule" id="http___pathwaycommons_org_pc2_Protein_3c410501913e286019942ef459fe25f7">
+            <label text="CNR1"/>
+            <bbox w="48.0" h="25.0" x="192.56952" y="10.93834"/>
+            <glyph class="state variable" id="http___pathwaycommons_org_pc2_Protein_3c410501913e286019942ef459fe25f7.info.1">
+                <state value="inactive"/>
+                <bbox w="35.0" h="10.0" x="199.06952" y="5.93834"/>
+            </glyph>
+        </glyph>
+        <arc class="stimulation" id="http___pathwaycommons_org_pc2_SmallMolecule_b245cf505b451e03a08ffa5ddaef5d39--to--http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT" source="http___pathwaycommons_org_pc2_SmallMolecule_b245cf505b451e03a08ffa5ddaef5d39" target="http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="production" id="http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT.output--to--http___pathwaycommons_org_pc2_Protein_e390810ac5c9e1fac8d14e7e3cf20994" source="OutputPort_http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT" target="http___pathwaycommons_org_pc2_Protein_e390810ac5c9e1fac8d14e7e3cf20994">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+        <arc class="consumption" id="http___pathwaycommons_org_pc2_Protein_3c410501913e286019942ef459fe25f7--to--http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT.input" source="http___pathwaycommons_org_pc2_Protein_3c410501913e286019942ef459fe25f7" target="InputPort_http___pathwaycommons_org_pc2_BiochemicalReaction_8441cd12b532d48ae60e64c8defbc472LEFT_TO_RIGHT">
+            <start x="0.0" y="0.0"/>
+            <end x="0.0" y="0.0"/>
+        </arc>
+    </map>
+</sbgn>

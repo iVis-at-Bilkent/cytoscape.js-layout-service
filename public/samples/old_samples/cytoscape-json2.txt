@@ -40,8 +40,5 @@
         </arc>
     </map>
 </sbgn>
-{
-    "name": "cose-bilkent",
-    "randomize": true,
-    "animate": false
-}
+
+

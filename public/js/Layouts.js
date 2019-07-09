@@ -1,109 +1,186 @@
 var graph = {};
 var edgeNodes = [];
+let cytoscapeJsGraph;
+let graphGlob;
+let styleForGraphs;
+
+
 var setFileContent = function (fileName) {
-    var span = document.getElementById('file-name'); 
+    var span = document.getElementById('file-name');
     while (span.firstChild) {
         span.removeChild(span.firstChild);
     }
     span.appendChild(document.createTextNode(fileName));
 };
+
 $(function () {
+    let convertIt, url;
 
-    var xmlObject = loadXMLDoc("samples/graph0.xml");
-    var graphmlConverter = graphmlToJSON(xmlObject);
-    atts = graphmlConverter.attributes;
+    function readFile() {
+        $.ajaxSetup({
+            async: false
+        });
+        jQuery.get("samples/sample1-compoundless-graphml.txt", (txt) => {
+            convertIt = txt;
+        });
+        $.ajaxSetup({
+            async: true
+        })
+    }
+    readFile();
 
-    var cytoscapeJsGraph = {
-        edges: graphmlConverter.objects[2],
-        nodes: graphmlConverter.objects[1]
+    let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
+    let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
+
+    if (isGraphML)
+        url = "http://localhost:3000/layout/graphml?edges=true";
+    else if (isSBGNML)
+        url = "http://localhost:3000/layout/sbgnml?edges=true"
+    else
+        url = "http://localhost:3000/layout/json?edges=true"
+
+    var options = { name: "preset" };
+    let graphData = convertIt;
+
+    let data;
+    if (!isGraphML && !isSBGNML) {
+        data = [JSON.parse(graphData), options];
+        data = JSON.stringify(data);
+    }
+    else
+        data = graphData + JSON.stringify(options);
+
+    const settings = {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'content-Type': 'text/plain',
+        },
+        body: data
     };
-    refreshCytoscape(cytoscapeJsGraph);
-    setFileContent("graph0.graphml");
 
+    // post request to the server to layout the graph
+    fetch(url, settings)
+        .then(response => response.json())
+        .then(res => {
+            console.log(res);
 
-    var panProps = ({
-        zoomFactor: 0.05, // zoom factor per zoom tick
-        zoomDelay: 45, // how many ms between zoom ticks
-        minZoom: 0.1, // min zoom level
-        maxZoom: 10, // max zoom level
-        fitPadding: 50, // padding when fitting
-        panSpeed: 10, // how many ms in between pan ticks
-        panDistance: 10, // max pan distance per tick
-        panDragAreaSize: 75, // the length of the pan drag box in which the vector for panning is calculated (bigger = finer control of pan speed and direction)
-        panMinPercentSpeed: 0.25, // the slowest speed we can pan by (as a percent of panSpeed)
-        panInactiveArea: 3, // radius of inactive area in pan drag box
-        panIndicatorMinOpacity: 0.5, // min opacity of pan indicator (the draggable nib); scales from this to 1.0
-        autodisableForMobile: true, // disable the panzoom completely for mobile (since we don't really need it with gestures like pinch to zoom)
-
-        // icon class names
-        sliderHandleIcon: 'fa fa-minus',
-        zoomInIcon: 'fa fa-plus',
-        zoomOutIcon: 'fa fa-minus',
-        resetIcon: 'fa fa-expand'
-    });
-    cy.panzoom(panProps);
+            let els = [];
+            let addIt;
+            els['nodes'] = [];
+            els['edges'] = [];
+            Object.keys(res).forEach((obj) => {
+                if (res[obj].source && res[obj].target) {
+                    addIt = {
+                        data: {
+                            id: obj,
+                            source: res[obj].source,
+                            target: res[obj].target
+                        }
+                    }
+                    els['edges'].push(addIt);
+                }
+                else {
+                    addIt = {
+                        data: {
+                            id: obj
+                        },
+                        position: res[obj]
+                    }
+                    els['nodes'].push(addIt);
+                }
+            });
+            cytoscapeJsGraph = els;
+            refreshCytoscape(els);
+            setFileContent("sample1-compoundless-graphml");
+            var panProps = ({
+                zoomFactor: 0.05, // zoom factor per zoom tick
+                zoomDelay: 45, // how many ms between zoom ticks
+                minZoom: 0.1, // min zoom level
+                maxZoom: 10, // max zoom level
+                fitPadding: 50, // padding when fitting
+                panSpeed: 10, // how many ms in between pan ticks
+                panDistance: 10, // max pan distance per tick
+                panDragAreaSize: 75, // the length of the pan drag box in which the vector for panning is calculated (bigger = finer control of pan speed and direction)
+                panMinPercentSpeed: 0.25, // the slowest speed we can pan by (as a percent of panSpeed)
+                panInactiveArea: 3, // radius of inactive area in pan drag box
+                panIndicatorMinOpacity: 0.5, // min opacity of pan indicator (the draggable nib); scales from this to 1.0
+                autodisableForMobile: true, // disable the panzoom completely for mobile (since we don't really need it with gestures like pinch to zoom)
+                sliderHandleIcon: 'fa fa-minus',
+                zoomInIcon: 'fa fa-plus',
+                zoomOutIcon: 'fa fa-minus',
+                resetIcon: 'fa fa-expand'
+            });
+            cy.panzoom(panProps);
+            graphGlob = els;
+        })
+        .catch(e => {
+            return e
+        });
 
 });
 $("#cose-bilkent").css("background-color", "grey");
 
 function refreshCytoscape(graphData) { // on dom ready
+    graphGlob = graphData;
+
+    styleForGraphs = [
+        {
+            selector: 'node',
+            style: {
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'white',
+                'text-outline-width': 2,
+                'text-outline-color': '#888',
+                'shape': 'rectangle'
+            },
+        },
+        {
+            selector: 'node:selected',
+            style: {
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'black',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black',
+                'border-color': 'black',
+                'border-width': 5
+            }
+        },
+        {
+            selector: ':parent',
+            style: {
+                'background-opacity': 0.333,
+                'text-valign': "bottom"
+            }
+        },
+        {
+            selector: 'edge',
+            style: {
+                'background-color': 'black',
+                'line-color': 'black',
+                'target-arrow-color': 'red',
+                'source-arrow-color': 'black',
+                'text-outline-color': 'black',
+                'curve-style': "bezier"
+            }
+        },
+        {
+            selector: 'edge:selected',
+            style: {
+                'background-color': 'green',
+                'line-color': 'green',
+                'width': 5,
+                'opacity': 1,
+                'color': 'green'
+            }
+        },
+    ]
 
     cy = cytoscape({
         container: $('#cy')[0],
-        style: [
-            {
-                selector: 'node',
-                style: {
-                    'content': 'data(name)',
-                    'text-valign': 'center',
-                    'color': 'white',
-                    'text-outline-width': 2,
-                    'text-outline-color': '#888',
-                    'shape': 'rectangle'
-                }
-            },
-            {
-                selector: 'node:selected',
-                style: {
-                    'background-color': 'black',
-                    'line-color': 'black',
-                    'target-arrow-color': 'black',
-                    'source-arrow-color': 'black',
-                    'text-outline-color': 'black',
-                    'border-color': 'black',
-                    'border-width': 5
-                }
-            },
-            {
-                selector: ':parent',
-                style: {
-                    'background-opacity': 0.333,
-                    'text-valign': "bottom"
-                }
-            },
-            {
-                selector: 'edge',
-                style: {
-                    'background-color': 'black',
-                    'line-color': 'black',
-                    'target-arrow-color': 'red',
-                    'source-arrow-color': 'black',
-                    'text-outline-color': 'black',
-                    'curve-style': "bezier"
-                }
-            },
-            {
-                selector: 'edge:selected',
-                style: {
-                    'background-color': 'green',
-                    'line-color': 'green',
-                    'width': 5,
-                    'opacity': 1,
-                    'color': 'green'
-                }
-            },
-        ],
-
+        style: styleForGraphs,
         elements: {
             nodes: graphData['nodes'],
             edges: graphData['edges']
@@ -117,6 +194,13 @@ function refreshCytoscape(graphData) { // on dom ready
         motionBlur: true,
         wheelSensitivity: 0.1,
         ready: function () {
+            this.nodes().forEach(function (node) {
+                let width = [10, 20, 30];
+                let size = width[Math.floor(Math.random() * 3)];
+                node.css("width", size);
+                node.css("height", size);
+            });
+
             var i = 0;
             this.on('tap', 'node', function (evt) {
                 if (i < 2) {
@@ -126,6 +210,7 @@ function refreshCytoscape(graphData) { // on dom ready
                     edgeNodes = [];
                     i = 0;
                 }
+
             });
 
             var getNodesData = function () {
@@ -229,9 +314,7 @@ function refreshCytoscape(graphData) { // on dom ready
     });
     cy.panzoom(panProps);
 
-    ur = cy.undoRedo({
-
-    });
+    ur = cy.undoRedo({});
 
     cy.on("undo", function (e, name) {
         refreshUndoRedoButtonsStatus();
@@ -245,51 +328,31 @@ function refreshCytoscape(graphData) { // on dom ready
 
     ur.action("addNode", addNode, removeNodes);
     ur.action("createCompound", createCompoundForSelectedNodes, removeCompound);
-}
-;
-
+};
 
 var COSEBilkentLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'cose-bilkent',
         ready: function () {
         },
-        // Called on `layoutstop`
         stop: function () {
         },
-        // Number of iterations between consecutive screen positions update (0 -> only updated on the end)
         refresh: 0,
-        // Whether to fit the network view after when done
         fit: true,
-        // Padding on fit
         padding: 10,
-        // Whether to enable incremental mode
         incremental: true,
-        // Whether to use the JS console to print debug messages
         debug: false,
-        // Node repulsion (non overlapping) multiplier
         nodeRepulsion: 4500,
-        // Node repulsion (overlapping) multiplier
         nodeOverlap: 10,
-        // Ideal edge (non nested) length
         idealEdgeLength: 50,
-        // Divisor to compute edge forces
         edgeElasticity: 0.45,
-        // Nesting factor (multiplier) to compute ideal edge length for nested edges
         nestingFactor: 0.1,
-        // Gravity force (constant)
         gravity: 0.4,
-        // Maximum number of iterations to perform
         numIter: 2500,
-        // Initial temperature (maximum node displacement)
         initialTemp: 200,
-        // Cooling factor (how the temperature is reduced between consecutive iterations
         coolingFactor: 0.95,
-        // Lower temperature threshold (below this point the layout will end)
         minTemp: 1,
-        // For enabling tiling
         tile: true,
-        //whether to make animation while performing the layout
         animate: true
     },
     currentLayoutProperties: null,
@@ -302,12 +365,59 @@ var COSEBilkentLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("cose-bilkent layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -343,7 +453,6 @@ var COSEBilkentLayout = Backbone.View.extend({
 
         $("#default-layout4").click(function (evt) {
             self.copyProperties();
-            console.log("asd");
             var temp = _.template($("#cose-bilkent-settings-template").html());
             self.template = temp(self.currentLayoutProperties);
             $(self.el).html(self.template);
@@ -387,12 +496,60 @@ var COSELayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("Cose layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -484,13 +641,60 @@ var COLALayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("Cola layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        //        var options = clone(this.currentLayoutProperties);
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -573,14 +777,60 @@ var ARBORLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("Arbor layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        console.log(options);
-        //cy.layout(options);
-        ur.do("layout", options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -614,7 +864,6 @@ var ARBORLayout = Backbone.View.extend({
         return this;
     }
 });
-
 var SPRINGYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'springy',
@@ -644,13 +893,60 @@ var SPRINGYLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("springy layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        console.log(options);
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -685,9 +981,7 @@ var SPRINGYLayout = Backbone.View.extend({
         return this;
     }
 });
-
 // newly added
-
 var FCOSELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "fcose",
@@ -725,12 +1019,60 @@ var FCOSELayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("fcose layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -781,7 +1123,6 @@ var FCOSELayout = Backbone.View.extend({
 var CISELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "cise",
-        // clusters: clusterInfo,
         animate: false,
         refresh: 10,
         animationDuration: undefined,
@@ -807,12 +1148,59 @@ var CISELayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("cise layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+        // data that will come here will already be converted to json
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -838,9 +1226,6 @@ var CISELayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        console.log();
-
-
         $("#default-layout6").click(function (evt) {
             self.copyProperties();
             var temp = _.template($("#cise-settings-template").html());
@@ -855,12 +1240,12 @@ var CISELayout = Backbone.View.extend({
 
 var AVSDFLayout = Backbone.View.extend({
     defaultLayoutProperties: {
-        refresh: 30,    
+        refresh: 30,
         fit: true,
-        padding: 10,     
+        padding: 10,
         ungrabifyWhileSimulating: false,
-        animate: false,         
-        nodeSeparation: 60  
+        animate: false,
+        nodeSeparation: 60
     },
     currentLayoutProperties: null,
     initialize: function () {
@@ -872,12 +1257,60 @@ var AVSDFLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("avsdf layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -897,8 +1330,6 @@ var AVSDFLayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        console.log();
-
 
         $("#default-layout9").click(function (evt) {
             self.copyProperties();
@@ -911,12 +1342,12 @@ var AVSDFLayout = Backbone.View.extend({
 
     }
 });
- 
+
 var DAGRELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         fit: true,
-        padding: 30,     
-        animate: false,         
+        padding: 30,
+        animate: false,
         nodeDimensionsIncludeLabels: false
     },
     currentLayoutProperties: null,
@@ -929,12 +1360,60 @@ var DAGRELayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("dagre layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
@@ -952,8 +1431,6 @@ var DAGRELayout = Backbone.View.extend({
             $(self.el).dialog('close');
         });
 
-        console.log();
-
 
         $("#default-layout7").click(function (evt) {
             self.copyProperties();
@@ -970,27 +1447,28 @@ var DAGRELayout = Backbone.View.extend({
 // everything that comes after animate has to be a property of an object called klay
 var KLAYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
+        name: "klay",
         fit: true,
-        padding: 30,     
-        animate: false, 
+        padding: 30,
+        animate: false,
         klay: {
-            addUnnecessaryBendpoints: false,  
-            aspectRatio: 1.6,  
-            borderSpacing: 20,  
-            compactComponents: false,  
-            edgeSpacingFactor: 0.5,  
-            feedbackEdges: false,  
-            inLayerSpacingFactor: 1.0,  
-            layoutHierarchy: false,  
-            linearSegmentsDeflectionDampening: 0.3,  
-            mergeEdges: false,  
-            mergeHierarchyCrossingEdges: true,  
-            randomizationSeed: 1,  
-            routeSelfLoopInside: false,  
-            separateConnectedComponents: true,  
-            spacing: 20,  
-            thoroughness: 7  
-          }        
+            addUnnecessaryBendpoints: false,
+            aspectRatio: 1.6,
+            borderSpacing: 20,
+            compactComponents: false,
+            edgeSpacingFactor: 0.5,
+            feedbackEdges: false,
+            inLayerSpacingFactor: 1.0,
+            layoutHierarchy: false,
+            linearSegmentsDeflectionDampening: 0.3,
+            mergeEdges: false,
+            mergeHierarchyCrossingEdges: true,
+            randomizationSeed: 1,
+            routeSelfLoopInside: false,
+            separateConnectedComponents: true,
+            spacing: 20,
+            thoroughness: 7
+        }
     },
     currentLayoutProperties: null,
     initialize: function () {
@@ -1002,17 +1480,65 @@ var KLAYLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("klay layout is applied")
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
         var temp = _.template($("#klay-settings-template").html());
-        let crossingMinimizationOption = ''; 
+        let crossingMinimizationOption = '';
 
         self.template = temp(this.currentLayoutProperties);
         $(self.el).html(self.template);
@@ -1089,17 +1615,65 @@ var EULERLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("Euler layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
         var temp = _.template($("#euler-settings-template").html());
-        let crossingMinimizationOption = ''; 
+        let crossingMinimizationOption = '';
 
         self.template = temp(this.currentLayoutProperties);
         $(self.el).html(self.template);
@@ -1139,13 +1713,13 @@ var EULERLayout = Backbone.View.extend({
 
 var SPREADLayout = Backbone.View.extend({
     defaultLayoutProperties: {
-        animate: false,  
-        fit: true,  
-        minDist: 20,  
-        padding: 20,  
-        expandingFactor: -1.0,  
-        maxExpandIterations: 4,  
-        randomize: false 
+        animate: false,
+        fit: true,
+        minDist: 20,
+        padding: 20,
+        expandingFactor: -1.0,
+        maxExpandIterations: 4,
+        randomize: false
     },
     currentLayoutProperties: null,
     initialize: function () {
@@ -1157,17 +1731,65 @@ var SPREADLayout = Backbone.View.extend({
     copyProperties: function () {
         this.currentLayoutProperties = _.clone(this.defaultLayoutProperties);
     },
-    applyLayout: function () {
+    applyLayout: async function () {
+        console.log("spread layout is applied");
         var options = {};
         for (var prop in this.currentLayoutProperties) {
             options[prop] = this.currentLayoutProperties[prop];
         }
-        cy.layout(options);
+
+        let graphData = graphGlob.nodes.concat(graphGlob.edges);
+        let data = [graphData, options];
+
+        let url = "http://localhost:3000/layout/json";
+
+        const settings = {
+            method: 'POST',
+            headers: {
+                'content-Type': 'text/plain',
+            },
+            body: JSON.stringify(data)
+        };
+
+        // post request to the server to layout the graph
+        const res = await fetch(url, settings)
+            .then(response => response.json())
+            .then(json => {
+                return json;
+            })
+            .catch(e => {
+                return e
+            });
+        let els = [];
+
+        els['nodes'] = [];
+        els['edges'] = [];
+
+        Object.keys(res).forEach((obj) => {
+            let addIt = {
+                data: {
+                    id: obj
+                },
+                position: res[obj]
+            }
+            els['nodes'].push(addIt);
+        });
+        cytoscapeJsGraph.edges.forEach((edge) => {
+            let addIt = {
+                data: {
+                    id: edge.data.id,
+                    source: edge.data.source,
+                    target: edge.data.target
+                }
+            }
+            els['edges'].push(addIt);
+        })
+        refreshCytoscape(els);
     },
     render: function () {
         var self = this;
         var temp = _.template($("#spread-settings-template").html());
-        let crossingMinimizationOption = ''; 
+        let crossingMinimizationOption = '';
 
         self.template = temp(this.currentLayoutProperties);
         $(self.el).html(self.template);

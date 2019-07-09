@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<sbgn xmlns='http://sbgn.org/libsbgn/0.2'>
+<map language='process description'>
+<glyph id='aa10e4f0-328c-41db-afe6-6535ceb96ecd' class='simple chemical' >
+<bbox y='145.96358049537375' x='807.9650300137547' w='35' h='35' />
+</glyph>
+<glyph id='4d534943-b677-4c1b-a3cc-ed7473952dae' class='simple chemical' >
+<bbox y='145.96358049537375' x='668.0790839532182' w='35' h='35' />
+</glyph>
+<glyph id='730b462d-cd39-1f5a-df35-92b9cc753295' class='macromolecule' >
+<bbox y='96.17277234455585' x='738.0220569834864' w='35' h='35' />
+</glyph>
+<glyph id='fb170563-1663-6e7f-43cc-abd8069d21a6' class='macromolecule' >
+<bbox y='96.17277234455585' x='623.2905499669031' w='35' h='35' />
+</glyph>
+<glyph id='69ba5be0-60b7-4d03-bd3d-59223a73bdda' class='process' >
+<bbox y='155.96358049537375' x='748.0220569834864' w='15' h='15' />
+</glyph>
+<glyph id='7adb8758-9bf4-4a9f-a656-e45e76a07ff7' class='process' >
+<bbox y='106.17277234455585' x='690.2315663084738' w='15' h='15' />
+</glyph>
+<glyph id='a9f27493-5ed9-4f77-daae-30dc8fb19014' class='simple chemical' >
+<bbox y='305.16084331903323' x='804.8776943874267' w='35' h='35' />
+</glyph>
+<glyph id='3f6da8f0-b1cb-1f03-d236-c354e5f4ac9f' class='simple chemical' >
+<bbox y='305.16084331903323' x='664.9917483268904' w='35' h='35' />
+</glyph>
+<glyph id='66f7d686-937a-48bc-baf1-ceef6679eaa7' class='complex'  >
+<bbox y='244.57181743638807' x='712.2000286527187' w='81.03770887889868' h='38.25' />
+<glyph id='97370c79-6e23-95ec-57f3-62e9fae19d09' class='macromolecule' >
+<bbox y='246.19681743638807' x='713.8250286527187' w='35' h='35' />
+</glyph>
+<glyph id='f12c58f2-c74b-7ec8-0ea6-f7efc353d276' class='macromolecule' >
+<bbox y='246.19681743638807' x='756.6127375316174' w='35' h='35' />
+</glyph>
+</glyph>
+<glyph id='42e1dc42-bb45-9c09-317c-2f0dfdc57148' class='macromolecule' >
+<bbox y='246.19681743638807' x='578.7027647349926' w='35' h='35' />
+</glyph>
+<glyph id='32be3b81-f185-336d-86c4-6dbb7f6bb84d' class='process' >
+<bbox y='315.16084331903323' x='744.9347213571585' w='15' h='15' />
+</glyph>
+<glyph id='9a548ec7-6438-e9be-a7ba-b92669f3a062' class='macromolecule' >
+<bbox y='305.16084331903323' x='578.7027647349926' w='35' h='35' />
+</glyph>
+<glyph id='7b9b8bc9-c857-4486-ad00-be6039043cd2' class='association' >
+<bbox y='256.1968174363881' x='649.0149470092582' w='15' h='15' />
+</glyph>
+<glyph id='57425f0a-a387-4ec2-b623-0205993e80d6' class='compartment'  >
+<bbox y='401.27405131429873' x='577.0777647349927' w='264.424929652434' h='103.27070241262612' />
+</glyph>
+<glyph id='cf90b04f-9914-b43a-d8f8-49c2fbfd7946' class='simple chemical' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='467.9197537269249' x='804.8776943874267' w='35' h='35' />
+</glyph>
+<glyph id='d20e7462-ef6e-a235-feaa-26b40768cc45' class='simple chemical' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='467.9197537269249' x='664.9917483268905' w='35' h='35' />
+</glyph>
+<glyph id='03483fc4-370a-214e-3d05-e0b5528cf79a' class='complex'  compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='407.8990513142988' x='711.3335106495151' w='80.78881843648992' h='38.25' />
+<glyph id='91e30d05-7256-946e-72d6-572b27d57c92' class='macromolecule' >
+<bbox y='409.5240513142988' x='712.9585106495151' w='35' h='35' />
+</glyph>
+<glyph id='70f32a5f-7365-6235-b892-1fb086c10615' class='macromolecule' >
+<bbox y='409.5240513142988' x='755.497329086005' w='35' h='35' />
+</glyph>
+</glyph>
+<glyph id='31d78359-a704-5a7c-dba5-89b653d8fcd9' class='macromolecule' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='408.95572784427975' x='578.7027647349927' w='35' h='35' />
+</glyph>
+<glyph id='fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' class='process' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='477.9197537269249' x='744.9347213571587' w='15' h='15' />
+</glyph>
+<glyph id='2eef0ce6-e2cc-ab1b-a411-e5123601ed5e' class='macromolecule' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='467.9197537269249' x='578.7027647349927' w='35' h='35' />
+</glyph>
+<glyph id='a2b9bc91-aafa-487e-99e8-e46904cd688f' class='association' compartmentRef='57425f0a-a387-4ec2-b623-0205993e80d6' >
+<bbox y='418.95572784427975' x='649.0149470092582' w='15' h='15' />
+</glyph>
+<arc id='4d534943-b677-4c1b-a3cc-ed7473952dae-69ba5be0-60b7-4d03-bd3d-59223a73bdda' target='69ba5be0-60b7-4d03-bd3d-59223a73bdda' source='4d534943-b677-4c1b-a3cc-ed7473952dae' class='consumption'>
+<start y='163.46358049537375' x='704.0790839532182'/>
+<end y='163.46358049537375' x='747.5220569834864'/>
+</arc>
+<arc id='fb170563-1663-6e7f-43cc-abd8069d21a6-7adb8758-9bf4-4a9f-a656-e45e76a07ff7' target='7adb8758-9bf4-4a9f-a656-e45e76a07ff7' source='fb170563-1663-6e7f-43cc-abd8069d21a6' class='consumption'>
+<start y='113.67277234455585' x='658.7905499669031'/>
+<end y='113.67277234455585' x='689.7315663084738'/>
+</arc>
+<arc id='7b9b8bc9-c857-4486-ad00-be6039043cd2-66f7d686-937a-48bc-baf1-ceef6679eaa7' target='66f7d686-937a-48bc-baf1-ceef6679eaa7' source='7b9b8bc9-c857-4486-ad00-be6039043cd2' class='production'>
+<start y='263.6968174363881' x='664.5149470092582'/>
+<end y='263.6968174363881' x='704.2000286527187'/>
+</arc>
+<arc id='66f7d686-937a-48bc-baf1-ceef6679eaa7-32be3b81-f185-336d-86c4-6dbb7f6bb84d' target='32be3b81-f185-336d-86c4-6dbb7f6bb84d' source='66f7d686-937a-48bc-baf1-ceef6679eaa7' class='catalysis'>
+<start y='288.3218174363881' x='752.6002093310084'/>
+<end y='312.1608723498586' x='752.4853232270866'/>
+</arc>
+<arc id='32be3b81-f185-336d-86c4-6dbb7f6bb84d-a9f27493-5ed9-4f77-daae-30dc8fb19014' target='a9f27493-5ed9-4f77-daae-30dc8fb19014' source='32be3b81-f185-336d-86c4-6dbb7f6bb84d' class='production'>
+<start y='322.66084331903323' x='760.4347213571585'/>
+<end y='322.66084331903323' x='801.3776943874267'/>
+</arc>
+<arc id='42e1dc42-bb45-9c09-317c-2f0dfdc57148-7b9b8bc9-c857-4486-ad00-be6039043cd2' target='7b9b8bc9-c857-4486-ad00-be6039043cd2' source='42e1dc42-bb45-9c09-317c-2f0dfdc57148' class='consumption'>
+<start y='263.6968174363881' x='614.2027647349926'/>
+<end y='263.6968174363881' x='648.5149470092582'/>
+</arc>
+<arc id='3f6da8f0-b1cb-1f03-d236-c354e5f4ac9f-32be3b81-f185-336d-86c4-6dbb7f6bb84d' target='32be3b81-f185-336d-86c4-6dbb7f6bb84d' source='3f6da8f0-b1cb-1f03-d236-c354e5f4ac9f' class='consumption'>
+<start y='322.66084331903323' x='700.9917483268904'/>
+<end y='322.66084331903323' x='744.4347213571585'/>
+</arc>
+<arc id='730b462d-cd39-1f5a-df35-92b9cc753295-69ba5be0-60b7-4d03-bd3d-59223a73bdda' target='69ba5be0-60b7-4d03-bd3d-59223a73bdda' source='730b462d-cd39-1f5a-df35-92b9cc753295' class='catalysis'>
+<start y='131.67277234455585' x='755.5220569834864'/>
+<end y='152.96358049537375' x='755.5220569834864'/>
+</arc>
+<arc id='69ba5be0-60b7-4d03-bd3d-59223a73bdda-aa10e4f0-328c-41db-afe6-6535ceb96ecd' target='aa10e4f0-328c-41db-afe6-6535ceb96ecd' source='69ba5be0-60b7-4d03-bd3d-59223a73bdda' class='production'>
+<start y='163.46358049537375' x='763.5220569834864'/>
+<end y='163.46358049537375' x='804.4650300137547'/>
+</arc>
+<arc id='7adb8758-9bf4-4a9f-a656-e45e76a07ff7-730b462d-cd39-1f5a-df35-92b9cc753295' target='730b462d-cd39-1f5a-df35-92b9cc753295' source='7adb8758-9bf4-4a9f-a656-e45e76a07ff7' class='production'>
+<start y='113.67277234455585' x='705.7315663084738'/>
+<end y='113.67277234455585' x='735.0220569834864'/>
+</arc>
+<arc id='9a548ec7-6438-e9be-a7ba-b92669f3a062-7b9b8bc9-c857-4486-ad00-be6039043cd2' target='7b9b8bc9-c857-4486-ad00-be6039043cd2' source='9a548ec7-6438-e9be-a7ba-b92669f3a062' class='consumption'>
+<start y='305.56385446805086' x='609.5153439667004'/>
+<next y='263.668007477439' x='642.1375669442853'/>
+<end y='263.68078675431514' x='648.5149630706973'/>
+</arc>
+<arc id='2eef0ce6-e2cc-ab1b-a411-e5123601ed5e-a2b9bc91-aafa-487e-99e8-e46904cd688f' target='a2b9bc91-aafa-487e-99e8-e46904cd688f' source='2eef0ce6-e2cc-ab1b-a411-e5123601ed5e' class='consumption'>
+<start y='468.1110361028839' x='609.0604319412522'/>
+<next y='426.42080644536225' x='640.0297452278938'/>
+<end y='426.438781096025' x='648.5149649587956'/>
+</arc>
+<arc id='a2b9bc91-aafa-487e-99e8-e46904cd688f-03483fc4-370a-214e-3d05-e0b5528cf79a' target='03483fc4-370a-214e-3d05-e0b5528cf79a' source='a2b9bc91-aafa-487e-99e8-e46904cd688f' class='production'>
+<start y='426.5034787613188' x='664.514804498609'/>
+<end y='426.73518675686853' x='703.333555184093'/>
+</arc>
+<arc id='31d78359-a704-5a7c-dba5-89b653d8fcd9-a2b9bc91-aafa-487e-99e8-e46904cd688f' target='a2b9bc91-aafa-487e-99e8-e46904cd688f' source='31d78359-a704-5a7c-dba5-89b653d8fcd9' class='consumption'>
+<start y='426.45572784427975' x='614.2027647349927'/>
+<end y='426.45572784427975' x='648.5149470092582'/>
+</arc>
+<arc id='fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c-cf90b04f-9914-b43a-d8f8-49c2fbfd7946' target='cf90b04f-9914-b43a-d8f8-49c2fbfd7946' source='fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' class='production'>
+<start y='485.4197537269249' x='760.4347213571587'/>
+<end y='485.4197537269249' x='801.3776943874267'/>
+</arc>
+<arc id='d20e7462-ef6e-a235-feaa-26b40768cc45-fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' target='fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' source='d20e7462-ef6e-a235-feaa-26b40768cc45' class='consumption'>
+<start y='485.4197537269249' x='700.9917483268905'/>
+<end y='485.4197537269249' x='744.4347213571587'/>
+</arc>
+<arc id='03483fc4-370a-214e-3d05-e0b5528cf79a-fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' target='fac8e2eb-9db7-ec6e-c6ab-f0108d0b2e4c' source='03483fc4-370a-214e-3d05-e0b5528cf79a' class='catalysis'>
+<start y='451.6490513142988' x='752.02597239487'/>
+<end y='474.9199368299153' x='752.3076351861802'/>
+</arc>
+</map>
+</sbgn>

@@ -1,5 +1,4 @@
 [
-	[
     {
         "group": "nodes",
         "data": {
@@ -129,7 +128,7 @@
         "data": {
             "id": "e3",
             "source": "n1",
-            "target": "n7"
+            "target": "n4"
         }
     },
     {
@@ -137,7 +136,7 @@
         "data": {
             "id": "e4",
             "source": "n2",
-            "target": "n4"
+            "target": "n5"
         }
     },
     {
@@ -145,7 +144,7 @@
         "data": {
             "id": "e5",
             "source": "n2",
-            "target": "n5"
+            "target": "n6"
         }
     },
     {
@@ -153,29 +152,13 @@
         "data": {
             "id": "e6",
             "source": "n4",
-            "target": "n5"
+            "target": "n7"
         }
     },
     {
         "group": "edges",
         "data": {
             "id": "e7",
-            "source": "n5",
-            "target": "n6"
-        }
-    },
-    {
-        "group": "edges",
-        "data": {
-            "id": "e8",
-            "source": "n3",
-            "target": "n5"
-        }
-    },
-    {
-        "group": "edges",
-        "data": {
-            "id": "e9",
             "source": "n4",
             "target": "n8"
         }
@@ -183,16 +166,9 @@
     {
         "group": "edges",
         "data": {
-            "id": "e10",
-            "source": "n4",
+            "id": "e8",
+            "source": "n8",
             "target": "n9"
         }
     }
-],
-{
-    "name": "fcose",
-    "quality": "default",
-    "randomize": true,
-    "animate": false
-}
 ]

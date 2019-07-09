@@ -1,7 +1,7 @@
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
-        $("#undo").parent("li").addClass("disabled"); 
+        $("#undo").parent("li").addClass("disabled");
     }
     else {
         $("#undo").parent("li").removeClass("disabled");
@@ -195,7 +195,6 @@ $("#spread").click(function (e) {
 var coseBilkentLayoutProp = new COSEBilkentLayout({
     el: '#cose-bilkent-layout-table'
 });
-
 var coseLayoutProp = new COSELayout({
     el: '#cose-layout-table'
 });
@@ -540,23 +539,86 @@ var atts;
 $("body").on("change", "#file-input", function (e) {
     var fileInput = document.getElementById('file-input');
     var file = fileInput.files[0];
-    var textType = /text.*/;
-
     var reader = new FileReader();
     reader.onload = function (e) {
-        var graphmlConverter = new graphmlToJSON(textToXmlObject(this.result));
-        atts = graphmlConverter.attributes;
-
-        var cytoscapeJsGraph = {
-            edges: graphmlConverter.objects[2],
-            nodes: graphmlConverter.objects[1]
+        let convertIt = this.result;    
+        let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
+        let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
+    
+        if (isGraphML)
+            url = "http://localhost:3000/layout/graphml?edges=true";
+        else if (isSBGNML)
+            url = "http://localhost:3000/layout/sbgnml?edges=true"
+        else
+            url = "http://localhost:3000/layout/json?edges=true"
+    
+        var options = { name: "preset" };
+        let graphData = convertIt;
+    
+        let data;
+        if (!isGraphML && !isSBGNML) {
+            data = [JSON.parse(graphData), options];
+            data = JSON.stringify(data);
+        }
+        else
+            data = graphData + JSON.stringify(options);
+    
+        const settings = {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'content-Type': 'text/plain',
+            },
+            body: data
         };
-        //       console.log(JSON.stringify(graphmlConverter.objects[1][0]));
-        refreshCytoscape(cytoscapeJsGraph);
-
+    
+        fetch(url, settings)
+            .then(response => response.json())
+            .then(res => {
+                let els = [];
+                let addIt;
+    
+                els['nodes'] = [];
+                els['edges'] = [];
+    
+                // console.log(res);
+    
+                Object.keys(res).forEach((obj) => {
+                    // console.log(obj);                
+                    if (res[obj].source && res[obj].target) {
+                        addIt = {
+                            data: {
+                                id: obj,
+                                source: res[obj].source,
+                                target: res[obj].target
+                            }
+                        }
+                        els['edges'].push(addIt);
+                    }
+                    else {
+                        addIt = {
+                            data: {
+                                id: obj
+                            },
+                            position: res[obj]
+                        }
+                        els['nodes'].push(addIt);
+                    }
+                });
+                cytoscapeJsGraph = els;
+    
+                // console.log(els);
+    
+                refreshCytoscape(els);
+                setFileContent(fileName + ".txt");
+                graphGlob = els;
+            })
+            .catch(e => {
+                return e
+            });
     };
     reader.readAsText(file);
-    setFileContent(file.name);
+
     $("#file-input").val(null);
 });
 
@@ -600,7 +662,6 @@ $("#save-as-png").click(function (evt) {
         var blob = new Blob(byteArrays, { type: contentType });
         return blob;
     }
-
     // this is to remove the beginning of the pngContent: data:img/png;base64,
     var b64data = pngContent.substr(pngContent.indexOf(",") + 1);
 
@@ -611,32 +672,115 @@ $("#save-as-png").click(function (evt) {
 
 
 var loadSample = function (fileName) {
-    var xmlObject = loadXMLDoc("samples/" + fileName + ".xml");
-    var graphmlConverter = graphmlToJSON(xmlObject);
-    atts = graphmlConverter.attributes;
+    let convertIt;
+    function readFile() {
+        $.ajaxSetup({
+            async: false
+        });
+        jQuery.get("samples/" + fileName + ".txt", (txt) => {
+            convertIt = txt;
+        });
+        $.ajaxSetup({
+            async: true
+        })
+    }
+    readFile();
 
-    var cytoscapeJsGraph = {
-        edges: graphmlConverter.objects[2],
-        nodes: graphmlConverter.objects[1]
+    let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
+    let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
+
+    if (isGraphML)
+        url = "http://localhost:3000/layout/graphml?edges=true";
+    else if (isSBGNML)
+        url = "http://localhost:3000/layout/sbgnml?edges=true"
+    else
+        url = "http://localhost:3000/layout/json?edges=true"
+
+    var options = { name: "preset" };
+    let graphData = convertIt;
+
+    let data;
+    if (!isGraphML && !isSBGNML) {
+        data = [JSON.parse(graphData), options];
+        data = JSON.stringify(data);
+    }
+    else
+        data = graphData + JSON.stringify(options);
+
+    const settings = {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'content-Type': 'text/plain',
+        },
+        body: data
     };
-    refreshCytoscape(cytoscapeJsGraph);
-    setFileContent(fileName + ".graphml");
+
+    fetch(url, settings)
+        .then(response => response.json())
+        .then(res => {
+            let els = [];
+            let addIt;
+            els['nodes'] = [];
+            els['edges'] = [];
+
+            Object.keys(res).forEach((obj) => {
+                // console.log(obj);                
+                if (res[obj].source && res[obj].target) {
+                    addIt = {
+                        data: {
+                            id: obj,
+                            source: res[obj].source,
+                            target: res[obj].target
+                        }
+                    }
+                    els['edges'].push(addIt);
+                }
+                else {
+                    addIt = {
+                        data: {
+                            id: obj
+                        },
+                        position: res[obj]
+                    }
+                    els['nodes'].push(addIt);
+                }
+            });
+            cytoscapeJsGraph = els;
+            refreshCytoscape(els);
+            setFileContent(fileName + ".txt");
+            graphGlob = els;
+        })
+        .catch(e => {
+            return e
+        });
 };
+
 $("#sample0").click(function (e) {
-    loadSample("graph0");
+    loadSample("sample1-compoundless-graphml");
 });
 $("#sample1").click(function (e) {
-    loadSample("graph1");
+    loadSample("sample2-compoundless-graphml");
 });
 $("#sample2").click(function (e) {
-    loadSample("graph2");
+    loadSample("sample3-compoundless-graphml");
 });
 $("#sample3").click(function (e) {
-    loadSample("graph3");
+    loadSample("sample1-compoundless-json");
 });
 $("#sample4").click(function (e) {
-    loadSample("graph4");
+    loadSample("sample2-compoundless-json");
 });
 $("#sample5").click(function (e) {
-    loadSample("graph5");
+    loadSample("sample3-compoundless-json");
 });
+$("#sample6").click(function (e) {
+    loadSample("sample1-compoundless-sbgnml");
+});
+$("#sample7").click(function (e) {
+    loadSample("sample2-compoundless-sbgnml");
+});
+$("#sample8").click(function (e) {
+    loadSample("sample3-compoundless-sbgnml");
+});
+
