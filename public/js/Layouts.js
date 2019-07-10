@@ -4,7 +4,7 @@ let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
 
-let port = location.port || 3000;
+let port = window.location.port;
 
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');

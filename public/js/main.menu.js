@@ -14,7 +14,7 @@ var refreshUndoRedoButtonsStatus = function () {
         $("#redo").parent("li").removeClass("disabled");
     }
 };
-
+// let port = window.location.port;
 
 ///////////////////// EDIT ////////////////////////////
 
@@ -544,7 +544,6 @@ $("body").on("change", "#file-input", function (e) {
         let convertIt = this.result;    
         let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
         let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
-        let port = location.port || 3000;
 
         if (isGraphML)
             url = "http://localhost:" + port + "/layout/graphml?edges=true";
@@ -689,7 +688,6 @@ var loadSample = function (fileName) {
 
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
-    let port = location.port || 3000;
 
     if (isGraphML)
         url = "http://localhost:" + port + "/layout/graphml?edges=true";
