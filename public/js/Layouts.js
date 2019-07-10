@@ -21,7 +21,7 @@ $(function () {
         $.ajaxSetup({
             async: false
         });
-        jQuery.get("samples/sample1-compoundless-graphml.txt", (txt) => {
+        jQuery.get("samples/sample10-clustered-graphml.txt", (txt) => {
             convertIt = txt;
         });
         $.ajaxSetup({
@@ -101,7 +101,7 @@ $(function () {
             });
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent("sample1-compoundless-graphml.txt");
+            setFileContent("sample10-clustered-graphml.txt");
             var panProps = ({
                 zoomFactor: 0.05, // zoom factor per zoom tick
                 zoomDelay: 45, // how many ms between zoom ticks

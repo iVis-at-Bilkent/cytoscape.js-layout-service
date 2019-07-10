@@ -788,21 +788,31 @@ $("#sample2").click(function (e) {
     loadSample("sample3-compoundless-graphml");
 });
 $("#sample3").click(function (e) {
-    loadSample("sample1-compoundless-json");
+    loadSample("sample4-compoundless-json");
 });
 $("#sample4").click(function (e) {
-    loadSample("sample2-compoundless-json");
+    loadSample("sample5-compoundless-json");
 });
 $("#sample5").click(function (e) {
-    loadSample("sample3-compoundless-json");
+    loadSample("sample6-compoundless-json");
 });
 $("#sample6").click(function (e) {
-    loadSample("sample1-compoundless-sbgnml");
+    loadSample("sample7-compoundless-sbgnml");
 });
 $("#sample7").click(function (e) {
-    loadSample("sample2-compoundless-sbgnml");
+    loadSample("sample8-compoundless-sbgnml");
 });
 $("#sample8").click(function (e) {
-    loadSample("sample3-compoundless-sbgnml");
+    loadSample("sample9-compoundless-sbgnml");
 });
+$("#sample9").click(function (e) {
+    loadSample("sample10-clustered-graphml");
+});
+$("#sample10").click(function (e) {
+    loadSample("sample11-clustered-graphml");
+});
+$("#sample11").click(function (e) {
+    loadSample("sample12-clustered-graphml");
+});
+
 
