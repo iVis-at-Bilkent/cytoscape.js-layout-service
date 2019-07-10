@@ -1,3 +1,5 @@
+heroku = true;
+
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
