@@ -174,12 +174,6 @@ app.post('/layout/:format', (req, res) => {
     return res.status(200).send(ret);
 });
 
-app.get('/', (req, res) => {
-    res.render('public/index.html');
-    // res.sendFile( path.join( __dirname + '/../public_html/index.html' ) );
-});
-
-
 app.listen(port, () => {
     console.log("Listening on " + port);
 });
