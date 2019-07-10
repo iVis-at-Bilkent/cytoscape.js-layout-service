@@ -544,13 +544,14 @@ $("body").on("change", "#file-input", function (e) {
         let convertIt = this.result;    
         let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
         let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
-    
+        let port = location.port || 3000;
+
         if (isGraphML)
-            url = "http://localhost:3000/layout/graphml?edges=true";
+            url = "http://localhost:" + port + "/layout/graphml?edges=true";
         else if (isSBGNML)
-            url = "http://localhost:3000/layout/sbgnml?edges=true"
+            url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
         else
-            url = "http://localhost:3000/layout/json?edges=true"
+            url = "http://localhost:" + port + "/layout/json?edges=true"
     
         var options = { name: "preset" };
         let graphData = convertIt;
@@ -688,13 +689,14 @@ var loadSample = function (fileName) {
 
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
+    let port = location.port || 3000;
 
     if (isGraphML)
-        url = "http://localhost:3000/layout/graphml?edges=true";
+        url = "http://localhost:" + port + "/layout/graphml?edges=true";
     else if (isSBGNML)
-        url = "http://localhost:3000/layout/sbgnml?edges=true"
+        url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
     else
-        url = "http://localhost:3000/layout/json?edges=true"
+        url = "http://localhost:" + port + "/layout/json?edges=true"
 
     var options = { name: "preset" };
     let graphData = convertIt;
