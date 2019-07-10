@@ -1682,8 +1682,10 @@
 </script>
 
         <script>
-            // console.log(window.location.host);
-            port = window.location.port; 
+            console.log(window.location.origin);
+            url = (window.location.origin).split(":"); 
+            port = parseInt(url[2]);
+
         </script>
 
         <!-- VIEW SCRIPTS -->
