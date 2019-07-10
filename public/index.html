@@ -1682,9 +1682,8 @@
 </script>
 
         <script>
-           let heroku = (window.location.port === undefined ) ? true : false;
+           let heroku = ( !window.location.port.isNaN() ) ? true : false;
            let port = 3000;
-
         </script>
 
         <!-- VIEW SCRIPTS -->
