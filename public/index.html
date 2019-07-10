@@ -1682,7 +1682,7 @@
 </script>
 
         <script>
-           let heroku = false;
+           let heroku = (window.location.port === undefined ) ? true : false;
            let port = 3000;
 
         </script>
