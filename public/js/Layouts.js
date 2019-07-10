@@ -4,6 +4,7 @@ let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
 
+let port = location.port || 3000;
 
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
@@ -33,11 +34,11 @@ $(function () {
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
     if (isGraphML)
-        url = "http://localhost:3000/layout/graphml?edges=true";
+        url = "http://localhost:" + port + "/layout/graphml?edges=true";
     else if (isSBGNML)
-        url = "http://localhost:3000/layout/sbgnml?edges=true"
+        url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
     else
-        url = "http://localhost:3000/layout/json?edges=true"
+        url = "http://localhost:" + port + "/layout/json?edges=true"
 
     var options = { name: "preset" };
     let graphData = convertIt;
@@ -63,8 +64,6 @@ $(function () {
     fetch(url, settings)
         .then(response => response.json())
         .then(res => {
-            console.log(res);
-
             let els = [];
             let addIt;
             els['nodes'] = [];
@@ -92,7 +91,7 @@ $(function () {
             });
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent("sample1-compoundless-graphml");
+            setFileContent("sample1-compoundless-graphml.txt");
             var panProps = ({
                 zoomFactor: 0.05, // zoom factor per zoom tick
                 zoomDelay: 45, // how many ms between zoom ticks
@@ -195,8 +194,9 @@ function refreshCytoscape(graphData) { // on dom ready
         wheelSensitivity: 0.1,
         ready: function () {
             this.nodes().forEach(function (node) {
-                let width = [10, 20, 30];
-                let size = width[Math.floor(Math.random() * 3)];
+                // let width = [10, 20, 30];
+                // let size = width[Math.floor(Math.random() * 3)];
+                let size = 15;
                 node.css("width", size);
                 node.css("height", size);
             });
@@ -375,7 +375,7 @@ var COSEBilkentLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -506,7 +506,7 @@ var COSELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -651,7 +651,7 @@ var COLALayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -787,7 +787,7 @@ var ARBORLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -877,8 +877,6 @@ var SPRINGYLayout = Backbone.View.extend({
         infinite: true, // overrides all other options for a forces-all-the-time mode
         ready: undefined, // callback on layoutready
         stop: undefined, // callback on layoutstop
-
-        // springy forces
         stiffness: 400,
         repulsion: 400,
         damping: 0.5
@@ -903,7 +901,7 @@ var SPRINGYLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1029,7 +1027,7 @@ var FCOSELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1157,7 +1155,7 @@ var CISELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
         // data that will come here will already be converted to json
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1240,6 +1238,7 @@ var CISELayout = Backbone.View.extend({
 
 var AVSDFLayout = Backbone.View.extend({
     defaultLayoutProperties: {
+        name: "avsdf",
         refresh: 30,
         fit: true,
         padding: 10,
@@ -1267,7 +1266,7 @@ var AVSDFLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1345,6 +1344,7 @@ var AVSDFLayout = Backbone.View.extend({
 
 var DAGRELayout = Backbone.View.extend({
     defaultLayoutProperties: {
+        name: "dagre",
         fit: true,
         padding: 30,
         animate: false,
@@ -1370,7 +1370,7 @@ var DAGRELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1389,8 +1389,8 @@ var DAGRELayout = Backbone.View.extend({
             .catch(e => {
                 return e
             });
-        let els = [];
 
+        let els = [];
         els['nodes'] = [];
         els['edges'] = [];
 
@@ -1403,6 +1403,7 @@ var DAGRELayout = Backbone.View.extend({
             }
             els['nodes'].push(addIt);
         });
+
         cytoscapeJsGraph.edges.forEach((edge) => {
             let addIt = {
                 data: {
@@ -1490,7 +1491,7 @@ var KLAYLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1589,6 +1590,7 @@ var KLAYLayout = Backbone.View.extend({
 
 var EULERLayout = Backbone.View.extend({
     defaultLayoutProperties: {
+        name: "euler",
         fit: true,
         padding: 30,
         animate: false,
@@ -1625,7 +1627,7 @@ var EULERLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1713,6 +1715,7 @@ var EULERLayout = Backbone.View.extend({
 
 var SPREADLayout = Backbone.View.extend({
     defaultLayoutProperties: {
+        name: "spread",
         animate: false,
         fit: true,
         minDist: 20,
@@ -1741,7 +1744,7 @@ var SPREADLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:3000/layout/json";
+        let url = "http://localhost:" + port + "/layout/json";
 
         const settings = {
             method: 'POST',
@@ -1832,6 +1835,6 @@ var whitenBackgrounds = function () {
     $("#dagre").css("background-color", "white");
     $("#klay").css("background-color", "white");
     $("#avsdf").css("background-color", "white");
-    $("euler").css("background-color", "white");
+    $("#euler").css("background-color", "white");
     $("#spread").css("background-color", "white");
 };

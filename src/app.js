@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
 const cytoscape = require('cytoscape');
+
+const port = process.env.PORT || 3000;
 
 // to serve the html
 const path = require( "path" );
@@ -17,11 +18,12 @@ const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
 
+global.localPort = port;
+
 var $ = jQuery = require('jquery')(window);
 
 const graphml = require('cytoscape-graphml');
 cytoscape.use(graphml, $);
-
 
 // for fcose
 const fcose = require('cytoscape-fcose');
@@ -60,12 +62,16 @@ cytoscape.use(euler);
 const spread = require('cytoscape-spread');
 cytoscape.use(spread);
 
+// springy layout
+const springy = require('cytoscape-springy');
+cytoscape.use(springy);
+
 let cy;
 let options;
 let data;
 let body;
 
-app.use( express.static( path.join( __dirname, "../public" ) ) );
+app.use( express.static( path.join( __dirname, "../public/" ) ) );
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
@@ -169,9 +175,13 @@ app.post('/layout/:format', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile( path.join( __dirname + '/../public_html/index.html' ) );
+    res.render('public/index.html');
+    // res.sendFile( path.join( __dirname + '/../public_html/index.html' ) );
 });
+
 
 app.listen(port, () => {
     console.log("Listening on " + port);
 });
+
+module.exports = port;
