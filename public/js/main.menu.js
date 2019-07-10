@@ -545,12 +545,22 @@ $("body").on("change", "#file-input", function (e) {
         let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
         let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-        if (isGraphML)
-            url = "http://localhost:" + port + "/layout/graphml?edges=true";
-        else if (isSBGNML)
-            url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
-        else
-            url = "http://localhost:" + port + "/layout/json?edges=true"
+        if( !heroku ){
+            if (isGraphML)
+                url = "http://localhost:" + port + "/layout/graphml?edges=true";
+            else if (isSBGNML)
+                url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
+            else
+                url = "http://localhost:" + port + "/layout/json?edges=true"
+        }
+        else{
+            if (isGraphML)
+                url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+            else if (isSBGNML)
+                url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+            else
+                url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+        }
     
         var options = { name: "preset" };
         let graphData = convertIt;
@@ -689,12 +699,22 @@ var loadSample = function (fileName) {
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-    if (isGraphML)
-        url = "http://localhost:" + port + "/layout/graphml?edges=true";
-    else if (isSBGNML)
-        url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
-    else
-        url = "http://localhost:" + port + "/layout/json?edges=true"
+    if( !heroku ){
+        if (isGraphML)
+            url = "http://localhost:" + port + "/layout/graphml?edges=true";
+        else if (isSBGNML)
+            url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
+        else
+            url = "http://localhost:" + port + "/layout/json?edges=true"
+    }
+    else{
+        if (isGraphML)
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+        else if (isSBGNML)
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+        else
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+    }
 
     var options = { name: "preset" };
     let graphData = convertIt;

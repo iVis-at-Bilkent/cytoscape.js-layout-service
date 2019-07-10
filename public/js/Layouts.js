@@ -4,8 +4,6 @@ let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
 
-let port = window.location.port;
-
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
     while (span.firstChild) {
@@ -33,12 +31,22 @@ $(function () {
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-    if (isGraphML)
-        url = "http://localhost:" + port + "/layout/graphml?edges=true";
-    else if (isSBGNML)
-        url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
-    else
-        url = "http://localhost:" + port + "/layout/json?edges=true"
+    if( !heroku ){
+        if (isGraphML)
+            url = "http://localhost:" + port + "/layout/graphml?edges=true";
+        else if (isSBGNML)
+            url = "http://localhost:" + port + "/layout/sbgnml?edges=true"
+        else
+            url = "http://localhost:" + port + "/layout/json?edges=true"
+    }
+    else{
+        if (isGraphML)
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+        else if (isSBGNML)
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+        else
+            url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+    }
 
     var options = { name: "preset" };
     let graphData = convertIt;
@@ -375,7 +383,7 @@ var COSEBilkentLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -506,7 +514,7 @@ var COSELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -651,7 +659,7 @@ var COLALayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -787,7 +795,7 @@ var ARBORLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -901,7 +909,7 @@ var SPRINGYLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1027,7 +1035,7 @@ var FCOSELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1155,7 +1163,7 @@ var CISELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
         // data that will come here will already be converted to json
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1266,7 +1274,7 @@ var AVSDFLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1370,7 +1378,7 @@ var DAGRELayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1491,7 +1499,7 @@ var KLAYLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1627,7 +1635,7 @@ var EULERLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',
@@ -1744,7 +1752,7 @@ var SPREADLayout = Backbone.View.extend({
         let graphData = graphGlob.nodes.concat(graphGlob.edges);
         let data = [graphData, options];
 
-        let url = "http://localhost:" + port + "/layout/json";
+        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
         const settings = {
             method: 'POST',

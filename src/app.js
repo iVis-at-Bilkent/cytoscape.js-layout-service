@@ -72,7 +72,10 @@ let options;
 let data;
 let body;
 
+
+
 app.use( express.static( path.join( __dirname, "../public/" ) ) );
+
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
