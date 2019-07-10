@@ -3,7 +3,7 @@ var edgeNodes = [];
 let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
-heroku = true;
+heroku = false;
 
 
 var setFileContent = function (fileName) {
@@ -1131,6 +1131,7 @@ var FCOSELayout = Backbone.View.extend({
 var CISELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "cise",
+        clusters: null,
         animate: false,
         refresh: 10,
         animationDuration: undefined,

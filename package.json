@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.js -e html,js,css",
+    "dev": "nodemon src/app.js -e html,js,css,txt",
     "debug": "node --inspect-brk src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start" : "node src/app.js"

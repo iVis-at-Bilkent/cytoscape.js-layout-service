@@ -117,6 +117,7 @@ app.use((req, res, next) => {
 })
 // whether to include edges in the output or not
 // POST /layout/:format?edges=true 
+// POST /layout/:format?clusters=true
 app.post('/layout/:format', (req, res) => {
     options.animate = false;
 
