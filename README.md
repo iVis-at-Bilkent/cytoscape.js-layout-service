@@ -25,9 +25,13 @@ POST /layout/:file_format?edges=true
 
 The format of the request depends on a format of the graph nodes and edges:
 #### JSON:
-Array where the first element of the array will also be an array that will consist of nodes and edges of the graph, and the second element will be JSON object where the options for the layout will be specified. Name field of the layout must be specified, while other fields are optional.
 
-- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample4-compoundless-json.txt)
+An array where the first element of the array is also an array that consists of nodes and edges of the graph, and the second element is a JSON object where the options for the layout are defined needs to be passed as a body of the request. Name field of the options body must be specified, other fields are optional. 
+If user wants to provide ```width``` and ```height``` for each node individually, they should include them in the data object as in the samples below.
+
+- [Sample JSON request body(width, height are included)](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/json_sample_width_height.json)
+
+- [Sample JSON request body(simplest form)](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample4-compoundless-json.txt)
 
 #### SBGN-ML or GraphML:
 First comes nodes and edges of the graph in either of two formats then the options body for the cytoscape.js in JSON.
