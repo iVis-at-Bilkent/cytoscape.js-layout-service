@@ -13,7 +13,15 @@ This web-server supports 3 input formats for graphs:
 3. JSON
 
 ## Instructions on how to send a request
-In order to layout any graph, POST request to the: https://cytoscape-layout-service.herokuapp.com/layout/:file_format needs to be send, and the type of the request must be 'text' or 'text/plain'.
+Request to layout the graph:
+```
+POST /layout/:file_format
+```
+needs to be send to https://cytoscape-layout-service.herokuapp.com, and the type of the request must be 'text' or 'text/plain'.
+By default nodes with their positions(x,y) and their dimension(width, height) if given will be returned. If you want edges to be returned as well you should add edges option to the request with it's truth value, which is false by default:
+```
+POST /layout/:file_format?edges=true
+```
 
 The format of the request depends on a format of the graph nodes and edges:
 #### JSON:
@@ -41,7 +49,6 @@ The supported layouts are:
 - [avsdf](https://github.com/iVis-at-Bilkent/cytoscape.js-avsdf)
 - [cola](https://github.com/cytoscape/cytoscape.js-cola)
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
-- [spread](https://github.com/cytoscape/cytoscape.js-spread)
   
  # Following is a list of third-party libraries used in building this web-service:
 - [express](https://www.npmjs.com/package/express)
