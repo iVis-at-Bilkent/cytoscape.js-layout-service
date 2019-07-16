@@ -38,7 +38,7 @@ First comes nodes and edges of the graph in either of two formats then the optio
 After the request is sent, the server will layout the given graph and return the JSON file with the node names and their positions.
 If an error occurs, the response of the server will consist of the error's body.
 
-## Supported layouts
+# Supported layouts
 The supported layouts are:
 - [fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose)
 - [cose-bilkent](https://github.com/cytoscape/cytoscape.js-cose-bilkent)
