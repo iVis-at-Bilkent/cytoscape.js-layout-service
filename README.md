@@ -13,24 +13,36 @@ This web-server supports 3 input formats for graphs:
 3. JSON
 
 ## Instructions on how to send a request
-In order to layout any graph, POST request to the: https://cytoscape-layout-service.herokuapp.com/layout/:file_format needs to be send, and the type of the request must be 'text' or 'text/plain'.
+Request to layout the graph:
+```
+POST /layout/:file_format
+```
+needs to be send to https://cytoscape-layout-service.herokuapp.com, and the type of the request must be 'text' or 'text/plain'.
+By default nodes with their positions(x,y) and their dimension(width, height) if given will be returned. If you want edges to be returned as well you should add edges option to the request with it's truth value, which is false by default:
+```
+POST /layout/:file_format?edges=true
+```
 
 The format of the request depends on a format of the graph nodes and edges:
 #### JSON:
-Array where the first element of the array will also be an array that will consist of nodes and edges of the graph, and the second element will be JSON object where the options for the layout will be specified. Name field of the layout must be specified, while other fields are optional.
 
-- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/demo/sbgnml-body)
+An array where the first element of the array is also an array that consists of nodes and edges of the graph, and the second element is a JSON object where the options for the layout are defined needs to be passed as a body of the request. Name field of the options body must be specified, other fields are optional. 
+If user wants to provide ```width``` and ```height``` for each node individually, they should include them in the data object as in the samples below.
+
+- [Sample JSON request body(width, height are included)](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/json_sample_width_height.json)
+
+- [Sample JSON request body(simplest form)](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample4-compoundless-json.txt)
 
 #### SBGN-ML or GraphML:
 First comes nodes and edges of the graph in either of two formats then the options body for the cytoscape.js in JSON.
-- [Sample SBGN-ML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/demo/sbgnml-body)
-- [Sample GraphML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/demo/graphml-body)
+- [Sample SBGN-ML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample7-compoundless-sbgnml.txt)
+- [Sample GraphML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample1-compoundless-graphml.txt)
 
 
 After the request is sent, the server will layout the given graph and return the JSON file with the node names and their positions.
 If an error occurs, the response of the server will consist of the error's body.
 
-## Supported layouts
+# Supported layouts
 The supported layouts are:
 - [fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose)
 - [cose-bilkent](https://github.com/cytoscape/cytoscape.js-cose-bilkent)
@@ -41,7 +53,6 @@ The supported layouts are:
 - [avsdf](https://github.com/iVis-at-Bilkent/cytoscape.js-avsdf)
 - [cola](https://github.com/cytoscape/cytoscape.js-cola)
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
-- [spread](https://github.com/cytoscape/cytoscape.js-spread)
   
  # Following is a list of third-party libraries used in building this web-service:
 - [express](https://www.npmjs.com/package/express)
