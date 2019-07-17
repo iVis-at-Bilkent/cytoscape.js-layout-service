@@ -39,18 +39,21 @@
                             </a>
                             <ul class="dropdown-menu">
 
-                                <li><a id="sample0" href="#">Sample1-compoundless-graphml</a></li>
-                                <li><a id="sample1" href="#">Sample2-compoundless-graphml</a></li>
-                                <li><a id="sample2" href="#">Sample3-compoundless-graphml</a></li>
-                                <li><a id="sample3" href="#">Sample4-compoundless-json</a></li>
-                                <li><a id="sample4" href="#">Sample5-compoundless-json</a></li>
-                                <li><a id="sample5" href="#">Sample6-compoundless-json</a></li>
-                                <li><a id="sample6" href="#">Sample7-compoundless-sbgnml</a></li>
-                                <li><a id="sample7" href="#">Sample8-compoundless-sbgnml</a></li>
-                                <li><a id="sample8" href="#">Sample9-compoundless-sbgnml</a></li>
+                                <li><a id="sample0" href="#">Sample1-simple-graphml</a></li>
+                                <li><a id="sample1" href="#">Sample2-simple-graphml</a></li>
+                                <li><a id="sample2" href="#">Sample3-simple-graphml</a></li>
+                                <li><a id="sample3" href="#">Sample4-simple-json</a></li>
+                                <li><a id="sample4" href="#">Sample5-simple-json</a></li>
+                                <li><a id="sample5" href="#">Sample6-simple-json</a></li>
+                                <li><a id="sample6" href="#">Sample7-simple-sbgnml</a></li>
+                                <li><a id="sample7" href="#">Sample8-simple-sbgnml</a></li>
+                                <li><a id="sample8" href="#">Sample9-simple-sbgnml</a></li>
                                 <li><a id="sample9" href="#">Sample10-clustered-graphml</a></li>
                                 <li><a id="sample10" href="#">Sample11-clustered-graphml</a></li>
                                 <li><a id="sample11" href="#">Sample12-clustered-graphml</a></li>
+                                <li><a id="sample12" href="#">Sample13-compound-graphml</a></li>
+                                <li><a id="sample13" href="#">Sample14-compound-graphml</a></li>
+                                <li><a id="sample14" href="#">Sample15-compound-graphml</a></li>
 
                             </ul>
                         </li>
@@ -338,14 +341,9 @@
                 <input id="num-iter4" type="text" class="input-small layout-text" value= <%= numIter %> >
             </td>
         </tr>
+
+        
         <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate4" type="checkbox" class="input-small layour-text" <% if(animate){%> checked <%} %>>
-            </td>
-        </tr><tr>
         <td>
             <span class="add-on layout-text"> Tile </span>
         </td>
@@ -497,14 +495,6 @@
         </tr>
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate" type="checkbox" class="input-small layour-text" <% if(animate){%> checked <%} %>>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Refresh </span>
             </td>
             <td>
@@ -577,15 +567,6 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate1" type="checkbox" class="input-small layout-text" <% if(animate){%> checked <%} %>>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Refresh </span>
             </td>
             <td>
@@ -601,16 +582,6 @@
                 <input id="maxSimulationTime1" type="text" class="input-small layout-text" value= <%= maxSimulationTime %> >
             </td>
         </tr>
-
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Ungrabify While Simulating </span>
-            </td>
-            <td>
-                <input id="ungrabifyWhileSimulating1" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){%> checked <%} %>>
-            </td>
-        </tr>
-
         <tr>
             <td>
                 <span class="add-on layout-text"> Fit </span>
@@ -677,15 +648,6 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate2" type="checkbox" class="input-small layout-text" <% if(animate){%> checked <%} %>>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Max. Simulation Time </span>
             </td>
             <td>
@@ -709,14 +671,7 @@
                 <input id="padding2" type="text" class="input-small layout-text" value= <%= padding %> >
             </td>
         </tr>
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Ungrabify While Simulating </span>
-            </td>
-            <td>
-                <input id="ungrabifyWhileSimulating2" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){%> checked <%} %>>
-            </td>
-        </tr>
+
 
         <tr>
             <td>
@@ -758,29 +713,13 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate3" type="checkbox" class="input-small layout-text" <% if(animate){%> checked <%} %>>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Max. Simulation Time </span>
             </td>
             <td>
                 <input id="maxSimulationTime3" type="text" class="input-small layout-text" value= <%= maxSimulationTime %> >
             </td>
         </tr>
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Ungrabify While Simulating </span>
-            </td>
-            <td>
-                <input id="ungrabifyWhileSimulating3" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){%> checked <%} %> >
-            </td>
-        </tr>
+
         <tr>
             <td>
                 <span class="add-on layout-text"> Fit </span>
@@ -856,28 +795,10 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Quality </span>
-            </td>
-            <td>
-                <input id="quality5" type="text" class="input-small layout-text" value = <%= quality %> >
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Randomize </span>
             </td>
             <td>
                 <input id="randomize5" type="checkbox" class="input-small layout-text" <% if(randomize){ %> checked <%}%> >
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate5" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
             </td>
         </tr>
 
@@ -1054,13 +975,6 @@
 
         <script type="text/template" id="cise-settings-template">
     <table class="table-condensed layout-table">
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate6" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
         </tr>
         <tr>
             <td>
@@ -1169,14 +1083,6 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate9" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Refresh </span>
             </td>
             <td>
@@ -1207,25 +1113,13 @@
                 <input id="nodeSeparation9" type="text" class="input-small layout-text" value = <%= nodeSeparation %> >
             </td>
         </tr>
-        
-        <tr>
+ 
+        <tr id="layout-buttons9">
             <td>
-                <span class="add-on layout-text"> Ungrabify While Simulating </span>
+                <button id="save-layout9" class="btn btn-default" >Save</button>
             </td>
             <td>
-                <input id="ungrabifyWhileSimulating9" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){ %> checked <%}%> >
-            </td>
-        </tr>
-
-
-
-
-        <tr id="layout-buttons6">
-            <td>
-                <button id="save-layout6" class="btn btn-default" >Save</button>
-            </td>
-            <td>
-                <button id="default-layout6" class="btn btn-default">Default</button>
+                <button id="default-layout9" class="btn btn-default">Default</button>
             </td>
         </tr>
 
@@ -1236,15 +1130,6 @@
 
         <script type="text/template" id="dagre-settings-template">
     <table class="table-condensed layout-table">
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate7" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
-        </tr>
-
         <tr>
             <td>
                 <span class="add-on layout-text"> Fit </span>
@@ -1302,16 +1187,6 @@
                 <input id="padding8" type="text" class="input-small layout-text" value = <%= padding %> >
             </td>
         </tr>
-
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate8" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
-        </tr>    
-
         <tr>
             <td>
                 <span class="add-on layout-text"> Add Unnecessary Bendpoints </span>
@@ -1472,15 +1347,6 @@
     <table class="table-condensed layout-table">
         <tr>
             <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate10" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Fit </span>
             </td>
             <td>
@@ -1580,15 +1446,6 @@
 
         <tr>
             <td>
-                <span class="add-on layout-text"> Ungrabify While Simulating </span>
-            </td>
-            <td>
-                <input id="ungrabifyWhileSimulating10" type="checkbox" class="input-small layout-text" <% if(ungrabifyWhileSimulating){ %> checked <%}%> >
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <span class="add-on layout-text"> Randomize </span>
             </td>
             <td>
@@ -1611,15 +1468,6 @@
 
         <script type="text/template" id="spread-settings-template">
     <table class="table-condensed layout-table">
-        <tr>
-            <td>
-                <span class="add-on layout-text"> Animate </span>
-            </td>
-            <td>
-                <input id="animate11" type="checkbox" class="input-small layout-text" <% if(animate){ %> checked <%}%> >
-            </td>
-        </tr>
-
         <tr>
             <td>
                 <span class="add-on layout-text"> Fit </span>
@@ -1715,4 +1563,4 @@
         <script src="js/main.menu.js"></script>
 </body>
 
-</html>
+</html> 

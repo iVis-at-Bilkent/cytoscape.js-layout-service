@@ -187,7 +187,7 @@ $("#euler").click(function (e) {
     whitenBackgrounds();
     $("#euler").css("background-color", "grey");
 });
-$("#spread").click(function (e) {
+$("#spread").click(function (e) { 
     tempName = "spread";
     whitenBackgrounds();
     $("#spread").css("background-color", "grey");
@@ -596,7 +596,6 @@ $("body").on("change", "#file-input", function (e) {
                 // console.log(res);
     
                 Object.keys(res).forEach((obj) => {
-                    // console.log(obj);                
                     if (res[obj].source && res[obj].target) {
                         addIt = {
                             data: {
@@ -612,7 +611,7 @@ $("body").on("change", "#file-input", function (e) {
                             data: {
                                 id: obj
                             },
-                            position: res[obj]
+                            position: {x : res[obj].x, y : res[obj].y}
                         }
                         els['nodes'].push(addIt);
                     }
@@ -779,31 +778,31 @@ var loadSample = function (fileName) {
 };
 
 $("#sample0").click(function (e) {
-    loadSample("sample1-compoundless-graphml");
+    loadSample("sample1-simple-graphml");
 });
 $("#sample1").click(function (e) {
-    loadSample("sample2-compoundless-graphml");
+    loadSample("sample2-simple-graphml");
 });
 $("#sample2").click(function (e) {
-    loadSample("sample3-compoundless-graphml");
+    loadSample("sample3-simple-graphml");
 });
 $("#sample3").click(function (e) {
-    loadSample("sample4-compoundless-json");
+    loadSample("sample4-simple-json");
 });
 $("#sample4").click(function (e) {
-    loadSample("sample5-compoundless-json");
+    loadSample("sample5-simple-json");
 });
 $("#sample5").click(function (e) {
-    loadSample("sample6-compoundless-json");
+    loadSample("sample6-simple-json");
 });
 $("#sample6").click(function (e) {
-    loadSample("sample7-compoundless-sbgnml");
+    loadSample("sample7-simple-sbgnml");
 });
 $("#sample7").click(function (e) {
-    loadSample("sample8-compoundless-sbgnml");
+    loadSample("sample8-simple-sbgnml");
 });
 $("#sample8").click(function (e) {
-    loadSample("sample9-compoundless-sbgnml");
+    loadSample("sample9-simple-sbgnml");
 });
 $("#sample9").click(function (e) {
     loadSample("sample10-clustered-graphml");
@@ -814,5 +813,15 @@ $("#sample10").click(function (e) {
 $("#sample11").click(function (e) {
     loadSample("sample12-clustered-graphml");
 });
+$("#sample12").click(function (e) {
+    loadSample("sample13-compound-graphml");
+});
+$("#sample13").click(function (e) {
+    loadSample("sample14-compound-graphml");
+});
+$("#sample14").click(function (e) {
+    loadSample("sample15-compound-graphml");
+});
+
 
 

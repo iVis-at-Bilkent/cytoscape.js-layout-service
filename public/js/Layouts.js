@@ -15,7 +15,7 @@ var setFileContent = function (fileName) {
 };
 
 $(function () {
-    let convertIt, url;
+    let convertIt, url; 
 
     function readFile() {
         $.ajaxSetup({
@@ -362,8 +362,7 @@ var COSEBilkentLayout = Backbone.View.extend({
         initialTemp: 200,
         coolingFactor: 0.95,
         minTemp: 1,
-        tile: true,
-        animate: true
+        tile: true
     },
     currentLayoutProperties: null,
     initialize: function () {
@@ -377,57 +376,7 @@ var COSEBilkentLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("cose-bilkent layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -445,7 +394,7 @@ var COSEBilkentLayout = Backbone.View.extend({
             self.currentLayoutProperties.nestingFactor = Number(document.getElementById("nesting-factor4").value);
             self.currentLayoutProperties.gravity = Number(document.getElementById("gravity4").value);
             self.currentLayoutProperties.numIter = Number(document.getElementById("num-iter4").value);
-            self.currentLayoutProperties.animate = document.getElementById("animate4").checked;
+            // self.currentLayoutProperties.animate = document.getElementById("animate4").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh4").value);
             self.currentLayoutProperties.fit = document.getElementById("fit4").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding4").value);
@@ -478,7 +427,6 @@ var COSELayout = Backbone.View.extend({
         },
         stop: function () {
         },
-        animate: true,
         refresh: 4,
         fit: true,
         padding: 30,
@@ -508,58 +456,7 @@ var COSELayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("Cose layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -577,7 +474,6 @@ var COSELayout = Backbone.View.extend({
             self.currentLayoutProperties.nestingFactor = Number(document.getElementById("nesting-factor").value);
             self.currentLayoutProperties.gravity = Number(document.getElementById("gravity").value);
             self.currentLayoutProperties.numIter = Number(document.getElementById("num-iter").value);
-            self.currentLayoutProperties.animate = document.getElementById("animate").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh").value);
             self.currentLayoutProperties.fit = document.getElementById("fit").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding").value);
@@ -604,10 +500,8 @@ var COSELayout = Backbone.View.extend({
 var COLALayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'cola',
-        animate: true, // whether to show the layout as it's running
         refresh: 1, // number of ticks per frame; higher is faster but more jerky
         maxSimulationTime: 4000, // max length in ms to run the layout
-        ungrabifyWhileSimulating: false, // so you can't drag nodes during layout
         fit: true, // on every layout reposition of nodes, fit the viewport
         padding: 30, // padding around the simulation
         boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
@@ -653,58 +547,7 @@ var COLALayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("Cola layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -715,10 +558,8 @@ var COLALayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout1").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate1").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh1").value);
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime1").value);
-            self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating1").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit1").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding1").value);
             self.currentLayoutProperties.randomize = document.getElementById("randomize1").checked;
@@ -743,33 +584,21 @@ var COLALayout = Backbone.View.extend({
 var ARBORLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'arbor',
-        animate: true, // whether to show the layout as it's running
         maxSimulationTime: 4000, // max length in ms to run the layout
         fit: true, // on every layout reposition of nodes, fit the viewport
         padding: 30, // padding around the simulation
         boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-        ungrabifyWhileSimulating: false, // so you can't drag nodes during layout
-
-        // callbacks on layout events
         ready: undefined, // callback on layoutready
         stop: undefined, // callback on layoutstop
-
-        // forces used by arbor (use arbor default on undefined)
         repulsion: undefined,
         stiffness: undefined,
         friction: undefined,
         gravity: true,
         fps: undefined,
         precision: undefined,
-        // static numbers or functions that dynamically return what these
-        // values should be for each element
-        // e.g. nodeMass: function(n){ return n.data('weight') }
         nodeMass: undefined,
         edgeLength: undefined,
         stepSize: 0.1, // smoothing of arbor bounding box
-
-        // function that returns true if the system is stable to indicate
-        // that the layout can be stopped
         stableEnergy: function (energy) {
             var e = energy;
             return (e.max <= 0.5) || (e.mean <= 0.3);
@@ -789,58 +618,7 @@ var ARBORLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("Arbor layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -851,12 +629,10 @@ var ARBORLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout2").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate2").checked;
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime2").value);
             self.currentLayoutProperties.fit = document.getElementById("fit2").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding2").value);
             self.currentLayoutProperties.gravity = document.getElementById("gravity2").checked;
-            self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating2").checked;
             self.currentLayoutProperties.stepSize = Number(document.getElementById("stepSize2").value);
             self.currentLayoutProperties.infinite = document.getElementById("infinite2").checked;
 
@@ -877,9 +653,7 @@ var ARBORLayout = Backbone.View.extend({
 var SPRINGYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: 'springy',
-        animate: false, // whether to show the layout as it's running
         maxSimulationTime: 4000, // max length in ms to run the layout
-        ungrabifyWhileSimulating: false, // so you can't drag nodes during layout
         fit: true, // whether to fit the viewport to the graph
         padding: 30, // padding on fit
         boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
@@ -903,58 +677,7 @@ var SPRINGYLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("springy layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -965,9 +688,7 @@ var SPRINGYLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout3").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate3").checked;
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime3").value);
-            self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating3").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit3").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding3").value);
             self.currentLayoutProperties.random = document.getElementById("random3").checked;
@@ -993,9 +714,7 @@ var SPRINGYLayout = Backbone.View.extend({
 var FCOSELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "fcose",
-        quality: "default",
         randomize: true,
-        animate: false,
         fit: true,
         padding: 10,
         nodeDimensionsIncludeLabels: false,
@@ -1029,58 +748,7 @@ var FCOSELayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("fcose layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1091,9 +759,7 @@ var FCOSELayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout5").click(function (evt) {
-            self.currentLayoutProperties.quality = new Text(document.getElementById("quality5").value);
             self.currentLayoutProperties.randomize = document.getElementById("randomize5").checked;
-            self.currentLayoutProperties.animate = document.getElementById("animate5").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit5").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding5").value);
             self.currentLayoutProperties.nodeDimensionsIncludeLabels = document.getElementById("nodeDimensionsIncludeLabels5").checked;
@@ -1132,7 +798,6 @@ var CISELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "cise",
         clusters: null,
-        animate: false,
         refresh: 10,
         animationDuration: undefined,
         animationEasing: undefined,
@@ -1159,57 +824,7 @@ var CISELayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("cise layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-        // data that will come here will already be converted to json
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1220,7 +835,6 @@ var CISELayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout6").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate6").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh6").value);
             self.currentLayoutProperties.fit = document.getElementById("fit6").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding6").value);
@@ -1253,8 +867,6 @@ var AVSDFLayout = Backbone.View.extend({
         refresh: 30,
         fit: true,
         padding: 10,
-        ungrabifyWhileSimulating: false,
-        animate: false,
         nodeSeparation: 60
     },
     currentLayoutProperties: null,
@@ -1269,58 +881,7 @@ var AVSDFLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("avsdf layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1331,12 +892,10 @@ var AVSDFLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout9").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate9").checked;
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh9").value);
             self.currentLayoutProperties.fit = document.getElementById("fit9").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding9").value);
             self.currentLayoutProperties.nodeSeparation = Number(document.getElementById("nodeSeparation9").value);
-            self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating9").checked;
             $(self.el).dialog('close');
         });
 
@@ -1358,7 +917,6 @@ var DAGRELayout = Backbone.View.extend({
         name: "dagre",
         fit: true,
         padding: 30,
-        animate: false,
         nodeDimensionsIncludeLabels: false
     },
     currentLayoutProperties: null,
@@ -1373,59 +931,7 @@ var DAGRELayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("dagre layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-
-        let els = [];
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1436,7 +942,6 @@ var DAGRELayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout7").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate7").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit7").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding7").value);
             self.currentLayoutProperties.nodeDimensionsIncludeLabels = document.getElementById("nodeDimensionsIncludeLabels7").checked;
@@ -1456,13 +961,11 @@ var DAGRELayout = Backbone.View.extend({
     }
 });
 
-// everything that comes after animate has to be a property of an object called klay
 var KLAYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "klay",
         fit: true,
         padding: 30,
-        animate: false,
         klay: {
             addUnnecessaryBendpoints: false,
             aspectRatio: 1.6,
@@ -1494,58 +997,7 @@ var KLAYLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("klay layout is applied")
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1558,7 +1010,6 @@ var KLAYLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout8").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate8").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit8").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding8").value);
 
@@ -1566,10 +1017,6 @@ var KLAYLayout = Backbone.View.extend({
             self.currentLayoutProperties.klay.aspectRatio = Number(document.getElementById("aspectRatio8").value);
             self.currentLayoutProperties.klay.borderSpacing = Number(document.getElementById("borderSpacing8").value);
             self.currentLayoutProperties.klay.compactComponents = document.getElementById("compactComponents8").checked;
-            // $("input[type='radio']").click(function(){
-            //     crossingMinimizationOption = $("input[name='crossingMinimizationOptions']:checked").val();
-            // });
-            // self.currentLayoutProperties.klay.crossingMinimization = crossingMinimizationOption;
             self.currentLayoutProperties.klay.edgeSpacingFactor = Number(document.getElementById("edgeSpacingFactor8").value);
             self.currentLayoutProperties.klay.feedbackEdges = document.getElementById("feedbackEdges8").checked;
             self.currentLayoutProperties.klay.inLayerSpacingFactor = Number(document.getElementById("inLayerSpacingFactor8").value);
@@ -1604,7 +1051,6 @@ var EULERLayout = Backbone.View.extend({
         name: "euler",
         fit: true,
         padding: 30,
-        animate: false,
         gravity: -1.2,
         pull: 0.001,
         theta: 0.666,
@@ -1614,7 +1060,6 @@ var EULERLayout = Backbone.View.extend({
         refresh: 10,
         maxIterations: 1000,
         maxSimulationTime: 4000,
-        ungrabifyWhileSimulating: false,
         boundingBox: undefined,
         randomize: false
     },
@@ -1630,58 +1075,7 @@ var EULERLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("Euler layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1694,7 +1088,6 @@ var EULERLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout10").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate10").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit10").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding10").value);
             self.currentLayoutProperties.gravity = Number(document.getElementById("gravity10").value);
@@ -1706,7 +1099,6 @@ var EULERLayout = Backbone.View.extend({
             self.currentLayoutProperties.refresh = Number(document.getElementById("refresh10").value);
             self.currentLayoutProperties.maxIterations = Number(document.getElementById("maxIterations10").value);
             self.currentLayoutProperties.maxSimulationTime = Number(document.getElementById("maxSimulationTime10").value);
-            self.currentLayoutProperties.ungrabifyWhileSimulating = document.getElementById("ungrabifyWhileSimulating10").checked;
             self.currentLayoutProperties.randomize = document.getElementById("randomize10").checked;
 
             $(self.el).dialog('close');
@@ -1727,7 +1119,6 @@ var EULERLayout = Backbone.View.extend({
 var SPREADLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "spread",
-        animate: false,
         fit: true,
         minDist: 20,
         padding: 20,
@@ -1747,58 +1138,7 @@ var SPREADLayout = Backbone.View.extend({
     },
     applyLayout: async function () {
         console.log("spread layout is applied");
-        var options = {};
-        for (var prop in this.currentLayoutProperties) {
-            options[prop] = this.currentLayoutProperties[prop];
-        }
-
-        let graphData = graphGlob.nodes.concat(graphGlob.edges);
-        let data = [graphData, options];
-
-        let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
-
-        const settings = {
-            method: 'POST',
-            headers: {
-                'content-Type': 'text/plain',
-            },
-            body: JSON.stringify(data)
-        };
-
-        // post request to the server to layout the graph
-        const res = await fetch(url, settings)
-            .then(response => response.json())
-            .then(json => {
-                return json;
-            })
-            .catch(e => {
-                return e
-            });
-        let els = [];
-
-        els['nodes'] = [];
-        els['edges'] = [];
-
-        Object.keys(res).forEach((obj) => {
-            let addIt = {
-                data: {
-                    id: obj
-                },
-                position: res[obj]
-            }
-            els['nodes'].push(addIt);
-        });
-        cytoscapeJsGraph.edges.forEach((edge) => {
-            let addIt = {
-                data: {
-                    id: edge.data.id,
-                    source: edge.data.source,
-                    target: edge.data.target
-                }
-            }
-            els['edges'].push(addIt);
-        })
-        refreshCytoscape(els);
+        await applyLayoutFunction(this);
     },
     render: function () {
         var self = this;
@@ -1811,7 +1151,6 @@ var SPREADLayout = Backbone.View.extend({
         $(self.el).dialog();
 
         $("#save-layout11").click(function (evt) {
-            self.currentLayoutProperties.animate = document.getElementById("animate11").checked;
             self.currentLayoutProperties.fit = document.getElementById("fit11").checked;
             self.currentLayoutProperties.padding = Number(document.getElementById("padding11").value);
             self.currentLayoutProperties.maxExpandIterations = Number(document.getElementById("maxExpandIterations11").value);
@@ -1833,6 +1172,62 @@ var SPREADLayout = Backbone.View.extend({
         return this;
     }
 });
+
+let applyLayoutFunction = async function(graph){
+    let options = {};
+
+    for (var prop in graph.currentLayoutProperties) {
+        options[prop] = graph.currentLayoutProperties[prop];
+    }
+
+    let graphData = graphGlob.nodes.concat(graphGlob.edges);
+    let data = [graphData, options];
+
+    let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
+
+    const settings = {
+        method: 'POST',
+        headers: {
+            'content-Type': 'text/plain',
+        },
+        body: JSON.stringify(data)
+    };
+
+    // post request to the server to layout the graph
+    const res = await fetch(url, settings)
+        .then(response => response.json())
+        .then(json => {
+            return json;
+        })
+        .catch(e => {
+            return e
+        });
+    let els = [];
+
+    els['nodes'] = [];
+    els['edges'] = [];
+
+    Object.keys(res).forEach((obj) => {
+        let addIt = {
+            data: {
+                id: obj
+            },
+            position: res[obj]
+        }
+        els['nodes'].push(addIt);
+    });
+    cytoscapeJsGraph.edges.forEach((edge) => {
+        let addIt = {
+            data: {
+                id: edge.data.id,
+                source: edge.data.source,
+                target: edge.data.target
+            }
+        }
+        els['edges'].push(addIt);
+    })
+    refreshCytoscape(els);
+}
 
 var whitenBackgrounds = function () {
     $("#cose-bilkent").css("background-color", "white");

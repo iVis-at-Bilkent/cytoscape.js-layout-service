@@ -6,7 +6,7 @@ const cytoscape = require('cytoscape');
 const port = process.env.PORT || 3000;
 
 // to serve the html
-const path = require( "path" );
+const path = require("path");
 // app.set( "view engine", any );
 
 // to support sbgnml type of input
@@ -19,7 +19,6 @@ const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
 
-global.localPort = port;
 
 var $ = jQuery = require('jquery')(window);
 
@@ -36,7 +35,7 @@ cytoscape.use(coseBilkent);
 
 // for cise layout, Needs to be fixed, some problems
 const cise = require('cytoscape-cise');
-cytoscape.use( cise );
+cytoscape.use(cise);
 
 // for dagre layout
 const dagre = require('cytoscape-dagre');
@@ -74,7 +73,7 @@ let body;
 
 
 
-app.use( express.static( path.join( __dirname, "../public/" ) ) );
+app.use(express.static(path.join(__dirname, "../public/")));
 
 
 // middleware to manage the formats of files
@@ -151,30 +150,36 @@ app.post('/layout/:format', (req, res) => {
     let ret = {};
 
     // whether to return edges or not
-    if(req.query.edges){
-        // can be updated
-
-        cy.filter((element, i) => {
-            return true;
-        }).forEach((ele) => {
-            if(ele.isNode())
-                ret[ele.id()] = ele.position();
-            else{
-                ret[ele.id()] = ele.data();
-                // delete the id field to not repeat it both in the object name and the field
-                delete ret[ele.id()].id;
+    cy.filter((element, i) => {
+        return true;
+    }).forEach((ele) => {
+        if (ele.isNode()) {
+            if (req.params.format === "json") {
+                let obj = ele.position();
+                obj["width"] = ele.data().width;
+                obj["height"] = ele.data().height;
+                ret[ele.id()] = obj;
             }
-        });
+            else if (req.params.format === "graphml") {
+                let obj = { x: parseInt(ele.data('x')), y: parseInt(ele.data('y')) };
+                obj["width"] = parseInt(ele.data('width'));
+                obj["height"] = parseInt(ele.data('height'));
+                obj["clusterID"] = ele.data('clusterID');
+                ret[ele.id()] = obj;
+            }
+            else if(req.params.format === "sbgnml"){
+                console.log(ele.data());
+                let obj = {x : ele.data().bbox.x, y : ele.data().bbox.y};
+                obj["width"] = ele.data().bbox.w || ele.data().bbox.width;
+                obj["height"] = ele.data().bbox.h || ele.data().bbox.height;
+                ret[ele.id()] = obj;
+            }
+        }
+        else if (!ele.isNode() && req.query.edges) {
+            ret[ele.id()] = {source: ele.data().source, target: ele.data().target};
+        }
+    });
 
-    }
-    else{
-        cy.filter((element, i) => {
-            return element.isNode();
-        }).forEach((node) => {
-            ret[node.id()] = node.position();
-        });
-    
-    }
 
     return res.status(200).send(ret);
 });
