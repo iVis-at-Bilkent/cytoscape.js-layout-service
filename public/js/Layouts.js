@@ -14,14 +14,24 @@ var setFileContent = function (fileName) {
     span.appendChild(document.createTextNode(fileName));
 };
 
-$(function () {
-    let convertIt, url; 
+var debug = function () {
+    console.log("Debug");
+    console.log("Debug");
+    console.log("Debug");
+    console.log("Debug");
+    console.log("Debug");
+}
 
+
+$(function () {
+    let convertIt, url;
+
+    // to make the ajax async, there should be a better way.
     function readFile() {
         $.ajaxSetup({
             async: false
         });
-        jQuery.get("samples/sample10-clustered-graphml.txt", (txt) => {
+        jQuery.get("samples/sample16-compound-json.txt", (txt) => {
             convertIt = txt;
         });
         $.ajaxSetup({
@@ -33,7 +43,7 @@ $(function () {
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-    if( !heroku ){
+    if (!heroku) {
         if (isGraphML)
             url = "http://localhost:" + port + "/layout/graphml?edges=true";
         else if (isSBGNML)
@@ -41,7 +51,7 @@ $(function () {
         else
             url = "http://localhost:" + port + "/layout/json?edges=true"
     }
-    else{
+    else {
         if (isGraphML)
             url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
         else if (isSBGNML)
@@ -92,16 +102,25 @@ $(function () {
                 else {
                     addIt = {
                         data: {
-                            id: obj
+                            id: obj,
+                            clusterID: res[obj].data.clusterID,
+                            width: res[obj].data.width,
+                            height: res[obj].data.height,
+                            parent: res[obj].data.parent
                         },
-                        position: res[obj]
+                        position: {
+                            x: res[obj].position.x,
+                            y: res[obj].position.y
+                        }
                     }
                     els['nodes'].push(addIt);
                 }
             });
+
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent("sample10-clustered-graphml.txt");
+            setFileContent("sample16-compound-json.txt");
+
             var panProps = ({
                 zoomFactor: 0.05, // zoom factor per zoom tick
                 zoomDelay: 45, // how many ms between zoom ticks
@@ -128,10 +147,23 @@ $(function () {
         });
 
 });
+
 $("#cose-bilkent").css("background-color", "grey");
+
+// random color generator for different colors;
+let getRandomColor = () => {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 
 function refreshCytoscape(graphData) { // on dom ready
     graphGlob = graphData;
+    cytoscapeJsGraph = graphData;
 
     styleForGraphs = [
         {
@@ -193,22 +225,32 @@ function refreshCytoscape(graphData) { // on dom ready
         elements: {
             nodes: graphData['nodes'],
             edges: graphData['edges']
-
         },
         layout: {
-            name: 'preset',
-            fit: true
+            name: 'preset'
         },
         boxSelectionEnabled: true,
         motionBlur: true,
         wheelSensitivity: 0.1,
         ready: function () {
-            this.nodes().forEach(function (node) {
-                // let width = [10, 20, 30];
-                // let size = width[Math.floor(Math.random() * 3)];
+            let colors = [];
+
+            this.nodes().forEach((node) => {
+                if (node.data().clusterID)
+                    colors[node.data().clusterID] = -1;
+            })
+
+            this.nodes().forEach((node) => {
+                if (node.data().clusterID && colors[node.data().clusterID] === -1)
+                    colors[node.data().clusterID] = getRandomColor();
+            })
+
+            this.nodes().forEach((node) => {
                 let size = 15;
                 node.css("width", size);
                 node.css("height", size);
+                if (node.data().clusterID)
+                    node.css("background-color", colors[node.data().clusterID]);
             });
 
             var i = 0;
@@ -302,6 +344,8 @@ function refreshCytoscape(graphData) { // on dom ready
             });
         }
     });
+
+
     var panProps = ({
         zoomFactor: 0.05, // zoom factor per zoom tick
         zoomDelay: 45, // how many ms between zoom ticks
@@ -710,7 +754,6 @@ var SPRINGYLayout = Backbone.View.extend({
         return this;
     }
 });
-// newly added
 var FCOSELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "fcose",
@@ -793,17 +836,16 @@ var FCOSELayout = Backbone.View.extend({
 
     }
 });
-
 var CISELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "cise",
-        clusters: null,
+        clusters: [],
         refresh: 10,
         animationDuration: undefined,
         animationEasing: undefined,
         fit: true,
         padding: 30,
-        nodeSeparation: 12.5,
+        nodeSeparation: 35,
         idealInterClusterEdgeLengthCoefficient: 1.4,
         allowNodesInsideCircle: false,
         maxRatioOfNodesInsideCircle: 0.1,
@@ -860,7 +902,6 @@ var CISELayout = Backbone.View.extend({
 
     }
 });
-
 var AVSDFLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "avsdf",
@@ -911,7 +952,6 @@ var AVSDFLayout = Backbone.View.extend({
 
     }
 });
-
 var DAGRELayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "dagre",
@@ -960,7 +1000,6 @@ var DAGRELayout = Backbone.View.extend({
 
     }
 });
-
 var KLAYLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "klay",
@@ -1045,7 +1084,6 @@ var KLAYLayout = Backbone.View.extend({
 
     }
 });
-
 var EULERLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "euler",
@@ -1115,7 +1153,6 @@ var EULERLayout = Backbone.View.extend({
         return this;
     }
 });
-
 var SPREADLayout = Backbone.View.extend({
     defaultLayoutProperties: {
         name: "spread",
@@ -1173,16 +1210,42 @@ var SPREADLayout = Backbone.View.extend({
     }
 });
 
-let applyLayoutFunction = async function(graph){
+let max = function (a, b) {
+    return (a > b) ? a : b;
+}
+
+let applyLayoutFunction = async function (graph) {
     let options = {};
 
     for (var prop in graph.currentLayoutProperties) {
         options[prop] = graph.currentLayoutProperties[prop];
     }
 
+    let cluster = [];
+    let mx = 0;
+
+    graphGlob.nodes.forEach((node) => {
+        if (node.data.clusterID)
+            mx = max(node.data.clusterID, mx);
+    })
+
+    // Since in CiSE, the case when the clusterID is empty is not handled
+    for (i = 0; i <= mx; i++)
+        cluster[i] = [];
+
+    graphGlob.nodes.forEach((node) => {
+        if (node.data.clusterID)
+            cluster[node.data.clusterID].push(node.data.id);
+    })
+
+    if (cluster.length !== 0) {
+        options["clusters"] = cluster;
+    }
+
     let graphData = graphGlob.nodes.concat(graphGlob.edges);
     let data = [graphData, options];
 
+    //url changes based on whether it's on heroku or on the localhost
     let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
 
     const settings = {
@@ -1192,27 +1255,29 @@ let applyLayoutFunction = async function(graph){
         },
         body: JSON.stringify(data)
     };
-
-    // post request to the server to layout the graph
     const res = await fetch(url, settings)
         .then(response => response.json())
         .then(json => {
             return json;
         })
         .catch(e => {
-            return e
+            return e;
         });
-    let els = [];
 
+    let els = [];
     els['nodes'] = [];
     els['edges'] = [];
 
     Object.keys(res).forEach((obj) => {
         let addIt = {
             data: {
-                id: obj
+                id: obj,
+                clusterID: res[obj].data.clusterID,
+                width: res[obj].data.width,
+                height: res[obj].data.height,
+                parent: res[obj].data.parent
             },
-            position: res[obj]
+            position: { x: res[obj].position.x, y: res[obj].position.y }
         }
         els['nodes'].push(addIt);
     });
@@ -1226,6 +1291,7 @@ let applyLayoutFunction = async function(graph){
         }
         els['edges'].push(addIt);
     })
+
     refreshCytoscape(els);
 }
 

@@ -1,0 +1,47 @@
+ [
+   {
+      "group":"nodes",
+      "data":{
+         "id":"n0"
+      }
+   },
+   {
+      "group":"nodes",
+      "data":{
+         "id":"n1",
+         "parent":"n0",
+          "width": 10
+      }
+   },
+   {
+      "group":"nodes",
+      "data":{
+         "id":"n2",
+         "parent":"n0"
+
+      }
+   },
+   {
+      "group":"nodes",
+      "data":{
+         "id":"n3",
+          "width": 10
+      }
+   },
+   {
+      "group":"edges",
+      "data":{
+         "id":"e0",
+         "source":"n3",
+         "target":"n2"
+      }
+   },
+   {
+      "group":"edges",
+      "data":{
+         "id":"e1",
+         "source":"n1",
+         "target":"n2"
+      }
+   }
+]

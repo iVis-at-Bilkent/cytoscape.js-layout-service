@@ -1,5 +1,6 @@
 heroku = false;
 
+
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
@@ -187,7 +188,7 @@ $("#euler").click(function (e) {
     whitenBackgrounds();
     $("#euler").css("background-color", "grey");
 });
-$("#spread").click(function (e) { 
+$("#spread").click(function (e) {
     tempName = "spread";
     whitenBackgrounds();
     $("#spread").css("background-color", "grey");
@@ -543,11 +544,11 @@ $("body").on("change", "#file-input", function (e) {
     var file = fileInput.files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        let convertIt = this.result;    
+        let convertIt = this.result;
         let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
         let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-        if( !heroku ){
+        if (!heroku) {
             if (isGraphML)
                 url = "http://localhost:" + port + "/layout/graphml?edges=true";
             else if (isSBGNML)
@@ -555,7 +556,7 @@ $("body").on("change", "#file-input", function (e) {
             else
                 url = "http://localhost:" + port + "/layout/json?edges=true"
         }
-        else{
+        else {
             if (isGraphML)
                 url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
             else if (isSBGNML)
@@ -563,10 +564,10 @@ $("body").on("change", "#file-input", function (e) {
             else
                 url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
         }
-    
+
         var options = { name: "preset" };
         let graphData = convertIt;
-    
+
         let data;
         if (!isGraphML && !isSBGNML) {
             data = [JSON.parse(graphData), options];
@@ -574,7 +575,7 @@ $("body").on("change", "#file-input", function (e) {
         }
         else
             data = graphData + JSON.stringify(options);
-    
+
         const settings = {
             method: 'POST',
             headers: {
@@ -583,18 +584,17 @@ $("body").on("change", "#file-input", function (e) {
             },
             body: data
         };
-    
+
         fetch(url, settings)
             .then(response => response.json())
             .then(res => {
                 let els = [];
                 let addIt;
-    
+
                 els['nodes'] = [];
                 els['edges'] = [];
-    
+
                 // console.log(res);
-    
                 Object.keys(res).forEach((obj) => {
                     if (res[obj].source && res[obj].target) {
                         addIt = {
@@ -609,17 +609,21 @@ $("body").on("change", "#file-input", function (e) {
                     else {
                         addIt = {
                             data: {
-                                id: obj
+                                id: obj,
+                                clusterID: res[obj].data.clusterID,
+                                width: res[obj].data.width,
+                                height: res[obj].data.height,
+                                parent: res[obj].data.parent
                             },
-                            position: {x : res[obj].x, y : res[obj].y}
+                            position: { x: res[obj].x, y: res[obj].y }
                         }
                         els['nodes'].push(addIt);
                     }
                 });
                 cytoscapeJsGraph = els;
-    
+
                 // console.log(els);
-    
+
                 refreshCytoscape(els);
                 setFileContent(fileName + ".txt");
                 graphGlob = els;
@@ -642,7 +646,6 @@ $("#new").click(function (e) {
     graphData['nodes'] = undefined;
     graphData['edges'] = undefined;
     refreshCytoscape(graphData);
-
 });
 
 
@@ -700,7 +703,7 @@ var loadSample = function (fileName) {
     let isGraphML = (convertIt.search("graphml") === -1) ? 0 : 1;
     let isSBGNML = (convertIt.search("sbgn") === -1) ? 0 : 1;
 
-    if( !heroku ){
+    if (!heroku) {
         if (isGraphML)
             url = "http://localhost:" + port + "/layout/graphml?edges=true";
         else if (isSBGNML)
@@ -708,7 +711,7 @@ var loadSample = function (fileName) {
         else
             url = "http://localhost:" + port + "/layout/json?edges=true"
     }
-    else{
+    else {
         if (isGraphML)
             url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
         else if (isSBGNML)
@@ -746,7 +749,6 @@ var loadSample = function (fileName) {
             els['edges'] = [];
 
             Object.keys(res).forEach((obj) => {
-                // console.log(obj);                
                 if (res[obj].source && res[obj].target) {
                     addIt = {
                         data: {
@@ -760,9 +762,13 @@ var loadSample = function (fileName) {
                 else {
                     addIt = {
                         data: {
-                            id: obj
+                            id: obj,
+                            clusterID: res[obj].data.clusterID,
+                            width: res[obj].data.width,
+                            height: res[obj].data.height,
+                            parent: res[obj].data.parent
                         },
-                        position: res[obj]
+                        position: { x: res[obj].position.x, y: res[obj].position.y }
                     }
                     els['nodes'].push(addIt);
                 }
@@ -770,7 +776,6 @@ var loadSample = function (fileName) {
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
             setFileContent(fileName + ".txt");
-            graphGlob = els;
         })
         .catch(e => {
             return e
@@ -822,6 +827,10 @@ $("#sample13").click(function (e) {
 $("#sample14").click(function (e) {
     loadSample("sample15-compound-graphml");
 });
+$("#sample15").click(function (e) {
+    loadSample("sample16-compound-json");
+});
+
 
 
 
