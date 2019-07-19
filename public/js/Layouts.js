@@ -3,7 +3,7 @@ var edgeNodes = [];
 let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
-heroku = true;
+heroku = false;
 
 
 var setFileContent = function (fileName) {
@@ -234,6 +234,7 @@ function refreshCytoscape(graphData) { // on dom ready
         wheelSensitivity: 0.1,
         ready: function () {
             let colors = [];
+            let usedColors = [];
 
             this.nodes().forEach((node) => {
                 if (node.data().clusterID)
@@ -241,8 +242,18 @@ function refreshCytoscape(graphData) { // on dom ready
             })
 
             this.nodes().forEach((node) => {
-                if (node.data().clusterID && colors[node.data().clusterID] === -1)
-                    colors[node.data().clusterID] = getRandomColor();
+                if (node.data().clusterID && colors[node.data().clusterID] === -1){
+                    let color = getRandomColor();
+                    if(usedColors[color] === false){
+                        colors[node.data().clusterID] = getRandomColor();
+                    }
+                    else{
+                        while(usedColors[color] === true){
+                            color = getRandomColor();
+                        }
+                        colors[node.data().clusterID] = color;
+                    }
+                }
             })
 
             this.nodes().forEach((node) => {
