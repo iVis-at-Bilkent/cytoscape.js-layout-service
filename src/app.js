@@ -124,7 +124,7 @@ app.post('/layout/:format', (req, res) => {
 
     if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
         cy = cytoscape({
-            styleEnabled: false,
+            styleEnabled: true,
             headless: true
         });
     }
@@ -134,12 +134,19 @@ app.post('/layout/:format', (req, res) => {
         })
     }
 
+    // for debugging purposes
+
+
     if (req.params.format === "graphml") {
         cy.graphml(data);
         cy.layout(options).run();
     }
     else {
         cy.add(data);
+
+        console.log(data);
+        console.log(options);
+        
 
         try {
             cy.layout(options).run();
