@@ -14,15 +14,6 @@ var setFileContent = function (fileName) {
     span.appendChild(document.createTextNode(fileName));
 };
 
-var debug = function () {
-    console.log("Debug");
-    console.log("Debug");
-    console.log("Debug");
-    console.log("Debug");
-    console.log("Debug");
-}
-
-
 $(function () {
     let convertIt, url;
 

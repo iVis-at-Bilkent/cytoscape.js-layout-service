@@ -143,11 +143,6 @@ app.post('/layout/:format', (req, res) => {
     }
     else {
         cy.add(data);
-
-        console.log(data);
-        console.log(options);
-        
-
         try {
             cy.layout(options).run();
         }

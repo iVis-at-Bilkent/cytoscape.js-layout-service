@@ -48,6 +48,8 @@ $("#addEdge").click(function (e) {
                 target: cy.$("node:selected")[1].data('id')
             }
         });
+
+
 });
 
 ///////////////////// VIEW ////////////////////////////
