@@ -48,7 +48,7 @@ Compounds are supported in graphml and json formats. Conventions for Cytoscape.j
 ## Clusters
 Clusters are supported in graphml and json formats. In json format clusterID field has to go to the data section of each node that has a cluster assigned to it. Similarly, in graphml clusterID key needs to be provided for each node that is part of some cluster.  
 
-# Supported layouts
+## Supported layouts
 The supported layouts are:
 - [fcose](https://github.com/iVis-at-Bilkent/cytoscape.js-fcose)
 - [cose-bilkent](https://github.com/cytoscape/cytoscape.js-cose-bilkent)
@@ -60,7 +60,7 @@ The supported layouts are:
 - [cola](https://github.com/cytoscape/cytoscape.js-cola)
 - [euler](https://github.com/cytoscape/cytoscape.js-euler)
   
- # Following is a list of third-party libraries used in building this web-service:
+## Following is a list of third-party libraries used in building this web-service:
 - [express](https://www.npmjs.com/package/express)
 - [sbgnml-to-cytoscape](https://www.npmjs.com/package/sbgnml-to-cytoscape)
 - [jsdom](https://www.npmjs.com/package/jsdom)
