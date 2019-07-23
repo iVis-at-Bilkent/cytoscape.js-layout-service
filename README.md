@@ -3,7 +3,7 @@ cytoscape-web-service
 
 Web-service on cytoscape.js to layout graphs
 
-Deployed at:
+Server and it's demo client-side are at:
 https://cytoscape-layout-service.herokuapp.com/
 
 ## Supported formats
@@ -24,7 +24,7 @@ POST /layout/:file_format?edges=true
 ```
 
 The format of the request depends on a format of the graph nodes and edges:
-#### JSON:
+### JSON:
 
 An array where the first element of the array is also an array that consists of nodes and edges of the graph, and the second element is a JSON object where the options for the layout are defined needs to be passed as a body of the request. Name field of the options body must be specified, other fields are optional. 
 If user wants to provide ```width``` and ```height``` for each node individually, they should include them in the data object as in the samples below.
@@ -33,7 +33,7 @@ If user wants to provide ```width``` and ```height``` for each node individually
 
 - [Sample JSON request body(simplest form)](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample4-compoundless-json.txt)
 
-#### SBGN-ML or GraphML:
+### SBGN-ML or GraphML:
 First comes nodes and edges of the graph in either of two formats then the options body for the cytoscape.js in JSON.
 - [Sample SBGN-ML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample7-compoundless-sbgnml.txt)
 - [Sample GraphML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample1-compoundless-graphml.txt)
@@ -41,6 +41,12 @@ First comes nodes and edges of the graph in either of two formats then the optio
 
 After the request is sent, the server will layout the given graph and return the JSON file with the node names and their positions.
 If an error occurs, the response of the server will consist of the error's body.
+
+## Compounds
+Compounds are supported in graphml and json formats. Conventions for Cytoscape.js for compounds in graphml and json formats are supported by the web-server.
+
+## Clusters
+Clusters are supported in graphml and json formats. In json format clusterID field has to go to the data section of each node that has a cluster assigned to it. Similarly, in graphml clusterID key needs to be provided for each node that is part of some cluster.  
 
 # Supported layouts
 The supported layouts are:
