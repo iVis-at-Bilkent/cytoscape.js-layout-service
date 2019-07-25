@@ -58,20 +58,11 @@ cytoscape.use(cola);
 const euler = require('cytoscape-euler');
 cytoscape.use(euler);
 
-// spread layout
-const spread = require('cytoscape-spread');
-cytoscape.use(spread);
-
-// springy layout
-const springy = require('cytoscape-springy');
-cytoscape.use(springy);
 
 let cy;
 let options;
 let data;
 let body;
-
-
 
 app.use(express.static(path.join(__dirname, "../public/")));
 
@@ -135,7 +126,6 @@ app.post('/layout/:format', (req, res) => {
     }
 
     // for debugging purposes
-
 
     if (req.params.format === "graphml") {
         cy.graphml(data);

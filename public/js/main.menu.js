@@ -1,6 +1,5 @@
 heroku = true;
 
-
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
@@ -40,16 +39,31 @@ $("#delete").click(function (e) {
 
 $("#addEdge").click(function (e) {
 
-    if (cy.$("node:selected").length == 2)
-        ur.do("add", {
-            group: "edges",
+    if (graphGlob["edges"] === undefined)
+        graphGlob["edges"] = [];
+    // if (cy.$("node:selected").length == 2)
+    // ur.do("add", {
+    //     group: "edges",
+    //     data: {
+    //         id: "e" + graphGlob["edges"].length,
+    //         source: cy.$("node:selected")[0].data('id'),
+    //         target: cy.$("node:selected")[1].data('id')
+    //     }
+    // });
+
+    if (cy.$("node:selected").length == 2){
+        graphGlob["edges"].push({
             data: {
+                id: "e" + graphGlob["edges"].length,
                 source: cy.$("node:selected")[0].data('id'),
                 target: cy.$("node:selected")[1].data('id')
             }
-        });
-
-
+        })
+    }
+    else{
+        console.log(new Error("You must have 2 nodes selected to create an edge!") );
+    }
+    refreshCytoscape(graphGlob);
 });
 
 ///////////////////// VIEW ////////////////////////////
@@ -116,7 +130,6 @@ $("#expand-all").click(function (e) {
 });
 
 ///////////////////// LOAD & SAVE //////////////////////////////
-
 
 $("#save-file").click(function (e) {
 
@@ -439,10 +452,14 @@ var addChild = function (children, theChild) {
 $("#makeCompound").click(function (e) {
     var nodes = cy.$('node:selected');
 
+    console.log("Making a compound? Are you crazy?");
+
     ur.do("createCompound", {
         nodesToMakeCompound: nodes,
         firstTime: true
     });
+
+
 });
 
 $("#layout-properties").click(function (e) {
@@ -645,8 +662,8 @@ $("#load-file").click(function (e) {
 
 $("#new").click(function (e) {
     var graphData = new Object();
-    graphData['nodes'] = undefined;
-    graphData['edges'] = undefined;
+    graphData['nodes'] = [];
+    graphData['edges'] = [];
     refreshCytoscape(graphData);
 });
 
@@ -684,9 +701,6 @@ $("#save-as-png").click(function (evt) {
     saveAs(b64toBlob(b64data, "image/png"), "network.png");
 
 });
-
-
-
 var loadSample = function (fileName) {
     let convertIt;
     function readFile() {

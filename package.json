@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser-xml": "^1.1.0",
     "cytoscape": "^3.7.2",
     "cytoscape-avsdf": "*",
     "cytoscape-cise": "*",
@@ -23,13 +22,10 @@
     "cytoscape-fcose": "*",
     "cytoscape-graphml": "^1.0.6",
     "cytoscape-klay": "^3.1.2",
-    "cytoscape-spread": "^3.0.0",
-    "cytoscape-springy": "^1.4.2",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
     "nodemon": "^1.19.1",
-    "path": "^0.12.7",
     "sbgnml-to-cytoscape": "^4.0.4"
   },
   "devDependencies": {}

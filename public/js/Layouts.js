@@ -5,7 +5,6 @@ let graphGlob;
 let styleForGraphs;
 heroku = true;
 
-
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
     while (span.firstChild) {
@@ -142,6 +141,7 @@ $(function () {
 $("#cose-bilkent").css("background-color", "grey");
 
 // random color generator for different colors;
+// src: https://stackoverflow.com/questions/1484506/random-color-generator
 let getRandomColor = () => {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -249,6 +249,9 @@ function refreshCytoscape(graphData) { // on dom ready
 
             this.nodes().forEach((node) => {
                 let size = 15;
+
+                node
+
                 node.css("width", size);
                 node.css("height", size);
                 if (node.data().clusterID)

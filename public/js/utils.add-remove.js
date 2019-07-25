@@ -10,14 +10,31 @@ var addRemoveUtilities = {
     cssTemp["shape"] = newNode.shape;
     cssTemp["width"] = newNode.w;
     cssTemp["height"] = newNode.h;
-//    cssTemp['border-width'] = borderWidth;
+    //  cssTemp['border-width'] = borderWidth;
     cssTemp['border-color'] = newNode.borderColor;
+
+    if (graphGlob["nodes"] === undefined)
+      graphGlob["nodes"] = [];
+
+    id = "n" + graphGlob["nodes"].length;
+
     var node = cy.add({
       group: "nodes",
-      data: {id: id_, name: newNode.name},
-      position: {x: newNode.x, y: newNode.y},
+      data: { id, name: newNode.name },
+      position: { x: newNode.x, y: newNode.y },
       css: cssTemp
     });
+
+
+    graphGlob["nodes"].push({
+      data: { id, name: newNode.name },
+      position: { x: newNode.x, y: newNode.y },
+      css: cssTemp
+    })
+    cytoscapeJsGraph = graphGlob;
+
+    refreshCytoscape(graphGlob);
+
     return node;
   },
 
@@ -30,13 +47,12 @@ var addRemoveUtilities = {
     var parents = nodes.parents();
     removedEles = removedEles.union(nodes.remove());
     cy.nodes().updateCompoundBounds();
-  //  refreshPaddings();
+    //  refreshPaddings();
     return removedEles;
   },
 
-  addEdgeSelected: function(source, target) {
-
-    if (cy.$("node:selected").length !=  2)
+  addEdgeSelected: function (source, target) {
+    if (cy.$("node:selected").length != 2)
       return;
 
     var edge = cy.add({
@@ -46,10 +62,10 @@ var addRemoveUtilities = {
         target: target
       }
     });
-    
+
     return edge;
   },
-  
+
 
   addEdge: function (source, target, sbgnclass) {
     var defaultsMap = this.defaultsMap;
@@ -99,7 +115,7 @@ var addRemoveUtilities = {
   },
   changeParent: function (nodes, oldParentId, newParentId) {
     var removedNodes = this.removeNodes(nodes);
-    
+
     for (var i = 0; i < removedNodes.length; i++) {
       var removedNode = removedNodes[i];
       var parentId = removedNode._private.data.parent;
@@ -110,14 +126,14 @@ var addRemoveUtilities = {
       }
 
       removedNode._private.data.parent = newParentId;
-      if(removedNode._private.parent){
+      if (removedNode._private.parent) {
         delete removedNode._private.parent;
       }
     }
 
     cy.add(removedNodes);
     cy.nodes().updateCompoundBounds();
-   // refreshPaddings();
-//    removedNodes.restore();
+    // refreshPaddings();
+    //    removedNodes.restore();
   }
 };
