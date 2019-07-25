@@ -73,10 +73,11 @@ Following is a list of third-party libraries used in building this web service:
 - [cytoscape-euler](https://www.npmjs.com/package/cytoscape-euler)
 - [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
 - [cytoscape-cise](https://www.npmjs.com/package/cytoscape-cise)
+- [nodemon](https://www.npmjs.com/package/nodemon)
+### Demo client
 - [bootstrap](https://getbootstrap.com)
 - [underscore.js](https://underscorejs.org)
 - [backbone.js](https://backbonejs.org)
-- [nodemon](https://www.npmjs.com/package/nodemon)
 
 
 
