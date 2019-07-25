@@ -1,4 +1,4 @@
-heroku = true;
+heroku = false;
 
 var refreshUndoRedoButtonsStatus = function () {
 
@@ -820,10 +820,10 @@ $("#sample6").click(function (e) {
     loadSample("sample7-simple-sbgnml");
 });
 $("#sample7").click(function (e) {
-    loadSample("sample8-simple-sbgnml");
+    loadSample("sample8-compound-sbgnml");
 });
 $("#sample8").click(function (e) {
-    loadSample("sample9-simple-sbgnml");
+    loadSample("sample9-compound-sbgnml");
 });
 $("#sample9").click(function (e) {
     loadSample("sample10-clustered-graphml");
@@ -845,6 +845,9 @@ $("#sample14").click(function (e) {
 });
 $("#sample15").click(function (e) {
     loadSample("sample16-compound-json");
+});
+$("#sample16").click(function (e) {
+    loadSample("sample17-simple-json-non-uniform-dimension");
 });
 
 

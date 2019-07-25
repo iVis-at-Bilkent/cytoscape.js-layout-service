@@ -3,7 +3,7 @@ var edgeNodes = [];
 let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
-heroku = true;
+heroku = false;
 
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
@@ -21,7 +21,7 @@ $(function () {
         $.ajaxSetup({
             async: false
         });
-        jQuery.get("samples/sample16-compound-json.txt", (txt) => {
+        jQuery.get("samples/sample17-simple-json-non-uniform-dimension.txt", (txt) => {
             convertIt = txt;
         });
         $.ajaxSetup({
@@ -109,7 +109,7 @@ $(function () {
 
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent("sample16-compound-json.txt");
+            setFileContent("sample17-simple-json-non-uniform-dimension.txt");
 
             var panProps = ({
                 zoomFactor: 0.05, // zoom factor per zoom tick
@@ -171,12 +171,12 @@ function refreshCytoscape(graphData) { // on dom ready
         {
             selector: 'node:selected',
             style: {
-                'background-color': 'black',
+                'background-color': 'cyan',
                 'line-color': 'black',
                 'target-arrow-color': 'black',
                 'source-arrow-color': 'black',
                 'text-outline-color': 'black',
-                'border-color': 'black',
+                'border-color': 'cyan',
                 'border-width': 5
             }
         },
@@ -250,10 +250,8 @@ function refreshCytoscape(graphData) { // on dom ready
             this.nodes().forEach((node) => {
                 let size = 15;
 
-                node
-
-                node.css("width", size);
-                node.css("height", size);
+                node.css("width", node.data().width || size);
+                node.css("height", node.data().height || size);
                 if (node.data().clusterID)
                     node.css("background-color", colors[node.data().clusterID]);
             });
