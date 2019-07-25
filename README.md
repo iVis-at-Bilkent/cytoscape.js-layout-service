@@ -76,6 +76,7 @@ Following is a list of third-party libraries used in building this web service:
 - [bootstrap](https://getbootstrap.com)
 - [underscore.js](https://underscorejs.org)
 - [backbone.js](https://backbonejs.org)
+- [nodemon](https://www.npmjs.com/package/nodemon)
 
 
 
