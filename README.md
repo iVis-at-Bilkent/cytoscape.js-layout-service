@@ -40,13 +40,13 @@ In any case it contains an array where the first element of the array is also an
 
 If user wants to provide ```width``` and ```height``` for each node individually, they should include them in the data object as in the samples below.
 
-- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample4-compoundless-json.txt) (simple)
+- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape.js-layout-service/blob/master/public/samples/sample4-simple-json.txt) (simple)
 
-- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/json_sample_width_height.json) (dimensions included)
+- [Sample JSON request body](https://github.com/iVis-at-Bilkent/cytoscape.js-layout-service/blob/master/public/samples/json_sample_width_height.json) (dimensions included)
 
-- [Sample SBGN-ML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample7-compoundless-sbgnml.txt)
+- [Sample SBGN-ML request body](https://github.com/iVis-at-Bilkent/cytoscape.js-layout-service/blob/master/public/samples/sample7-simple-sbgnml.txt)
 
-- [Sample GraphML request body](https://github.com/iVis-at-Bilkent/cytoscape-web-service/blob/master/public/samples/sample1-compoundless-graphml.txt)
+- [Sample GraphML request body](https://github.com/iVis-at-Bilkent/cytoscape.js-layout-service/blob/master/public/samples/sample2-simple-graphml.txt)
 
 After the request is sent, the server will layout the given graph and return the JSON file with the node names and their positions.
 If an error occurs, the response of the server will consist of the error's body.
@@ -73,6 +73,10 @@ Following is a list of third-party libraries used in building this web service:
 - [cytoscape-euler](https://www.npmjs.com/package/cytoscape-euler)
 - [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
 - [cytoscape-cise](https://www.npmjs.com/package/cytoscape-cise)
+- [bootstrap] (https://getbootstrap.com)
+- [underscore.js] (https://underscorejs.org)
+- [backbone.js] (https://backbonejs.org)
+
 
 
 
