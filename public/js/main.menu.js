@@ -1,4 +1,4 @@
-heroku = false;
+heroku = true;
 
 var refreshUndoRedoButtonsStatus = function () {
 
