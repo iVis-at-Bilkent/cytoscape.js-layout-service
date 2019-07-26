@@ -1,4 +1,5 @@
-heroku = true;
+heroku = !(location.hostname === "localhost");
+
 
 var refreshUndoRedoButtonsStatus = function () {
 

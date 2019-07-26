@@ -3,7 +3,7 @@ var edgeNodes = [];
 let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
-heroku = true;
+heroku = !(location.hostname === "localhost");
 
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
