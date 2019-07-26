@@ -848,7 +848,7 @@ var CISELayout = Backbone.View.extend({
         animationEasing: undefined,
         fit: true,
         padding: 30,
-        nodeSeparation: 35,
+        nodeSeparation: 100,
         idealInterClusterEdgeLengthCoefficient: 1.4,
         allowNodesInsideCircle: false,
         maxRatioOfNodesInsideCircle: 0.1,

@@ -272,8 +272,8 @@
     <node id="n21">
       <data key="x">538</data>
       <data key="y">690</data>
-      <data key="height">40</data>
-      <data key="width">40</data>
+      <data key="height">100</data>
+      <data key="width">100</data>
       <data key="color">164 98 164</data>
       <data key="color1">255 255 255</data>
       <data key="text">26</data>

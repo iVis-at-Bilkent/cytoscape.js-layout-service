@@ -19,8 +19,8 @@
     <node id="n0">
       <data key="x">923</data>
       <data key="y">806</data>
-      <data key="height">40</data>
-      <data key="width">90</data>
+      <data key="height">100</data>
+      <data key="width">100</data>
       <data key="color">218 159 247</data>
       <data key="borderColor">14 112 130</data>
       <data key="text">ALBERT, I</data>
