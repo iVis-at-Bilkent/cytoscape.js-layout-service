@@ -1,6 +1,5 @@
 heroku = !(location.hostname === "localhost");
 
-
 var refreshUndoRedoButtonsStatus = function () {
 
     if (ur.isUndoStackEmpty()) {
@@ -17,7 +16,6 @@ var refreshUndoRedoButtonsStatus = function () {
         $("#redo").parent("li").removeClass("disabled");
     }
 };
-// let port = window.location.port;
 
 ///////////////////// EDIT ////////////////////////////
 
@@ -52,7 +50,7 @@ $("#addEdge").click(function (e) {
     //     }
     // });
 
-    if (cy.$("node:selected").length == 2){
+    if (cy.$("node:selected").length == 2) {
         graphGlob["edges"].push({
             data: {
                 id: "e" + graphGlob["edges"].length,
@@ -61,8 +59,8 @@ $("#addEdge").click(function (e) {
             }
         })
     }
-    else{
-        console.log(new Error("You must have 2 nodes selected to create an edge!") );
+    else {
+        console.log(new Error("You must have 2 nodes selected to create an edge!"));
     }
     refreshCytoscape(graphGlob);
 });
@@ -451,16 +449,36 @@ var addChild = function (children, theChild) {
 };
 
 $("#makeCompound").click(function (e) {
-    var nodes = cy.$('node:selected');
+    let nodes = cy.$('node:selected');
+    let allNodes = cy.$('node');
 
-    console.log("Making a compound? Are you crazy?");
+    let dict = {};
+    let compoundNumber = 0;
 
-    ur.do("createCompound", {
-        nodesToMakeCompound: nodes,
-        firstTime: true
-    });
+    allNodes.forEach((node) => {
+        if (dict[node.data().parent] !== true) {
+            dict[node.data().parent] = true;
+            compoundNumber = compoundNumber + 1;
+        }
+    })
 
+    const newCompoundId = "compound" + (compoundNumber + 1);
 
+    graphGlob["nodes"].push({
+        data: {
+            id: newCompoundId
+        }
+    })
+
+    graphGlob["nodes"].forEach((GlobNode) => {
+        nodes.toArray().forEach((node) => {
+            if (node.data().id === GlobNode.data.id) {
+                GlobNode.data.parent = newCompoundId;
+            }
+        })
+    })
+
+    refreshCytoscape(graphGlob);
 });
 
 $("#layout-properties").click(function (e) {
@@ -641,9 +659,6 @@ $("body").on("change", "#file-input", function (e) {
                     }
                 });
                 cytoscapeJsGraph = els;
-
-                // console.log(els);
-
                 refreshCytoscape(els);
                 setFileContent(fileName + ".txt");
                 graphGlob = els;
