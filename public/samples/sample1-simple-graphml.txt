@@ -4,17 +4,41 @@
     xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
      http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
   <graph id="G" edgedefault="undirected">
-    <node id="n0"/>
-    <node id="n1"/>
-    <node id="n2"/>
-    <node id="n3"/>
-    <node id="n4"/>
-    <node id="n5"/>
-    <node id="n6"/>
+    <node id="n0">
+      <data key="height">40</data>
+      <data key="width">60</data>
+    </node>
+    <node id="n1">
+      <data key="height">40</data>
+      <data key="width">60</data>
+    </node>
+    <node id="n2">
+      <data key="height">30</data>
+      <data key="width">30</data>
+    </node>
+    <node id="n3">
+      <data key="height">30</data>
+      <data key="width">30</data>
+    </node>
+    <node id="n4">
+      <data key="height">50</data>
+      <data key="width">45</data>
+    </node>
+    <node id="n5">
+      <data key="height">45</data>
+      <data key="width">45</data>    
+    </node>
+    <node id="n6">
+      <data key="height">10</data>
+      <data key="width">10</data>    
+    </node>
     <node id="n7"/>
     <node id="n8"/>
     <node id="n9"/>
-    <node id="n10"/>
+    <node id="n10">
+      <data key="height">15</data>
+      <data key="width">15</data>  
+    </node>
     <edge id="e0" source="n0" target="n2"/>
     <edge id="e1" source="n1" target="n2"/>
     <edge id="e2" source="n2" target="n3"/>

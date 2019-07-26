@@ -3,7 +3,7 @@ var edgeNodes = [];
 let cytoscapeJsGraph;
 let graphGlob;
 let styleForGraphs;
-heroku = true;
+heroku = false;
 
 var setFileContent = function (fileName) {
     var span = document.getElementById('file-name');
@@ -176,7 +176,7 @@ function refreshCytoscape(graphData) { // on dom ready
                 'target-arrow-color': 'black',
                 'source-arrow-color': 'black',
                 'text-outline-color': 'black',
-                'border-color': 'cyan',
+                'border-color': 'red',
                 'border-width': 5
             }
         },
@@ -201,8 +201,8 @@ function refreshCytoscape(graphData) { // on dom ready
         {
             selector: 'edge:selected',
             style: {
-                'background-color': 'green',
-                'line-color': 'green',
+                'background-color': 'cyan',
+                'line-color': 'cyan',
                 'width': 5,
                 'opacity': 1,
                 'color': 'green'
@@ -248,7 +248,7 @@ function refreshCytoscape(graphData) { // on dom ready
             })
 
             this.nodes().forEach((node) => {
-                let size = 15;
+                let size = 40;
 
                 node.css("width", node.data().width || size);
                 node.css("height", node.data().height || size);
