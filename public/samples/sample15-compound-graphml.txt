@@ -15,45 +15,7 @@
   <key id="textFont" for="all" attr.name="textFont" attr.type="string"/>
   <key id="textColor" for="all" attr.name="textColor" attr.type="string"/>
   <graph id="" edgedefault="undirected">
-    <node id="n0">
-      <data key="x">436</data>
-      <data key="y">55</data>
-      <data key="height">40</data>
-      <data key="width">40</data>
-      <data key="color">64 128 128</data>
-      <data key="borderColor">64 128 128</data>
-      <data key="text">Node</data>
-      <data key="textFont">1|Arial|8|0|WINDOWS|1|-11|0|0|0|0|0|0|0|1|0|0|0|0|Arial</data>
-      <data key="textColor">0 0 0</data>
-      <data key="clusterID">0</data>
-      <data key="shape">Rectangle</data>
-    </node>
-    <node id="n1">
-      <data key="x">335</data>
-      <data key="y">70</data>
-      <data key="height">40</data>
-      <data key="width">40</data>
-      <data key="color">64 128 128</data>
-      <data key="borderColor">64 128 128</data>
-      <data key="text">Node</data>
-      <data key="textFont">1|Arial|8|0|WINDOWS|1|-11|0|0|0|0|0|0|0|1|0|0|0|0|Arial</data>
-      <data key="textColor">0 0 0</data>
-      <data key="clusterID">0</data>
-      <data key="shape">Rectangle</data>
-    </node>
-    <node id="n2">
-      <data key="x">529</data>
-      <data key="y">101</data>
-      <data key="height">43</data>
-      <data key="width">42</data>
-      <data key="color">64 128 128</data>
-      <data key="borderColor">64 128 128</data>
-      <data key="text">Node</data>
-      <data key="textFont">1|Arial|8|0|WINDOWS|1|-11|0|0|0|0|0|0|0|1|0|0|0|0|Arial</data>
-      <data key="textColor">0 0 0</data>
-      <data key="clusterID">0</data>
-      <data key="shape">Rectangle</data>
-    </node>
+    
     <node id="n3">
       <data key="x">138</data>
       <data key="y">352</data>
