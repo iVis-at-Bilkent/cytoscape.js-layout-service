@@ -15,7 +15,7 @@
     "cytoscape": "^3.7.2",
     "cytoscape-avsdf": "*",
     "cytoscape-cise": "*",
-    "cytoscape-cola": "^2.3.0",
+    "cytoscape-cola": "*",
     "cytoscape-cose-bilkent": "^4.0.0",
     "cytoscape-dagre": "^2.2.2",
     "cytoscape-euler": "^1.2.1",

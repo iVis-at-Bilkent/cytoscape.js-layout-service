@@ -126,6 +126,7 @@ app.post('/layout/:format', (req, res) => {
     }
 
     // for debugging purposes
+    // console.log(data);
 
     if (req.params.format === "graphml") {
         cy.graphml(data);

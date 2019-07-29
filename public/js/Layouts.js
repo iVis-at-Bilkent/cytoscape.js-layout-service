@@ -171,7 +171,7 @@ function refreshCytoscape(graphData) { // on dom ready
         {
             selector: 'node:selected',
             style: {
-                'background-color': 'cyan',
+                'background-color': '#888',
                 'line-color': 'black',
                 'target-arrow-color': 'black',
                 'source-arrow-color': 'black',
@@ -237,6 +237,7 @@ function refreshCytoscape(graphData) { // on dom ready
                     let color = getRandomColor();
                     if(usedColors[color] === false){
                         colors[node.data().clusterID] = getRandomColor();
+                        node.data().color = colors[node.data().clusterID];
                     }
                     else{
                         while(usedColors[color] === true){

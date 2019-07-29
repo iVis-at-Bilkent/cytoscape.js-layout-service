@@ -356,8 +356,22 @@ $("#addNodeMenu").click(function () {
             toggleUserControl();
             $("#cy").css("background-image", "").css("cursor", "");
             $("#cy").popover("destroy");
-            ur.do("addNode", newNode);
+            
+            const id = "node" + graphGlob["nodes"].length;
 
+            graphGlob["nodes"].push({
+                data : {
+                    id,
+                    width: w,
+                    height: h
+                },
+                position: {
+                    x,
+                    y
+                }
+            })
+            refreshCytoscape(graphGlob);
+            // ur.do("addNode", newNode);
         });
     });
 });
@@ -827,10 +841,10 @@ $("#sample3").click(function (e) {
     loadSample("sample4-simple-json");
 });
 $("#sample4").click(function (e) {
-    loadSample("sample5-huge-tree-graphml");
+    loadSample("sample5-big-tree-graphml");
 });
 $("#sample5").click(function (e) {
-    loadSample("sample6-huge-graph-graphml");
+    loadSample("sample6-big-graph-graphml");
 });
 $("#sample6").click(function (e) {
     loadSample("sample7-simple-sbgnml");
