@@ -176,7 +176,7 @@ function refreshCytoscape(graphData) { // on dom ready
                 'target-arrow-color': 'black',
                 'source-arrow-color': 'black',
                 'text-outline-color': 'black',
-                'border-color': 'red',
+                'border-color': 'cyan',
                 'border-width': 5
             }
         },
