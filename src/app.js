@@ -113,7 +113,7 @@ app.use((req, res, next) => {
 app.post('/layout/:format', (req, res) => {
     options.animate = false;
 
-    if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose") {
+    if (options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose" || options.name === "cola") {
         cy = cytoscape({
             styleEnabled: true,
             headless: true
