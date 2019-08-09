@@ -13,8 +13,8 @@
       <data key="width">60</data>
     </node>
     <node id="n2">
-      <data key="height">30</data>
-      <data key="width">30</data>
+      <data key="height">200</data>
+      <data key="width">200</data>
     </node>
     <node id="n3">
       <data key="height">30</data>

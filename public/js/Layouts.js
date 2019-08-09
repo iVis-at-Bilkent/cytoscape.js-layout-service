@@ -249,10 +249,11 @@ function refreshCytoscape(graphData) { // on dom ready
             })
 
             this.nodes().forEach((node) => {
-                let size = 40;
+                let size = 30;
 
                 node.css("width", node.data().width || size);
                 node.css("height", node.data().height || size);
+                
                 if (node.data().clusterID)
                     node.css("background-color", colors[node.data().clusterID]);
             });

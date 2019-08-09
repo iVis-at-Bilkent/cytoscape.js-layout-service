@@ -19,7 +19,6 @@ const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
 
-
 var $ = jQuery = require('jquery')(window);
 
 const graphml = require('cytoscape-graphml');
@@ -58,14 +57,12 @@ cytoscape.use(cola);
 const euler = require('cytoscape-euler');
 cytoscape.use(euler);
 
-
 let cy;
 let options;
 let data;
 let body;
 
 app.use(express.static(path.join(__dirname, "../public/")));
-
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
@@ -112,28 +109,44 @@ app.use((req, res, next) => {
 // POST /layout/:format?clusters=true
 app.post('/layout/:format', (req, res) => {
     options.animate = false;
+    let size = 30;
 
-    if (options.name === "cise" || options.name === "cose-bilkent" || options.name === "cose" || options.name === "fcose" || options.name === "cola") {
-        cy = cytoscape({
-            styleEnabled: true,
-            headless: true
-        });
-    }
-    else {
-        cy = cytoscape({
-            headless: true
-        })
-    }
+    cy = cytoscape({
+        styleEnabled: true,
+        headless: true
+    });
 
-    // for debugging purposes
-    // console.log(data);
 
     if (req.params.format === "graphml") {
         cy.graphml(data);
+
+        cy.filter((element, i) => {
+            return element.isNode();
+        }).forEach((node) => {
+            node.css("width", parseInt(node.data('width')) || size);
+            node.css("height", parseInt(node.data('height')) || size);
+        })
+
         cy.layout(options).run();
     }
     else {
+        // console.log(data);
         cy.add(data);
+
+        cy.filter((element, i) => {
+            return element.isNode();
+        }).forEach((node) => {
+            if (req.params.format === "json") {
+                node.css("width", node.data().width || size);
+                node.css("height", node.data().height || size);
+            }
+            else {
+                node.css("width", node.data().bbox.w || size);
+                node.css("height", node.data().bbox.h || size);
+            }
+        })
+
+
         try {
             cy.layout(options).run();
         }
@@ -146,10 +159,12 @@ app.post('/layout/:format', (req, res) => {
     let ret = {};
 
     // whether to return edges or not
+    console.log(options);
     cy.filter((element, i) => {
         return true;
     }).forEach((ele) => {
         if (ele.isNode()) {
+            console.log(ele.layoutDimensions());
             if (req.params.format === "json") {
                 let obj = {};
                 obj["position"] = { x: ele.position().x, y: ele.position().y };

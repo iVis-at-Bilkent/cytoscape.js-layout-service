@@ -10,15 +10,17 @@
       "data":{
          "id":"n1",
          "parent":"n0",
-          "width": 10
+         "width":100,
+         "height":100
       }
    },
    {
       "group":"nodes",
       "data":{
          "id":"n2",
-         "parent":"n0"
-
+         "parent":"n0",
+         "width":60,
+         "height":30
       }
    },
    {
@@ -32,16 +34,8 @@
       "group":"edges",
       "data":{
          "id":"e0",
-         "source":"n3",
-         "target":"n2"
-      }
-   },
-   {
-      "group":"edges",
-      "data":{
-         "id":"e1",
-         "source":"n1",
-         "target":"n2"
+         "source":"n0",
+         "target":"n3"
       }
    }
 ]
