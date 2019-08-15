@@ -119,7 +119,6 @@ app.post('/layout/:format', (req, res) => {
 
     if (req.params.format === "graphml") {
         cy.graphml(data);
-
         cy.filter((element, i) => {
             return element.isNode();
         }).forEach((node) => {
@@ -130,7 +129,6 @@ app.post('/layout/:format', (req, res) => {
         cy.layout(options).run();
     }
     else {
-        // console.log(data);
         cy.add(data);
 
         cy.filter((element, i) => {
@@ -159,12 +157,10 @@ app.post('/layout/:format', (req, res) => {
     let ret = {};
 
     // whether to return edges or not
-    console.log(options);
     cy.filter((element, i) => {
         return true;
     }).forEach((ele) => {
         if (ele.isNode()) {
-            console.log(ele.layoutDimensions());
             if (req.params.format === "json") {
                 let obj = {};
                 obj["position"] = { x: ele.position().x, y: ele.position().y };
@@ -173,6 +169,10 @@ app.post('/layout/:format', (req, res) => {
             }
             else if (req.params.format === "graphml") {
                 let obj = {};
+
+                // console.log(ele.data());
+                // there
+
                 obj["position"] = { x: parseInt(ele.data('x')), y: parseInt(ele.data('y')) };
                 obj["data"] = { width: parseInt(ele.data('width')), height: parseInt(ele.data('height')), clusterID: parseInt(ele.data('clusterID')), parent: ele.data("parent") };
                 ret[ele.id()] = obj;
@@ -188,6 +188,7 @@ app.post('/layout/:format', (req, res) => {
             ret[ele.id()] = { source: ele.data().source, target: ele.data().target };
         }
     });
+    console.log(JSON.stringify(ret));
     return res.status(200).send(ret);
 });
 

@@ -106,7 +106,6 @@ $(function () {
                     els['nodes'].push(addIt);
                 }
             });
-
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
             setFileContent("sample17-simple-json-non-uniform-dimension.txt");
@@ -153,6 +152,7 @@ let getRandomColor = () => {
 
 
 function refreshCytoscape(graphData) { // on dom ready
+    console.log(graphGlob);
     graphGlob = graphData;
     cytoscapeJsGraph = graphData;
 

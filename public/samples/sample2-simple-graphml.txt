@@ -7,27 +7,39 @@
    <graph id="G" edgedefault="undirected">
       <node id="n0">
          <data key="d0">green</data>
+         <data key="x">100.56108914098377</data>
+         <data key="y">208.29033645074946</data>
       </node>
       <node id="n1">
          <data key="height">10</data>
          <data key="width">10</data>
+         <data key="x">167.67245127762567</data>
+         <data key="y">169.71445555298578</data>
       </node>
       <node id="n2">
          <data key="height">10</data>
          <data key="width">10</data>
          <data key="d0">blue</data>
+         <data key="x">72.02913193870359</data>
+         <data key="y">137.95693048031217</data>
       </node>
       <node id="n3">
          <data key="d0">red</data>
+         <data key="x">139.8702776910818</data>
+         <data key="y">99.18575348073682</data>
       </node>
       <node id="n4">
          <data key="height">20</data>
          <data key="width">20</data>
+         <data key="x">25</data>
+         <data key="y">81.12453021526721</data>
       </node>
       <node id="n5">
          <data key="height">25</data>
          <data key="width">25</data>
          <data key="d0">turquoise</data>
+         <data key="x">89.06019253059503</data>
+         <data key="y">27.5</data>
       </node>
       <edge id="e0" source="n0" target="n2">
          <data key="d1">1.0</data>
