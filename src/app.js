@@ -172,7 +172,6 @@ app.post('/layout/:format', (req, res) => {
 
                 // console.log(ele.data());
                 // there
-
                 obj["position"] = { x: parseInt(ele.data('x')), y: parseInt(ele.data('y')) };
                 obj["data"] = { width: parseInt(ele.data('width')), height: parseInt(ele.data('height')), clusterID: parseInt(ele.data('clusterID')), parent: ele.data("parent") };
                 ret[ele.id()] = obj;
@@ -188,7 +187,7 @@ app.post('/layout/:format', (req, res) => {
             ret[ele.id()] = { source: ele.data().source, target: ele.data().target };
         }
     });
-    console.log(JSON.stringify(ret));
+    // console.log(JSON.stringify(ret));
     return res.status(200).send(ret);
 });
 

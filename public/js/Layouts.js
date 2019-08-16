@@ -152,7 +152,7 @@ let getRandomColor = () => {
 
 
 function refreshCytoscape(graphData) { // on dom ready
-    console.log(graphGlob);
+    // console.log(graphData);
     graphGlob = graphData;
     cytoscapeJsGraph = graphData;
 

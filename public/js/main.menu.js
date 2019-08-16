@@ -286,11 +286,10 @@ $("#addNodeMenu").click(function () {
 
     cy.one("click", function (e) {
         toggleUserControl();
+        var x = e.position.x;
+        var y = e.position.y;
 
-        var x = e.cyPosition.x;
-        var y = e.cyPosition.y;
-
-        $("#new-node-y").val(e.cyPosition.y);
+        $("#new-node-y").val(e.position.y);
 
         $('#new-node-color').colorpicker();
         $('#new-node-border-color').colorpicker();
@@ -541,7 +540,8 @@ $("#layout-properties").click(function (e) {
 });
 
 $("#perform-layout").click(function (e) {
-    cy.layout().stop();
+    // cy.layout().stop();
+
     cy.nodes().removeData("ports");
     cy.edges().removeData("portsource");
     cy.edges().removeData("porttarget");
