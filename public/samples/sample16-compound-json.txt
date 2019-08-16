@@ -1,41 +1,57 @@
- [
-   {
-      "group":"nodes",
-      "data":{
-         "id":"n0"
-      }
-   },
-   {
-      "group":"nodes",
-      "data":{
-         "id":"n1",
-         "parent":"n0",
-         "width":100,
-         "height":100
-      }
-   },
-   {
-      "group":"nodes",
-      "data":{
-         "id":"n2",
-         "parent":"n0",
-         "width":60,
-         "height":30
-      }
-   },
-   {
-      "group":"nodes",
-      "data":{
-         "id":"n3",
-          "width": 10
-      }
-   },
-   {
-      "group":"edges",
-      "data":{
-         "id":"e0",
-         "source":"n0",
-         "target":"n3"
-      }
-   }
+[
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n0"
+        },
+        "position": {
+            "x": 173.49447644360816,
+            "y": 75
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 100,
+            "height": 100,
+            "parent": "n0",
+            "id": "n1"
+        },
+        "position": {
+            "x": 138.49447644360816,
+            "y": 75
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 60,
+            "height": 30,
+            "parent": "n0",
+            "id": "n2"
+        },
+        "position": {
+            "x": 228.49447644360816,
+            "y": 40
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 10,
+            "id": "n3"
+        },
+        "position": {
+            "x": 20,
+            "y": 85
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n0",
+            "target": "n3",
+            "id": "e0"
+        }
+    }
 ]

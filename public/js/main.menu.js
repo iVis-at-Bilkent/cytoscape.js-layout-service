@@ -549,6 +549,7 @@ $("#perform-layout").click(function (e) {
     cy.nodes().data("ports", []);
     cy.edges().data("portsource", []);
     cy.edges().data("porttarget", []);
+
     switch (tempName) {
         case 'cose-bilkent':
             coseBilkentLayoutProp.applyLayout();
@@ -841,7 +842,7 @@ $("#sample3").click(function (e) {
     loadSample("sample4-simple-json");
 });
 $("#sample4").click(function (e) {
-    loadSample("sample5-big-tree-graphml");
+    loadSample("sample5-big-tree-json");
 });
 $("#sample5").click(function (e) {
     loadSample("sample6-big-graph-graphml");
@@ -862,16 +863,16 @@ $("#sample10").click(function (e) {
     loadSample("sample11-clustered-graphml");
 });
 $("#sample11").click(function (e) {
-    loadSample("sample12-clustered-graphml");
+    loadSample("sample12-clustered-json");
 });
 $("#sample12").click(function (e) {
-    loadSample("sample13-compound-graphml");
+    loadSample("sample13-compound-json");
 });
 $("#sample13").click(function (e) {
-    loadSample("sample14-compound-graphml");
+    loadSample("sample14-compound-json");
 });
 $("#sample14").click(function (e) {
-    loadSample("sample15-compound-graphml");
+    loadSample("sample15-compound-json");
 });
 $("#sample15").click(function (e) {
     loadSample("sample16-compound-json");

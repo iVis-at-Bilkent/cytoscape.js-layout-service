@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cytoscape = require('cytoscape');
+const fs = require('fs');
 
 // const port = process.env.PORT || 3000;
 const port = process.env.PORT || 3000;
@@ -155,6 +156,7 @@ app.post('/layout/:format', (req, res) => {
     }
 
     let ret = {};
+    // let save = [];
 
     // whether to return edges or not
     cy.filter((element, i) => {
@@ -165,13 +167,18 @@ app.post('/layout/:format', (req, res) => {
                 let obj = {};
                 obj["position"] = { x: ele.position().x, y: ele.position().y };
                 obj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
+
+                // let saveObj = {};
+                // saveObj["group"] = "nodes";
+                // saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
+                // saveObj["data"].id = ele.data().id;
+                // saveObj["position"] = { x: ele.position().x, y: ele.position().y };
+                // save.push(saveObj);
+
                 ret[ele.data().id] = obj;
             }
             else if (req.params.format === "graphml") {
                 let obj = {};
-
-                // console.log(ele.data());
-                // there
                 obj["position"] = { x: parseInt(ele.data('x')), y: parseInt(ele.data('y')) };
                 obj["data"] = { width: parseInt(ele.data('width')), height: parseInt(ele.data('height')), clusterID: parseInt(ele.data('clusterID')), parent: ele.data("parent") };
                 ret[ele.id()] = obj;
@@ -186,8 +193,20 @@ app.post('/layout/:format', (req, res) => {
         else if (!ele.isNode() && req.query.edges) {
             ret[ele.id()] = { source: ele.data().source, target: ele.data().target };
         }
+
+        // if (!ele.isNode()) {
+        //     let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
+        //     // saveObj.id = ele.id();
+        //     save.push(saveObj);
+        // }
     });
-    // console.log(JSON.stringify(ret));
+
+
+    // fs.writeFileSync("graph.json", JSON.stringify(save), (err) => {
+    //     console.log(err);
+    // });
+    // console.log(ret);
+
     return res.status(200).send(ret);
 });
 

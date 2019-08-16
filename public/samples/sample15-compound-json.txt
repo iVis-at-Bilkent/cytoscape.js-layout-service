@@ -1,0 +1,568 @@
+[
+    {
+        "group": "nodes",
+        "data": {
+            "width": 161,
+            "height": 210,
+            "clusterID": 0,
+            "id": "n3"
+        },
+        "position": {
+            "x": 909.9422216835551,
+            "y": 1733.6473809309432
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 3,
+            "parent": "n3",
+            "id": "n3:n0"
+        },
+        "position": {
+            "x": 1000.2692732123134,
+            "y": 1685.4624984136162
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 3,
+            "parent": "n3",
+            "id": "n3:n1"
+        },
+        "position": {
+            "x": 819.6151701547968,
+            "y": 1781.8322634482683
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 3,
+            "parent": "n3",
+            "id": "n3:n2"
+        },
+        "position": {
+            "x": 958.1271042008805,
+            "y": 1823.9744324597016
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 3,
+            "parent": "n3",
+            "id": "n3:n3"
+        },
+        "position": {
+            "x": 861.7573391662288,
+            "y": 1643.3203294021846
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 133,
+            "height": 218,
+            "clusterID": 0,
+            "id": "n4"
+        },
+        "position": {
+            "x": 1190.0923398920565,
+            "y": 1434.7155637434184
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 42,
+            "height": 43,
+            "clusterID": 4,
+            "parent": "n4",
+            "id": "n4:n0"
+        },
+        "position": {
+            "x": 1308.2006372494802,
+            "y": 1441.1208044158989
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 42,
+            "clusterID": 4,
+            "parent": "n4",
+            "id": "n4:n1"
+        },
+        "position": {
+            "x": 1084.555278582042,
+            "y": 1348.3208801490744
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 42,
+            "clusterID": 4,
+            "parent": "n4",
+            "id": "n4:n2"
+        },
+        "position": {
+            "x": 1211.1685209545349,
+            "y": 1555.2205114874664
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 4,
+            "parent": "n4",
+            "id": "n4:n3"
+        },
+        "position": {
+            "x": 1072.4840425346329,
+            "y": 1497.8985446003448
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 41,
+            "clusterID": 4,
+            "parent": "n4",
+            "id": "n4:n4"
+        },
+        "position": {
+            "x": 1229.9925292563228,
+            "y": 1313.7106159993705
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 79,
+            "height": 151,
+            "clusterID": 0,
+            "id": "n5"
+        },
+        "position": {
+            "x": 1443.1353673275476,
+            "y": 1224.3723583396104
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 6,
+            "parent": "n5",
+            "id": "n5:n0"
+        },
+        "position": {
+            "x": 1437.6825890415491,
+            "y": 1274.9063713785226
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 42,
+            "clusterID": 6,
+            "parent": "n5",
+            "id": "n5:n1"
+        },
+        "position": {
+            "x": 1448.588145613546,
+            "y": 1173.338345300698
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 118,
+            "height": 140,
+            "clusterID": 0,
+            "id": "n6"
+        },
+        "position": {
+            "x": 1490.2763857085201,
+            "y": 1494.958307274132
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 5,
+            "parent": "n6",
+            "id": "n6:n0"
+        },
+        "position": {
+            "x": 1548.7551438126914,
+            "y": 1562.3182917993925
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 44,
+            "height": 45,
+            "clusterID": 5,
+            "parent": "n6",
+            "id": "n6:n1"
+        },
+        "position": {
+            "x": 1545.8098692052602,
+            "y": 1428.5983227488714
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 5,
+            "parent": "n6",
+            "id": "n6:n2"
+        },
+        "position": {
+            "x": 1431.7976276043487,
+            "y": 1498.533389278625
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 176,
+            "height": 112,
+            "clusterID": 0,
+            "id": "n7"
+        },
+        "position": {
+            "x": 1256.6855808290916,
+            "y": 1756.2012717981456
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 1,
+            "parent": "n7",
+            "id": "n7:n0"
+        },
+        "position": {
+            "x": 1191.0800255545819,
+            "y": 1817.4980302054728
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 41,
+            "clusterID": 1,
+            "parent": "n7",
+            "id": "n7:n1"
+        },
+        "position": {
+            "x": 1238.8053264560215,
+            "y": 1693.9045133908185
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 43,
+            "clusterID": 1,
+            "parent": "n7",
+            "id": "n7:n2"
+        },
+        "position": {
+            "x": 1322.2911361036013,
+            "y": 1796.7791037046331
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 132,
+            "height": 161,
+            "clusterID": 0,
+            "id": "n8"
+        },
+        "position": {
+            "x": 661.8857530610976,
+            "y": 1410.1863350558174
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 48,
+            "clusterID": 2,
+            "parent": "n8",
+            "id": "n8:n0"
+        },
+        "position": {
+            "x": 598.4527815919248,
+            "y": 1429.4402445327544
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 42,
+            "height": 49,
+            "clusterID": 2,
+            "parent": "n8",
+            "id": "n8:n1"
+        },
+        "position": {
+            "x": 725.8187245302704,
+            "y": 1477.435020171697
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 43,
+            "height": 49,
+            "clusterID": 2,
+            "parent": "n8",
+            "id": "n8:n2"
+        },
+        "position": {
+            "x": 703.7501434261545,
+            "y": 1342.937649939938
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n7:n1",
+            "target": "n6:n2",
+            "id": "e0"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6:n0",
+            "target": "n6:n2",
+            "id": "e1"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3:n1",
+            "target": "n3:n3",
+            "id": "e2"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n2",
+            "target": "n3:n2",
+            "id": "e3"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n7:n1",
+            "target": "n3:n0",
+            "id": "e4"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n1",
+            "target": "n4:n3",
+            "id": "e5"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6:n1",
+            "target": "n6:n2",
+            "id": "e6"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n5:n0",
+            "target": "n4:n0",
+            "id": "e7"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3:n0",
+            "target": "n3:n1",
+            "id": "e8"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n3",
+            "target": "n3:n0",
+            "id": "e9"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n5:n0",
+            "target": "n4:n4",
+            "id": "e10"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n1",
+            "target": "n3:n3",
+            "id": "e11"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6:n1",
+            "target": "n6:n0",
+            "id": "e12"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n3",
+            "target": "n4:n2",
+            "id": "e13"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3:n2",
+            "target": "n3:n1",
+            "id": "e14"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n4",
+            "target": "n4:n1",
+            "id": "e15"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n7:n1",
+            "target": "n7:n2",
+            "id": "e16"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6:n2",
+            "target": "n5:n0",
+            "id": "e17"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3:n3",
+            "target": "n8:n1",
+            "id": "e18"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n4",
+            "target": "n5:n1",
+            "id": "e19"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n7:n0",
+            "target": "n7:n2",
+            "id": "e20"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n8:n1",
+            "target": "n8:n2",
+            "id": "e21"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n2",
+            "target": "n4:n0",
+            "id": "e22"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n3",
+            "target": "n4:n0",
+            "id": "e23"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n8:n1",
+            "target": "n8:n0",
+            "id": "e24"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4:n0",
+            "target": "n4:n4",
+            "id": "e25"
+        }
+    }
+]

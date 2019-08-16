@@ -42,12 +42,13 @@ $(function () {
             url = "http://localhost:" + port + "/layout/json?edges=true"
     }
     else {
+        let base = "https://cytoscape-layout-service.herokuapp.com/layout/"
         if (isGraphML)
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+            url = base + "graphml?edges=true";
         else if (isSBGNML)
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+            url = base + "sbgnml?edges=true"
         else
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+            url = base + "json?edges=true"
     }
 
     var options = { name: "preset" };
@@ -233,14 +234,14 @@ function refreshCytoscape(graphData) { // on dom ready
             })
 
             this.nodes().forEach((node) => {
-                if (node.data().clusterID && colors[node.data().clusterID] === -1){
+                if (node.data().clusterID && colors[node.data().clusterID] === -1) {
                     let color = getRandomColor();
-                    if(usedColors[color] === false){
+                    if (usedColors[color] === false) {
                         colors[node.data().clusterID] = getRandomColor();
                         node.data().color = colors[node.data().clusterID];
                     }
-                    else{
-                        while(usedColors[color] === true){
+                    else {
+                        while (usedColors[color] === true) {
                             color = getRandomColor();
                         }
                         colors[node.data().clusterID] = color;
@@ -253,7 +254,7 @@ function refreshCytoscape(graphData) { // on dom ready
 
                 node.css("width", node.data().width || size);
                 node.css("height", node.data().height || size);
-                
+
                 if (node.data().clusterID)
                     node.css("background-color", colors[node.data().clusterID]);
             });
@@ -1296,6 +1297,8 @@ let applyLayoutFunction = async function (graph) {
         }
         els['edges'].push(addIt);
     })
+
+
 
     refreshCytoscape(els);
 }
