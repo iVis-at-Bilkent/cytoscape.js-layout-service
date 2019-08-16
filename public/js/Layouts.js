@@ -21,7 +21,7 @@ $(function () {
         $.ajaxSetup({
             async: false
         });
-        jQuery.get("samples/sample17-simple-json-non-uniform-dimension.txt", (txt) => {
+        jQuery.get("samples/sample1-simple-graphml.txt", (txt) => {
             convertIt = txt;
         });
         $.ajaxSetup({
@@ -109,7 +109,7 @@ $(function () {
             });
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent("sample17-simple-json-non-uniform-dimension.txt");
+            setFileContent("sample1-simple-graphml");
 
             var panProps = ({
                 zoomFactor: 0.05, // zoom factor per zoom tick

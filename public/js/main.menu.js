@@ -822,7 +822,7 @@ var loadSample = function (fileName) {
             });
             cytoscapeJsGraph = els;
             refreshCytoscape(els);
-            setFileContent(fileName + ".txt");
+            setFileContent(fileName);
         })
         .catch(e => {
             return e
