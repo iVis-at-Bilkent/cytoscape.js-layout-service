@@ -10,7 +10,8 @@ First go and pull everything from this git repository. Then execute:
 ```
 npm install
 ```
-to install all of the dependencies for the server. 
+to install all of the dependencies for the server.
+
 To run the server on the port that is assigned in the index.html(3000 by default) execute:
 ```
 npm run dev
