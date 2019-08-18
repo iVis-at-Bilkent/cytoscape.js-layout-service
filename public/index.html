@@ -70,7 +70,7 @@
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a id="addNodeMenu" href="#">Add Node ...</a></li>
+                        <li><a id="addNodeMenu" href="#">Add Node...</a></li>
                         <li><a id="makeCompound" href="#">Add Compound For Selected</a></li>
                         <li><a id="addEdge" href="#">Add Edge Between Selected</a></li>
                         <li class="divider"></li>
@@ -98,7 +98,6 @@
                                 <li><a id="klay" href="#">klay</a></li>
                                 <li><a id="avsdf" href="#">avsdf</a></li>
                                 <li><a id="euler" href="#">euler</a></li>
-                                <!-- <li><a id="spread" href="#">spread</a></li> -->
                             </ul>
                         </li>
                         <li class="divider"></li>
@@ -205,10 +204,10 @@
                     <h4 class="modal-title" id="add-node-modal-label">Add new node</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="new-node-name">Name</label>
                         <input type="text" class="form-control" id="new-node-name" placeholder="Name" value=" ">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="new-node-width">Width</label>
                         <input type="number" class="form-control" min="0" value="15" id="new-node-width"
@@ -219,7 +218,7 @@
                         <input type="number" class="form-control" min="0" value="15" id="new-node-height"
                             placeholder="Height">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="new-node-shape">Shape</label>
                         <select id="new-node-shape" class="form-control">
                             <option value="rectangle">Rectangle</option>
@@ -228,22 +227,22 @@
                             <option value="roundrectangle">Round Rectangle</option>
                             <option value="pentagon">Pentagon</option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                         <label for="new-node-color">Color</label>
                         <div id="new-node-color" class="input-group colorpicker-component">
                             <input type="text" value="gray" class="form-control" />
                             <span class="input-group-addon"><i></i></span>
                         </div>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                         <label for="new-node-border-color">Border Color</label>
 
                         <div id="new-node-border-color" class="input-group colorpicker-component">
-                            <input type="text" value="black" class="form-control" />
+                            <input type="text" value="cyan" class="form-control" />
                             <span class="input-group-addon"><i></i></span>
                         </div>
-                    </div>
+                    </div> -->
                     <!--
                 <div class="form-group">
                     <label for="new-node-x">X Position</label>
@@ -1560,6 +1559,9 @@
         <script src="js/view_scripts/underscore-min.js"></script>
         <script src="js/view_scripts/backbone-min.js"></script>
         <script src="js/view_scripts/bootstrap-colorpicker.min.js"></script>
+
+        <!-- For saving the graph purposes -->
+        <script src="js/converter.json-to-graphml.js"></script>
 
         <!-- CYTOSCAPE & EXTENSIONS -->
         <script src="js/main.js"></script>

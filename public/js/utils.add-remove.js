@@ -13,27 +13,27 @@ var addRemoveUtilities = {
     //  cssTemp['border-width'] = borderWidth;
     cssTemp['border-color'] = newNode.borderColor;
 
-    if (graphGlob["nodes"] === undefined)
-      graphGlob["nodes"] = [];
+    // if (graphGlob["nodes"] === undefined)
+    //   graphGlob["nodes"] = [];
 
-    id = "n" + graphGlob["nodes"].length;
+    // id = "n" + graphGlob["nodes"].length;
 
     var node = cy.add({
       group: "nodes",
-      data: { id, name: newNode.name },
-      position: { x: newNode.x, y: newNode.y },
+      data: {id: id_, name: newNode.name},
+      position: {x: newNode.x, y: newNode.y},
       css: cssTemp
     });
 
 
-    graphGlob["nodes"].push({
-      data: { id, name: newNode.name },
-      position: { x: newNode.x, y: newNode.y },
-      css: cssTemp
-    })
-    cytoscapeJsGraph = graphGlob;
+    // graphGlob["nodes"].push({
+    //   data: { id, name: newNode.name },
+    //   position: { x: newNode.x, y: newNode.y },
+    //   css: cssTemp
+    // })
+    // cytoscapeJsGraph = graphGlob;
 
-    refreshCytoscape(graphGlob);
+    // refreshCytoscape(graphGlob);
 
     return node;
   },
@@ -47,7 +47,9 @@ var addRemoveUtilities = {
     var parents = nodes.parents();
     removedEles = removedEles.union(nodes.remove());
     cy.nodes().updateCompoundBounds();
-    //  refreshPaddings();
+    // refreshPaddings();
+
+    // console.log(removedEles);
     return removedEles;
   },
 
@@ -97,7 +99,6 @@ var addRemoveUtilities = {
     return edges.remove();
   },
   restoreEles: function (eles) {
-    console.log(eles);
     eles.restore();
     return eles;
   },

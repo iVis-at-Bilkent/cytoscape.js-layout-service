@@ -13,6 +13,7 @@ var setFileContent = function (fileName) {
     span.appendChild(document.createTextNode(fileName));
 };
 
+// on dom ready
 $(function () {
     let convertIt, url;
 
@@ -152,8 +153,7 @@ let getRandomColor = () => {
 }
 
 
-function refreshCytoscape(graphData) { // on dom ready
-    // console.log(graphData);
+function refreshCytoscape(graphData) { 
     graphGlob = graphData;
     cytoscapeJsGraph = graphData;
 
@@ -271,35 +271,37 @@ function refreshCytoscape(graphData) { // on dom ready
 
             });
 
-            var getNodesData = function () {
-                var nodesData = {};
-                var nodes = cy.nodes();
-                for (var i = 0; i < nodes.length; i++) {
-                    var node = nodes[i];
-                    nodesData[node.id()] = {
-                        width: node.width(),
-                        height: node.height(),
-                        x: node.position("x"),
-                        y: node.position("y")
-                    };
-                }
-                return nodesData;
-            };
+            // var getNodesData = function () {
+            //     var nodesData = {};
+            //     var nodes = cy.nodes();
+            //     for (var i = 0; i < nodes.length; i++) {
+            //         var node = nodes[i];
+            //         nodesData[node.id()] = {
+            //             width: node.width(),
+            //             height: node.height(),
+            //             x: node.position("x"),
+            //             y: node.position("y")
+            //         };
+            //     }
+            //     return nodesData;
+            // };
 
-            var enableDragAndDropMode = function () {
-                window.dragAndDropModeEnabled = true;
-                $("#sbgn-network-container").addClass("target-cursor");
-                cy.autolock(true);
-                cy.autounselectify(true);
-            };
+            // getNodesData();
 
-            var disableDragAndDropMode = function () {
-                window.dragAndDropModeEnabled = null;
-                window.nodeToDragAndDrop = null;
-                $("#sbgn-network-container").removeClass("target-cursor");
-                cy.autolock(false);
-                cy.autounselectify(false);
-            };
+            // var enableDragAndDropMode = function () {
+            //     window.dragAndDropModeEnabled = true;
+            //     $("#sbgn-network-container").addClass("target-cursor");
+            //     cy.autolock(true);
+            //     cy.autounselectify(true);
+            // };
+
+            // var disableDragAndDropMode = function () {
+            //     window.dragAndDropModeEnabled = null;
+            //     window.nodeToDragAndDrop = null;
+            //     $("#sbgn-network-container").removeClass("target-cursor");
+            //     cy.autolock(false);
+            //     cy.autounselectify(false);
+            // };
 
             var lastMouseDownNodeInfo = null;
             this.on("mousedown", "node", function () {
@@ -1220,7 +1222,8 @@ let max = function (a, b) {
     return (a > b) ? a : b;
 }
 
-let applyLayoutFunction = async function (graph) {
+// This function is used to layout the function by sending a request to the server.
+let applyLayoutFunction = async (graph) => {
     let options = {};
 
     for (var prop in graph.currentLayoutProperties) {
@@ -1230,25 +1233,52 @@ let applyLayoutFunction = async function (graph) {
     let cluster = [];
     let mx = 0;
 
+    graphGlob["nodes"] = [];
+    graphGlob["edges"] = [];
+
+    cy.filter((element, i) => {
+        return true;
+    }).forEach((ele) => {
+        let obj = {};
+        let node = ele.data();
+
+        if(ele.isNode()){
+            console.log(node);
+            obj["data"] = {id: node.id, clusterID: node.clusterID, width: node.width || ele.css("width"), height: node.height || ele.css("height"), parent: node.parent };
+            obj["position"] = {x: node.x, y: node.y};
+            graphGlob["nodes"].push(obj);
+        }
+        else{
+            obj["data"] = {id: node.id, source: node.source, target: node.target };
+            graphGlob["edges"].push(obj);
+        }
+    })
+    
+
     graphGlob.nodes.forEach((node) => {
         if (node.data.clusterID)
             mx = max(node.data.clusterID, mx);
     })
 
-    // Since in CiSE, the case when the clusterID is empty is not handled
+    // in CiSE, the case when the clusterID is empty is not handled
     for (i = 0; i <= mx; i++)
         cluster[i] = [];
 
+    // creating an array with cluster information for CiSE
     graphGlob.nodes.forEach((node) => {
         if (node.data.clusterID)
             cluster[node.data.clusterID].push(node.data.id);
     })
 
+    // CiSE layout want's you to include clusters like this. 
     if (cluster.length !== 0) {
         options["clusters"] = cluster;
     }
 
+    // adding both nodes and edges to one graph to send it to the server. 
     let graphData = graphGlob.nodes.concat(graphGlob.edges);
+
+    // this is the structure the server accepts data. First graph, second options. 
     let data = [graphData, options];
 
     //url changes based on whether it's on heroku or on the localhost

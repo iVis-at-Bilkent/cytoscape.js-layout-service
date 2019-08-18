@@ -37,32 +37,40 @@ $("#delete").click(function (e) {
 });
 
 $("#addEdge").click(function (e) {
-
-    if (graphGlob["edges"] === undefined)
-        graphGlob["edges"] = [];
-    // if (cy.$("node:selected").length == 2)
-    // ur.do("add", {
-    //     group: "edges",
-    //     data: {
-    //         id: "e" + graphGlob["edges"].length,
-    //         source: cy.$("node:selected")[0].data('id'),
-    //         target: cy.$("node:selected")[1].data('id')
-    //     }
-    // });
-
-    if (cy.$("node:selected").length == 2) {
-        graphGlob["edges"].push({
+    if (cy.$("node:selected").length == 2)
+        ur.do("add", {
+            group: "edges",
             data: {
-                id: "e" + graphGlob["edges"].length,
                 source: cy.$("node:selected")[0].data('id'),
                 target: cy.$("node:selected")[1].data('id')
             }
-        })
-    }
-    else {
-        console.log(new Error("You must have 2 nodes selected to create an edge!"));
-    }
-    refreshCytoscape(graphGlob);
+        });
+
+    // if (graphGlob["edges"] === undefined)
+    //     graphGlob["edges"] = [];
+    // if (cy.$("node:selected").length == 2) {
+    //     graphGlob["edges"].push({
+    //         data: {
+    //             id: "e" + graphGlob["edges"].length,
+    //             source: cy.$("node:selected")[0].data('id'),
+    //             target: cy.$("node:selected")[1].data('id')
+    //         }
+    //     })
+
+        // ur.do("add", {
+        //     group: "edges",
+        //     data: {
+        //         id: "e" + graphGlob["edges"].length,
+        //         source: cy.$("node:selected")[0].data('id'),
+        //         target: cy.$("node:selected")[1].data('id')
+        //     }
+        // })
+    // }
+    // else {
+    //     console.log(new Error("You must have 2 nodes selected to create an edge!"));
+    // }
+    // refreshCytoscape(graphGlob);
+
 });
 
 ///////////////////// VIEW ////////////////////////////
@@ -79,54 +87,54 @@ var getSelectedNodesForExpandCollapse = function () {
 
 }
 
-$("#collapse-selected").click(function (e) {
-    var nodes = getSelectedNodesForExpandCollapse().filter("[expanded-collapsed='expanded']");
-    var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(nodes, "collapse");
+// $("#collapse-selected").click(function (e) {
+//     var nodes = getSelectedNodesForExpandCollapse().filter("[expanded-collapsed='expanded']");
+//     var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(nodes, "collapse");
 
-    if (!thereIs) {
-        return;
-    }
+//     if (!thereIs) {
+//         return;
+//     }
 
-    editorActionsManager._do(new SimpleCollapseGivenNodesCommand(nodes));
-    refreshUndoRedoButtonsStatus();
+//     editorActionsManager._do(new SimpleCollapseGivenNodesCommand(nodes));
+//     refreshUndoRedoButtonsStatus();
 
-});
+// });
 
-$("#expand-selected").click(function (e) {
-    var nodes = getSelectedNodesForExpandCollapse().filter("[expanded-collapsed='collapsed']");
-    var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(nodes, "expand");
+// $("#expand-selected").click(function (e) {
+//     var nodes = getSelectedNodesForExpandCollapse().filter("[expanded-collapsed='collapsed']");
+//     var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(nodes, "expand");
 
-    if (!thereIs) {
-        return;
-    }
+//     if (!thereIs) {
+//         return;
+//     }
 
-    editorActionsManager._do(new SimpleExpandGivenNodesCommand(nodes));
-    refreshUndoRedoButtonsStatus();
-});
+//     editorActionsManager._do(new SimpleExpandGivenNodesCommand(nodes));
+//     refreshUndoRedoButtonsStatus();
+// });
 
-$("#collapse-all").click(function (e) {
-    var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(cy.nodes(":visible"), "collapse");
+// $("#collapse-all").click(function (e) {
+//     var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(cy.nodes(":visible"), "collapse");
 
-    if (!thereIs) {
-        return;
-    }
+//     if (!thereIs) {
+//         return;
+//     }
 
-    editorActionsManager._do(new SimpleCollapseGivenNodesCommand(cy.nodes()));
-    refreshUndoRedoButtonsStatus();
-});
+//     editorActionsManager._do(new SimpleCollapseGivenNodesCommand(cy.nodes()));
+//     refreshUndoRedoButtonsStatus();
+// });
 
-$("#expand-all").click(function (e) {
-    var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(cy.nodes(":visible"), "expand");
+// $("#expand-all").click(function (e) {
+//     var thereIs = expandCollapseUtilities.thereIsNodeToExpandOrCollapse(cy.nodes(":visible"), "expand");
 
-    if (!thereIs) {
-        return;
-    }
+//     if (!thereIs) {
+//         return;
+//     }
 
-    editorActionsManager._do(new SimpleExpandAllNodesCommand({
-        firstTime: true
-    }));
-    refreshUndoRedoButtonsStatus();
-});
+//     editorActionsManager._do(new SimpleExpandAllNodesCommand({
+//         firstTime: true
+//     }));
+//     refreshUndoRedoButtonsStatus();
+// });
 
 ///////////////////// LOAD & SAVE //////////////////////////////
 
@@ -310,8 +318,8 @@ $("#addNodeMenu").click(function () {
               var y = $("#new-node-y").val();*/
             var color = $("#new-node-color").colorpicker("getValue", "gray");
             var shape = $("#new-node-shape").val();
-            var borderColor = $("#new-node-border-color").colorpicker("getValue", "black");
-            //var borderWidth = $("#new-node-border-width").val();
+            var borderColor = $("#new-node-border-color").colorpicker("getValue", "cyan");
+            var borderWidth = $("#new-node-border-width").val();
 
             if (w == "") {
                 w = null;
@@ -349,104 +357,17 @@ $("#addNodeMenu").click(function () {
                 h: h,
                 color: color,
                 shape: shape,
-                borderColor: borderColor,
+                borderColor,
                 firstTime: true
             };
             toggleUserControl();
             $("#cy").css("background-image", "").css("cursor", "");
             $("#cy").popover("destroy");
-            
-            const id = "node" + graphGlob["nodes"].length;
+            ur.do("addNode", newNode);
 
-            graphGlob["nodes"].push({
-                data : {
-                    id,
-                    width: w,
-                    height: h
-                },
-                position: {
-                    x,
-                    y
-                }
-            })
-            refreshCytoscape(graphGlob);
-            // ur.do("addNode", newNode);
         });
     });
 });
-
-/*
-$("#addNodeMenu").click(function () {
-    $("#add-node-dialog").dialog({
-        modal: true,
-        draggable: false,
-        resizable: false,
-        position: ['center', 'center'],
-        show: 'blind',
-        hide: 'blind',
-        width: 250,
-        dialogClass: 'ui-dialog-osx',
-        buttons: {
-            "Done": function () {
-                var name = $("#new-node-name").val();
-                var w = $("#new-node-width").val();
-                var h = $("#new-node-height").val();
-                var x = $("#new-node-x").val();
-                var y = $("#new-node-y").val();
-                var color = $("#new-node-color").val();
-                var shape = $("#new-node-shape").val();
-                var borderColor = $("#new-node-border-color").val();
-//                var borderWidth = $("#new-node-border-width").val();
-
-                if (w == "") {
-                    w = null;
-                }
-                else {
-                    w = Number(w);
-                }
-
-                if (h == "") {
-                    h = null;
-                }
-                else {
-                    h = Number(h);
-                }
-
-                if (x == "") {
-                    x = null;
-                }
-                else {
-                    x = Number(x);
-                }
-
-                if (y == "") {
-                    y = null;
-                }
-                else {
-                    y = Number(y);
-                }
-
-                var newNode = {
-                    name: name,
-                    x: x,
-                    y: y,
-                    w: w,
-                    h: h,
-                    color: color,
-                    shape: shape,
-                    borderColor: borderColor,
-                    firstTime: true
-                };
-
-                editorActionsManager._do(new AddNodeCommand(newNode));
-                refreshUndoRedoButtonsStatus();
-
-                //addNode(name, x, y, w, h, color, shape,borderColor);
-                $(this).dialog("close");
-            }
-        }
-    });
-});*/
 
 var addChild = function (children, theChild) {
     var len = children.length;
@@ -462,36 +383,43 @@ var addChild = function (children, theChild) {
 };
 
 $("#makeCompound").click(function (e) {
-    let nodes = cy.$('node:selected');
-    let allNodes = cy.$('node');
+    var nodes = cy.$('node:selected');
 
-    let dict = {};
-    let compoundNumber = 0;
+    ur.do("createCompound", {
+        nodesToMakeCompound: nodes,
+        firstTime: true
+    });
 
-    allNodes.forEach((node) => {
-        if (dict[node.data().parent] !== true) {
-            dict[node.data().parent] = true;
-            compoundNumber = compoundNumber + 1;
-        }
-    })
+    // let nodes = cy.$('node:selected');
+    // let allNodes = cy.$('node');
 
-    const newCompoundId = "compound" + (compoundNumber + 1);
+    // let dict = {};
+    // let compoundNumber = 0;
 
-    graphGlob["nodes"].push({
-        data: {
-            id: newCompoundId
-        }
-    })
+    // allNodes.forEach((node) => {
+    //     if (dict[node.data().parent] !== true) {
+    //         dict[node.data().parent] = true;
+    //         compoundNumber = compoundNumber + 1;
+    //     }
+    // })
 
-    graphGlob["nodes"].forEach((GlobNode) => {
-        nodes.toArray().forEach((node) => {
-            if (node.data().id === GlobNode.data.id) {
-                GlobNode.data.parent = newCompoundId;
-            }
-        })
-    })
+    // const newCompoundId = "compound" + (compoundNumber + 1);
 
-    refreshCytoscape(graphGlob);
+    // graphGlob["nodes"].push({
+    //     data: {
+    //         id: newCompoundId
+    //     }
+    // })
+
+    // graphGlob["nodes"].forEach((GlobNode) => {
+    //     nodes.toArray().forEach((node) => {
+    //         if (node.data().id === GlobNode.data.id) {
+    //             GlobNode.data.parent = newCompoundId;
+    //         }
+    //     })
+    // })
+
+    // refreshCytoscape(graphGlob);
 });
 
 $("#layout-properties").click(function (e) {
@@ -506,13 +434,6 @@ $("#layout-properties").click(function (e) {
             case 'cola':
                 colaLayoutProp.render();
                 break;
-            case 'arbor':
-                arborLayoutProp.render();
-                break;
-            case 'springy':
-                springyLayoutProp.render();
-                break;
-            // newly added
             case 'fcose':
                 fcoseLayoutProp.render();
                 break;
@@ -531,9 +452,7 @@ $("#layout-properties").click(function (e) {
             case 'euler':
                 eulerLayoutProp.render();
                 break;
-            case 'spread':
-                spreadLayoutProp.render();
-                break;
+
         }
     }
 
@@ -560,13 +479,6 @@ $("#perform-layout").click(function (e) {
         case 'cola':
             colaLayoutProp.applyLayout();
             break;
-        case 'arbor':
-            arborLayoutProp.applyLayout();
-            break;
-        case 'springy':
-            springyLayoutProp.applyLayout();
-            break;
-        // newly added
         case 'fcose':
             fcoseLayoutProp.applyLayout();
             break;
@@ -585,9 +497,7 @@ $("#perform-layout").click(function (e) {
         case 'euler':
             eulerLayoutProp.applyLayout();
             break;
-        case 'spread':
-            spreadLayoutProp.applyLayout();
-            break;
+
     }
 });
 var atts;
@@ -693,8 +603,8 @@ $("#load-file").click(function (e) {
 
 $("#new").click(function (e) {
     var graphData = new Object();
-    graphData['nodes'] = [];
-    graphData['edges'] = [];
+    graphData['nodes'] = undefined;
+    graphData['edges'] = undefined;
     refreshCytoscape(graphData);
 });
 
