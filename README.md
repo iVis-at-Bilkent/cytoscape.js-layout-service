@@ -5,6 +5,19 @@ This repository implements a web service for [Cytoscape.js](http://js.cytoscape.
 
 A sample server deployment along with a simple client-side demo can be found [here](https://cytoscape-layout-service.herokuapp.com/).
 
+### Setup the server
+First go and pull everything from this git repository. Then execute: 
+```
+npm install
+```
+to install all of the dependencies for the server.
+
+To run the server on the port that is assigned in the index.html(3000 by default) execute:
+```
+npm run dev
+```
+
+
 ### Supported formats
 This web service supports the following input formats for graphs:
 - [JSON](https://www.json.org/)
@@ -63,6 +76,7 @@ Following is a list of third-party libraries used in building this web service:
 - [sbgnml-to-cytoscape](https://www.npmjs.com/package/sbgnml-to-cytoscape)
 - [jsdom](https://www.npmjs.com/package/jsdom)
 - [jQuery](https://www.npmjs.com/package/jquery)
+- [jQuery-migrate](https://www.npmjs.com/package/jquery-migrate)
 - [cytoscape-graphml](https://www.npmjs.com/package/cytoscape-graphml)
 - [cytoscape-fcose](https://www.npmjs.com/package/cytoscape-fcose)
 - [cytoscape-cose-bilkent](https://www.npmjs.com/package/cytoscape-cose-bilkent)
