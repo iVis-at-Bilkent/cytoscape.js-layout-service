@@ -19,6 +19,7 @@ var refreshUndoRedoButtonsStatus = function () {
 
 ///////////////////// EDIT ////////////////////////////
 
+// assigning shortcuts to the events in the menu, delete, redo, undo
 function KeyPress(e) {
     var evtobj = window.event ? event : e
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
@@ -28,7 +29,16 @@ function KeyPress(e) {
     else if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
         ur.redo();
         refreshUndoRedoButtonsStatus();
-    };
+    }
+    else if (evtobj.keyCode == 46) {
+        var selectedEles = cy.$(":selected");
+
+        if (selectedEles.length == 0) {
+            return;
+        }
+        ur.do("remove", selectedEles);
+        refreshUndoRedoButtonsStatus();
+    }
 }
 
 document.onkeydown = KeyPress;
@@ -70,9 +80,6 @@ $("#addEdge").click(function (e) {
 ///////////////////// LOAD & SAVE //////////////////////////////
 
 $("#save-file-json").click(function (e) {
-
-
-
     let save = [];
 
     cy.filter((element, i) => {
@@ -100,8 +107,43 @@ $("#save-file-json").click(function (e) {
     });
     var filename = "" + new Date().getTime() + ".json";
     saveAs(blob, filename);
-
 });
+
+
+$('#save-file-graphml').click((e) => {
+    let save = [];
+
+    cy.filter((element, i) => {
+        return true;
+    }).forEach((ele) => {
+        if (ele.isNode()) {
+            let saveObj = {};
+            saveObj["group"] = "nodes";
+            saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
+            saveObj["data"].id = ele.data().id;
+            saveObj["position"] = { x: ele.position().x, y: ele.position().y };
+            save.push(saveObj);
+        }
+        else {
+            let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
+            saveObj.id = ele.id();
+            save.push(saveObj);
+        }
+    })
+
+    var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
+
+    let graphml = jsonToGraphml.createGraphml(save);
+
+    console.log(graphml);
+
+    var blob = new Blob([graphml], {
+        type: "application/xml;charset=utf-8;",
+    });
+    var filename = "" + new Date().getTime() + ".xml";
+    saveAs(blob, filename);
+
+})
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
