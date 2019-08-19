@@ -36,6 +36,10 @@
                         <li><a id="new" href="#">New</a> </li>
                         <li><input id="file-input" type="file" style="display:none" />
                             <a href="#" type="file" id="load-file">Load...</a></li>
+
+                        <li><a id="save-file-json" href="#">Save</a></li>
+
+
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Samples
                                 <b class="right-caret"></b>
@@ -66,16 +70,8 @@
 
                         <li class="divider"></li>
 
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Save as
-                                <b class="right-caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a id="save-as-png" href="#">PNG</a></li>
-                                <li><a id="save-file-json" href="#">JSON</a></li>
-                                <!-- <li><a id="save-file-graphml" href="#">GraphML</a></li> -->
-                            </ul>
-                        </li>
+                        <li><a id="save-as-png" href="#">Save as PNG</a></li>
+
 
                     </ul>
 
@@ -1563,7 +1559,7 @@
     </table>
 </script>
         <script>
-            let port = 3000;
+            let port = window.location.port;
         </script>
 
         <script src="js/view_scripts/jquery.min.js"></script>

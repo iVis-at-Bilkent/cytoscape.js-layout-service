@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.js -e html,js,css,txt",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/app.js -e html,js,css,txt",
     "debug": "node --inspect-brk src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "env-cmd -f ./config/dev.env jest --watch",
     "start": "node src/app.js"
   },
   "author": "",
@@ -28,5 +28,9 @@
     "nodemon": "^1.19.1",
     "sbgnml-to-cytoscape": "^4.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "env-cmd": "^9.0.3",
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
+  }
 }
