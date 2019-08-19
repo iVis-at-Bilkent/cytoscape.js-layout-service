@@ -1243,7 +1243,6 @@ let applyLayoutFunction = async (graph) => {
         let node = ele.data();
 
         if(ele.isNode()){
-            console.log(node);
             obj["data"] = {id: node.id, clusterID: node.clusterID, width: node.width || ele.css("width"), height: node.height || ele.css("height"), parent: node.parent };
             obj["position"] = {x: node.x, y: node.y};
             graphGlob["nodes"].push(obj);
@@ -1337,8 +1336,6 @@ var whitenBackgrounds = function () {
     $("#cose-bilkent").css("background-color", "white");
     $("#cose").css("background-color", "white");
     $("#cola").css("background-color", "white");
-    $("#springy").css("background-color", "white");
-    $("#arbor").css("background-color", "white");
     // newly added
     $("#fcose").css("background-color", "white");
     $("#cise").css("background-color", "white");
@@ -1346,5 +1343,4 @@ var whitenBackgrounds = function () {
     $("#klay").css("background-color", "white");
     $("#avsdf").css("background-color", "white");
     $("#euler").css("background-color", "white");
-    $("#spread").css("background-color", "white");
 };
