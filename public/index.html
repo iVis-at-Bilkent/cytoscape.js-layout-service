@@ -23,11 +23,14 @@
 
 <body>
     <nav id="myNavbar" class="navbar navbar-default my-nav-bar" role="navigation">
+
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="container">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <ul class="nav navbar-nav">
+
                 <li class="dropdown">
+
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">File <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a id="new" href="#">New</a> </li>
@@ -60,13 +63,27 @@
 
                             </ul>
                         </li>
-                        <li>
-                            <a id="save-file" href="#">Save</a></li>
+
                         <li class="divider"></li>
-                        <li>
-                            <a id="save-as-png" href="#">Save as PNG</a>
+
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Save as
+                                <b class="right-caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+
+                                <li><a id="save-as-png" href="#">PNG</a></li>
+                                <li><a id="save-file-json" href="#">JSON</a></li>
+                                <li><a id="save-file-graphml" href="#">GraphML</a></li>
+
+                            </ul>
                         </li>
+
                     </ul>
+
+
+
+
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Edit <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -80,7 +97,7 @@
                         <li class="disabled"><a id="redo" href="#">Redo <i class="shortcut"> (CTRL + Y)</i> </a></li>
                     </ul>
                 </li>
-                
+
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Layout <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -1553,7 +1570,7 @@
 
         <script src="js/view_scripts/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-3.1.0.js"></script>
-        
+
         <script src="js/view_scripts/jquery-ui.min.js"></script>
         <script src="js/view_scripts/bootstrap.min.js"></script>
         <script src="js/view_scripts/underscore-min.js"></script>

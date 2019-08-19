@@ -1,0 +1,253 @@
+[
+    {
+        "group": "nodes",
+        "data": {
+            "width": 60,
+            "height": 40,
+            "clusterID": null,
+            "id": "n0"
+        },
+        "position": {
+            "x": 201,
+            "y": 651
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 60,
+            "height": 40,
+            "clusterID": null,
+            "id": "n1"
+        },
+        "position": {
+            "x": 61,
+            "y": 635
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 200,
+            "height": 200,
+            "clusterID": null,
+            "id": "n2"
+        },
+        "position": {
+            "x": 189,
+            "y": 475
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 30,
+            "height": 30,
+            "clusterID": null,
+            "id": "n3"
+        },
+        "position": {
+            "x": 154,
+            "y": 308
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 45,
+            "height": 50,
+            "clusterID": null,
+            "id": "n4"
+        },
+        "position": {
+            "x": 226,
+            "y": 228
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 45,
+            "height": 45,
+            "clusterID": null,
+            "id": "n5"
+        },
+        "position": {
+            "x": 80,
+            "y": 234
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 10,
+            "height": 10,
+            "clusterID": null,
+            "id": "n6"
+        },
+        "position": {
+            "x": 152,
+            "y": 182
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": null,
+            "height": null,
+            "clusterID": null,
+            "id": "n7"
+        },
+        "position": {
+            "x": 30,
+            "y": 152
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": null,
+            "height": null,
+            "clusterID": null,
+            "id": "n8"
+        },
+        "position": {
+            "x": 111,
+            "y": 115
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": null,
+            "height": null,
+            "clusterID": null,
+            "id": "n9"
+        },
+        "position": {
+            "x": 121,
+            "y": 30
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "width": 15,
+            "height": 15,
+            "clusterID": null,
+            "id": "n10"
+        },
+        "position": {
+            "x": 41,
+            "y": 80
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n0",
+            "target": "n2",
+            "id": "e0"
+        },
+        "id": "e0"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n1",
+            "target": "n2",
+            "id": "e1"
+        },
+        "id": "e1"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n2",
+            "target": "n3",
+            "id": "e2"
+        },
+        "id": "e2"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3",
+            "target": "n5",
+            "id": "e3"
+        },
+        "id": "e3"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n3",
+            "target": "n4",
+            "id": "e4"
+        },
+        "id": "e4"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n4",
+            "target": "n6",
+            "id": "e5"
+        },
+        "id": "e5"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6",
+            "target": "n5",
+            "id": "e6"
+        },
+        "id": "e6"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n5",
+            "target": "n7",
+            "id": "e7"
+        },
+        "id": "e7"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n6",
+            "target": "n8",
+            "id": "e8"
+        },
+        "id": "e8"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n8",
+            "target": "n7",
+            "id": "e9"
+        },
+        "id": "e9"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n8",
+            "target": "n9",
+            "id": "e10"
+        },
+        "id": "e10"
+    },
+    {
+        "group": "edges",
+        "data": {
+            "source": "n8",
+            "target": "n10",
+            "id": "e11"
+        },
+        "id": "e11"
+    }
+]

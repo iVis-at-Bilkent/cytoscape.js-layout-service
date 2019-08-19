@@ -20,12 +20,12 @@ var refreshUndoRedoButtonsStatus = function () {
 ///////////////////// EDIT ////////////////////////////
 
 function KeyPress(e) {
-    var evtobj = window.event? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey){
+    var evtobj = window.event ? event : e
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
         ur.undo();
         refreshUndoRedoButtonsStatus();
     }
-    else if (evtobj.keyCode == 89 && evtobj.ctrlKey){
+    else if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
         ur.redo();
         refreshUndoRedoButtonsStatus();
     };
@@ -54,7 +54,7 @@ $("#delete").click(function (e) {
 });
 
 $("#addEdge").click(function (e) {
-    if (cy.$("node:selected").length == 2){
+    if (cy.$("node:selected").length == 2) {
         ur.do("add", {
             group: "edges",
             data: {
@@ -69,14 +69,36 @@ $("#addEdge").click(function (e) {
 
 ///////////////////// LOAD & SAVE //////////////////////////////
 
-$("#save-file").click(function (e) {
+$("#save-file-json").click(function (e) {
 
-    var sbgnmlText = jsonToGraphml.createGraphml(atts);
 
-    var blob = new Blob([sbgnmlText], {
-        type: "text/plain;charset=utf-8;",
+
+    let save = [];
+
+    cy.filter((element, i) => {
+        return true;
+    }).forEach((ele) => {
+        if (ele.isNode()) {
+            let saveObj = {};
+            saveObj["group"] = "nodes";
+            saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
+            saveObj["data"].id = ele.data().id;
+            saveObj["position"] = { x: ele.position().x, y: ele.position().y };
+            save.push(saveObj);
+        }
+        else {
+            let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
+            saveObj.id = ele.id();
+            save.push(saveObj);
+        }
+    })
+
+    var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
+
+    var blob = new Blob([jsonText], {
+        type: "application/json;charset=utf-8;",
     });
-    var filename = "" + new Date().getTime() + ".graphml";;
+    var filename = "" + new Date().getTime() + ".json";
     saveAs(blob, filename);
 
 });
