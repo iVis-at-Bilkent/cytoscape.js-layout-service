@@ -17,6 +17,13 @@ To run the server on the port that is assigned in the index.html(3000 by default
 npm run dev
 ```
 
+### Test the server
+To test the server execute:
+```
+npm test
+```
+and you will have 4 basic test cases executed, that check if the server is up and working as expected with different types of inputs.
+
 
 ### Supported formats
 This web service supports the following input formats for graphs:
