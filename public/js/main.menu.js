@@ -100,7 +100,7 @@ $("#save-file-json").click(function (e) {
         }
     })
 
-    var jsonText = JSON.stringify(save, null, 4); //jsonToGraphml.createGraphml(atts);
+    var jsonText = JSON.stringify(save, null, 4);
 
     console.log(jsonText);
 

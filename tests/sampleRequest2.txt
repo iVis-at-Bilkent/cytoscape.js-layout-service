@@ -1,0 +1,222 @@
+[
+	[
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n0"
+        },
+        "position": {
+            "x": 100,
+            "y": 100
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n1"
+        },
+        "position": {
+            "x": 200,
+            "y": 200
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n2"
+        },
+        "position": {
+            "x": 300,
+            "y": 300
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n3"
+        },
+        "position": {
+            "x": 400,
+            "y": 400
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n4"
+        },
+        "position": {
+            "x": 500,
+            "y": 500
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n5"
+        },
+        "position": {
+            "x": 600,
+            "y": 600
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n6"
+        },
+        "position": {
+            "x": 700,
+            "y": 700
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n7"
+        },
+        "position": {
+            "x": 800,
+            "y": 800
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n8"
+        },
+        "position": {
+            "x": 900,
+            "y": 900
+        }
+    },
+    {
+        "group": "nodes",
+        "data": {
+            "id": "n9"
+        },
+        "position": {
+            "x": 1000,
+            "y": 1000
+        }
+    },
+   {
+        "group": "edges",
+        "data": {
+            "id": "e0",
+            "source": "n0",
+            "target": "n1"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e1",
+            "source": "n1",
+            "target": "n2"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e2",
+            "source": "n1",
+            "target": "n3"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e3",
+            "source": "n1",
+            "target": "n7"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e4",
+            "source": "n2",
+            "target": "n4"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e5",
+            "source": "n2",
+            "target": "n5"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e6",
+            "source": "n4",
+            "target": "n5"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e7",
+            "source": "n5",
+            "target": "n6"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e8",
+            "source": "n3",
+            "target": "n5"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e9",
+            "source": "n4",
+            "target": "n8"
+        }
+    },
+    {
+        "group": "edges",
+        "data": {
+            "id": "e10",
+            "source": "n4",
+            "target": "n9"
+        }
+    }
+],
+{
+	"name" : "klay",
+    "nodeDimensionsIncludeLabels": false,
+    "animate": false,
+    "klay": {
+        "addUnnecessaryBendpoints": false,
+        "aspectRatio": 1.6,
+        "borderSpacing": 20,
+        "compactComponents": false,
+        "crossingMinimization": "LAYER_SWEEP",
+        "cycleBreaking": "GREEDY",
+        "direction": "UNDEFINED",
+        "edgeRouting": "ORTHOGONAL",
+        "edgeSpacingFactor": 0.5,
+        "feedbackEdges": false,
+        "fixedAlignment": "NONE",
+        "inLayerSpacingFactor": 1,
+        "layoutHierarchy": false,
+        "linearSegmentsDeflectionDampening": 0.3,
+        "mergeEdges": false,
+        "mergeHierarchyCrossingEdges": true,
+        "nodeLayering": "NETWORK_SIMPLEX",
+        "nodePlacement": "BRANDES_KOEPF",
+        "randomizationSeed": 1,
+        "routeSelfLoopInside": false,
+        "separateConnectedComponents": true,
+        "spacing": 20,
+        "thoroughness": 7
+    }
+}
+]

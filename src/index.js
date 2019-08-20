@@ -87,12 +87,22 @@ app.use((req, res, next) => {
             let isJson = !(foundGML || foundSBGN);
 
             if (isJson) {
-                body = JSON.parse(body);
+                try {
+                    body = JSON.parse(body);
+                }
+                catch (e) {
+                    console.log(e);
+                }
                 data = body[0];
                 options = body[1];
             }
             else {
-                options = JSON.parse(options);
+                try {
+                    options = JSON.parse(options);
+                }
+                catch (e) {
+                    console.log(e);
+                }
                 if (foundSBGN) { // sbgnml
                     data = convert(data);
                 }
@@ -188,6 +198,7 @@ app.post('/layout/:format', (req, res) => {
 
     return res.status(200).send(ret);
 });
+
 
 module.exports = {
     port,
