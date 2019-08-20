@@ -100,7 +100,9 @@ $("#save-file-json").click(function (e) {
         }
     })
 
-    var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
+    var jsonText = JSON.stringify(save, null, 4); //jsonToGraphml.createGraphml(atts);
+
+    console.log(jsonText);
 
     var blob = new Blob([jsonText], {
         type: "application/json;charset=utf-8;",
@@ -110,40 +112,40 @@ $("#save-file-json").click(function (e) {
 });
 
 
-$('#save-file-graphml').click((e) => {
-    let save = [];
+// $('#save-file-graphml').click((e) => {
+//     let save = [];
 
-    cy.filter((element, i) => {
-        return true;
-    }).forEach((ele) => {
-        if (ele.isNode()) {
-            let saveObj = {};
-            saveObj["group"] = "nodes";
-            saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
-            saveObj["data"].id = ele.data().id;
-            saveObj["position"] = { x: ele.position().x, y: ele.position().y };
-            save.push(saveObj);
-        }
-        else {
-            let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
-            saveObj.id = ele.id();
-            save.push(saveObj);
-        }
-    })
+//     cy.filter((element, i) => {
+//         return true;
+//     }).forEach((ele) => {
+//         if (ele.isNode()) {
+//             let saveObj = {};
+//             saveObj["group"] = "nodes";
+//             saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
+//             saveObj["data"].id = ele.data().id;
+//             saveObj["position"] = { x: ele.position().x, y: ele.position().y };
+//             save.push(saveObj);
+//         }
+//         else {
+//             let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
+//             saveObj.id = ele.id();
+//             save.push(saveObj);
+//         }
+//     })
 
-    var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
+//     var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
 
-    let graphml = jsonToGraphml.createGraphml(save);
+//     let graphml = jsonToGraphml.createGraphml(save);
 
-    console.log(graphml);
+//     console.log(graphml);
 
-    var blob = new Blob([graphml], {
-        type: "application/xml;charset=utf-8;",
-    });
-    var filename = "" + new Date().getTime() + ".xml";
-    saveAs(blob, filename);
+//     var blob = new Blob([graphml], {
+//         type: "application/xml;charset=utf-8;",
+//     });
+//     var filename = "" + new Date().getTime() + ".xml";
+//     saveAs(blob, filename);
 
-})
+// })
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////

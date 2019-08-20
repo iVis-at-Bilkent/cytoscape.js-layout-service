@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns      http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+   <graph id="G" edgedefault="undirected">
+      <node id="n0">
+         <data key="height">40</data>
+         <data key="width">60</data>
+         <data key="x">201.85189311015665</data>
+         <data key="y">651.8939028876075</data>
+      </node>
+      <node id="n1">
+         <data key="height">40</data>
+         <data key="width">60</data>
+         <data key="x">61.52641166827084</data>
+         <data key="y">635.5925388376036</data>
+      </node>
+      <node id="n2">
+         <data key="height">200</data>
+         <data key="width">200</data>
+         <data key="x">189.36804822769818</data>
+         <data key="y">475.7819535160959</data>
+      </node>
+      <node id="n3">
+         <data key="height">30</data>
+         <data key="width">30</data>
+         <data key="x">154.72855301549043</data>
+         <data key="y">308.1120696819428</data>
+      </node>
+      <node id="n4">
+         <data key="height">50</data>
+         <data key="width">45</data>
+         <data key="x">226.3645536780807</data>
+         <data key="y">228.22586642175906</data>
+      </node>
+      <node id="n5">
+         <data key="height">45</data>
+         <data key="width">45</data>
+         <data key="x">80.60190544676493</data>
+         <data key="y">234.0054163665552</data>
+      </node>
+      <node id="n6">
+         <data key="height">10</data>
+         <data key="width">10</data>
+         <data key="x">152.63007401184018</data>
+         <data key="y">182.62967987442107</data>
+      </node>
+      <node id="n7">
+         <data key="x">30</data>
+         <data key="y">152.75533502866392</data>
+      </node>
+      <node id="n8">
+         <data key="x">111.47192476497685</data>
+         <data key="y">115.05433714147102</data>
+      </node>
+      <node id="n9">
+         <data key="x">121.63541879667355</data>
+         <data key="y">30</data>
+      </node>
+      <node id="n10">
+         <data key="height">15</data>
+         <data key="width">15</data>
+         <data key="x">41.190890595326664</data>
+         <data key="y">80.70511509363791</data>
+      </node>
+      <edge id="e0" source="n0" target="n2" />
+      <edge id="e1" source="n1" target="n2" />
+      <edge id="e2" source="n2" target="n3" />
+      <edge id="e3" source="n3" target="n5" />
+      <edge id="e4" source="n3" target="n4" />
+      <edge id="e5" source="n4" target="n6" />
+      <edge id="e6" source="n6" target="n5" />
+      <edge id="e7" source="n5" target="n7" />
+      <edge id="e8" source="n6" target="n8" />
+      <edge id="e9" source="n8" target="n7" />
+      <edge id="e10" source="n8" target="n9" />
+      <edge id="e11" source="n8" target="n10" />
+   </graph>
+</graphml>
+{
+    "name" : "fcose"
+}

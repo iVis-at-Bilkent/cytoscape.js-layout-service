@@ -9,6 +9,9 @@
     "test": "env-cmd -f ./config/dev.env jest --watch",
     "start": "node src/app.js"
   },
+  "jest": {
+    "testEnvironment" : "node"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
