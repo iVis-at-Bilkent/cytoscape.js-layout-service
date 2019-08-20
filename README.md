@@ -88,10 +88,15 @@ Following is a list of third-party libraries used in building this web service:
 - [cytoscape-spread](https://www.npmjs.com/package/cytoscape-spread)
 - [cytoscape-cise](https://www.npmjs.com/package/cytoscape-cise)
 - [nodemon](https://www.npmjs.com/package/nodemon)
+- [jest](https://www.npmjs.com/package/jest)
+- [super-test](https://www.npmjs.com/package/supertest)
 ### Demo client
 - [bootstrap](https://getbootstrap.com)
 - [underscore.js](https://underscorejs.org)
 - [backbone.js](https://backbonejs.org)
+- [FileSaver.js](https://github.com/eligrey/FileSaver.js/)
+- [cytoscape-panzoom](https://github.com/cytoscape/cytoscape.js-panzoom)
+- [cytoscape-undo-redo.js](https://github.com/iVis-at-Bilkent/cytoscape.js-undo-redo)
 
 
 
