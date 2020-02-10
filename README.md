@@ -4,7 +4,7 @@ Cytoscape.js Layout Web Service
 This repository implements a web service for [Cytoscape.js](http://js.cytoscape.org/) layouts. Applications not directly working on a Cytoscape.js canvas or applications that prefer a backend service for layout may use this as a service.
 
 Cytoscape.js Layout Web service is distributed under the [MIT License](https://opensource.org/licenses/MIT).
-A sample server deployment along with a simple client-side demo can be found [here](https://cytoscape-layout-service.herokuapp.com/).
+A sample server deployment along with a simple client-side demo can be found [here](https://cytoscape-ivis-layout-service.herokuapp.com/).
 
 ### Setup the server
 First go and pull everything from this git repository. Then execute: 
