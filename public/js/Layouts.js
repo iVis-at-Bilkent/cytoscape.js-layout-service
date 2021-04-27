@@ -1107,7 +1107,7 @@ var EULERLayout = Backbone.View.extend({
         maxIterations: 1000,
         maxSimulationTime: 4000,
         boundingBox: undefined,
-        randomize: false
+        randomize: true
     },
     currentLayoutProperties: null,
     initialize: function () {

@@ -10,3 +10,4 @@ cytoscape.js-layout-demo.iml
 .idea/modules.xml
 .idea/vcs.xml
 /playground
+/nbproject/private/

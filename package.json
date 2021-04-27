@@ -10,7 +10,7 @@
     "start": "node src/app.js"
   },
   "jest": {
-    "testEnvironment" : "node"
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC",
