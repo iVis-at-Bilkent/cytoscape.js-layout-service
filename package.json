@@ -29,7 +29,8 @@
     "jquery": "^3.4.1",
     "jsdom": "^15.1.1",
     "nodemon": "^1.19.1",
-    "sbgnml-to-cytoscape": "^4.0.4"
+    "sbgnml-to-cytoscape": "^4.0.4",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "env-cmd": "^9.0.3",

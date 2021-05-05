@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cytoscape = require('cytoscape');
 const fs = require('fs');
+const cors = require('cors');
 
 // const port = process.env.PORT || 3000;
 const port = process.env.PORT || 3000;
@@ -64,6 +65,8 @@ let data;
 let body;
 
 app.use(express.static(path.join(__dirname, "../public/")));
+app.use(cors());
+
 
 // middleware to manage the formats of files
 app.use((req, res, next) => {
