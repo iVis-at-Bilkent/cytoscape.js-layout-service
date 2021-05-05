@@ -22,18 +22,18 @@ var refreshUndoRedoButtonsStatus = function () {
 // assigning shortcuts to the events in the menu, delete, redo, undo
 function KeyPress(e) {
     var evtobj = window.event ? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
         ur.undo();
         refreshUndoRedoButtonsStatus();
     }
-    else if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+    else if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
         ur.redo();
         refreshUndoRedoButtonsStatus();
     }
-    else if (evtobj.keyCode == 46) {
+    else if (evtobj.keyCode === 46) {
         var selectedEles = cy.$(":selected");
 
-        if (selectedEles.length == 0) {
+        if (selectedEles.length === 0) {
             return;
         }
         ur.do("remove", selectedEles);
@@ -56,7 +56,7 @@ $("#redo").click(function (e) {
 $("#delete").click(function (e) {
     var selectedEles = cy.$(":selected");
 
-    if (selectedEles.length == 0) {
+    if (selectedEles.length === 0) {
         return;
     }
     ur.do("remove", selectedEles);
@@ -64,7 +64,7 @@ $("#delete").click(function (e) {
 });
 
 $("#addEdge").click(function (e) {
-    if (cy.$("node:selected").length == 2) {
+    if (cy.$("node:selected").length === 2) {
         ur.do("add", {
             group: "edges",
             data: {
@@ -111,44 +111,6 @@ $("#save-file-json").click(function (e) {
     saveAs(blob, filename);
 });
 
-
-// $('#save-file-graphml').click((e) => {
-//     let save = [];
-
-//     cy.filter((element, i) => {
-//         return true;
-//     }).forEach((ele) => {
-//         if (ele.isNode()) {
-//             let saveObj = {};
-//             saveObj["group"] = "nodes";
-//             saveObj["data"] = { width: ele.data().width, height: ele.data().height, clusterID: ele.data().clusterID, parent: ele.data().parent };
-//             saveObj["data"].id = ele.data().id;
-//             saveObj["position"] = { x: ele.position().x, y: ele.position().y };
-//             save.push(saveObj);
-//         }
-//         else {
-//             let saveObj = { group: "edges", data: { source: ele.data().source, target: ele.data().target, id: ele.id() } };
-//             saveObj.id = ele.id();
-//             save.push(saveObj);
-//         }
-//     })
-
-//     var jsonText = JSON.stringify(save); //jsonToGraphml.createGraphml(atts);
-
-//     let graphml = jsonToGraphml.createGraphml(save);
-
-//     console.log(graphml);
-
-//     var blob = new Blob([graphml], {
-//         type: "application/xml;charset=utf-8;",
-//     });
-//     var filename = "" + new Date().getTime() + ".xml";
-//     saveAs(blob, filename);
-
-// })
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////
 
 var tempName = "cose-bilkent";
 $("#cose-bilkent").click(function (e) {
@@ -307,28 +269,28 @@ $("#addNodeMenu").click(function () {
             var borderColor = $("#new-node-border-color").colorpicker("getValue", "cyan");
             var borderWidth = $("#new-node-border-width").val();
 
-            if (w == "") {
+            if (w === "") {
                 w = null;
             }
             else {
                 w = Number(w);
             }
 
-            if (h == "") {
+            if (h === "") {
                 h = null;
             }
             else {
                 h = Number(h);
             }
 
-            if (x == "") {
+            if (x === "") {
                 x = null;
             }
             else {
                 x = Number(x);
             }
 
-            if (y == "") {
+            if (y === "") {
                 y = null;
             }
             else {
@@ -475,11 +437,11 @@ $("body").on("change", "#file-input", function (e) {
         }
         else {
             if (isGraphML)
-                url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+                url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/graphml?edges=true";
             else if (isSBGNML)
-                url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+                url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/sbgnml?edges=true"
             else
-                url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+                url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/json?edges=true"
         }
 
         var options = { name: "preset" };
@@ -624,11 +586,11 @@ var loadSample = function (fileName) {
     }
     else {
         if (isGraphML)
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/graphml?edges=true";
+            url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/graphml?edges=true";
         else if (isSBGNML)
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/sbgnml?edges=true"
+            url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/sbgnml?edges=true"
         else
-            url = "https://cytoscape-layout-service.herokuapp.com/layout/json?edges=true"
+            url = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/json?edges=true"
     }
 
     var options = { name: "preset" };

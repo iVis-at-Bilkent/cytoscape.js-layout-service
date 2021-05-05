@@ -15,13 +15,13 @@ const path = require("path");
 let convert = require('sbgnml-to-cytoscape');
 
 // for graphml
-var jsdom = require("jsdom");
+const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
 
-var $ = jQuery = require('jquery')(window);
+const $ = jQuery = require('jquery')(window);
 
 const graphml = require('cytoscape-graphml');
 cytoscape.use(graphml, $);

@@ -43,7 +43,7 @@ $(function () {
             url = "http://localhost:" + port + "/layout/json?edges=true"
     }
     else {
-        let base = "https://cytoscape-layout-service.herokuapp.com/layout/"
+        let base = "https://cytoscape-ivis-layout-service.herokuapp.com/layout/"
         if (isGraphML)
             url = base + "graphml?edges=true";
         else if (isSBGNML)
@@ -1281,7 +1281,7 @@ let applyLayoutFunction = async (graph) => {
     let data = [graphData, options];
 
     //url changes based on whether it's on heroku or on the localhost
-    let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-layout-service.herokuapp.com/layout/json");
+    let url = (!heroku) ? ("http://localhost:" + port + "/layout/json") : ("https://cytoscape-ivis-layout-service.herokuapp.com/layout/json");
 
     const settings = {
         method: 'POST',
