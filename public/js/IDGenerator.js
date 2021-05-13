@@ -1,11 +1,11 @@
-var count = 0;
-var pre = "_id_";
-var post = "_";
+let count = 0;
+let pre = "_id_";
+let post = "_";
 function IDGenerator(){
 }
 
 IDGenerator.generate = function(){
-  var res = pre + count + post;
+  let res = pre + count + post;
   count++;
   return res;
 };

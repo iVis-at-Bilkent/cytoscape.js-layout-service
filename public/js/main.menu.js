@@ -207,24 +207,6 @@ var eulerLayoutProp = new EULERLayout({
 
 $("#add-node-dialog").hide();
 
-function toggleUserControl() {
-    /*
-        toggleFuncs = function (fs){
-            for(var i = 0; i < fs.length; i++)
-                fs[i](!fs[i]());
-        };
-        console.log(cy);
-        toggleFuncs([*/
-    /*
-        cy.panningEnabled(!cy.panningEnabled());
-            cy.zoomingEnabled(!cy.zoomingEnabled());
-            cy.boxSelectionEnabled(!cy.boxSelectionEnabled());
-            cy.autoungrabify(!cy.autoungrabify());
-            cy.autounselectify(!cy.autounselectify());
-            cy.autolock(!cy.autolock());*/
-}
-
-
 $("#addNodeMenu").click(function () {
     $("#cy").css("background-image", "url('css/images/grid_background.gif')").css("cursor", "crosshair");
     $("#cy").popover({

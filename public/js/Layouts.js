@@ -271,38 +271,6 @@ function refreshCytoscape(graphData) {
 
             });
 
-            // var getNodesData = function () {
-            //     var nodesData = {};
-            //     var nodes = cy.nodes();
-            //     for (var i = 0; i < nodes.length; i++) {
-            //         var node = nodes[i];
-            //         nodesData[node.id()] = {
-            //             width: node.width(),
-            //             height: node.height(),
-            //             x: node.position("x"),
-            //             y: node.position("y")
-            //         };
-            //     }
-            //     return nodesData;
-            // };
-
-            // getNodesData();
-
-            // var enableDragAndDropMode = function () {
-            //     window.dragAndDropModeEnabled = true;
-            //     $("#sbgn-network-container").addClass("target-cursor");
-            //     cy.autolock(true);
-            //     cy.autounselectify(true);
-            // };
-
-            // var disableDragAndDropMode = function () {
-            //     window.dragAndDropModeEnabled = null;
-            //     window.nodeToDragAndDrop = null;
-            //     $("#sbgn-network-container").removeClass("target-cursor");
-            //     cy.autolock(false);
-            //     cy.autounselectify(false);
-            // };
-
             var lastMouseDownNodeInfo = null;
             this.on("mousedown", "node", function () {
                 var self = this;
@@ -324,8 +292,8 @@ function refreshCytoscape(graphData) {
                     x: node.position("x"),
                     y: node.position("y")
                 };
-                if (mouseUpPosition.x != lastMouseDownPosition.x ||
-                    mouseUpPosition.y != lastMouseDownPosition.y) {
+                if (mouseUpPosition.x !== lastMouseDownPosition.x ||
+                    mouseUpPosition.y !== lastMouseDownPosition.y) {
                     var positionDiff = {
                         x: mouseUpPosition.x - lastMouseDownPosition.x,
                         y: mouseUpPosition.y - lastMouseDownPosition.y

@@ -12,13 +12,12 @@ var addRemoveUtilities = {
     cssTemp["height"] = newNode.h;
     cssTemp['border-color'] = newNode.borderColor;
 
-    var node = cy.add({
+    return cy.add({
       group: "nodes",
-      data: {id: id_, name: newNode.name},
+      data: {id: id_, name: newNode.name, label: ''},
       position: {x: newNode.x, y: newNode.y},
       css: cssTemp
     });
-    return node;
   },
 
   removeNodes: function (nodes) {
@@ -37,15 +36,14 @@ var addRemoveUtilities = {
     if (cy.$("node:selected").length != 2)
       return;
 
-    var edge = cy.add({
+    return cy.add({
       group: "edges",
       data: {
         source: source,
-        target: target
+        target: target,
+        label: ''
       }
     });
-
-    return edge;
   },
 
 
@@ -60,7 +58,8 @@ var addRemoveUtilities = {
       data: {
         source: source,
         target: target,
-        sbgnclass: sbgnclass
+        sbgnclass: sbgnclass,
+        label: ''
       },
       css: css
     });
@@ -102,7 +101,7 @@ var addRemoveUtilities = {
       var parentId = removedNode._private.data.parent;
 
       //Just alter the parent id of the nodesToMakeCompound
-      if (parentId != oldParentId || removedNode._private.data.source) {
+      if (parentId !== oldParentId || removedNode._private.data.source) {
         continue;
       }
 

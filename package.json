@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cytoscape": "^3.7.2",
+    "cytoscape": "^3.8.0",
     "cytoscape-avsdf": "*",
     "cytoscape-cise": "*",
     "cytoscape-cola": "*",
