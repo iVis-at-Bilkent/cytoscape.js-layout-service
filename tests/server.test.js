@@ -3,7 +3,7 @@ const app = require('../src/app');
 const fs = require('fs');
 const path = require('path');
 
-let data;
+let data, data1, data2;
 
 beforeEach(() => {
     console.log(path.resolve(__dirname, "./sampleRequest.txt"));

@@ -1,15 +1,12 @@
 const express = require('express');
 const app = express();
 const cytoscape = require('cytoscape');
-const fs = require('fs');
 const cors = require('cors');
 
-// const port = process.env.PORT || 3000;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 // to serve the html
 const path = require("path");
-// app.set( "view engine", any );
 
 // to support sbgnml type of input
 let convert = require('sbgnml-to-cytoscape');
@@ -67,12 +64,10 @@ let body;
 app.use(express.static(path.join(__dirname, "../public/")));
 app.use(cors());
 
-
 // middleware to manage the formats of files
 app.use((req, res, next) => {
     if (req.method === "POST") {
         body = '';
-        isJson = false;
         options = '';
         data = '';
 
@@ -81,7 +76,7 @@ app.use((req, res, next) => {
         })
 
         req.on('end', () => {
-            for (id = 0; id < body.length && body[id] != '{'; id++);
+            let id = body.indexOf('{');
             options = body.substring(id);
             data = body.substring(0, id);
 
@@ -92,18 +87,15 @@ app.use((req, res, next) => {
             if (isJson) {
                 try {
                     body = JSON.parse(body);
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e);
                 }
                 data = body[0];
                 options = body[1];
-            }
-            else {
+            } else {
                 try {
                     options = JSON.parse(options);
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e);
                 }
                 if (foundSBGN) { // sbgnml
@@ -112,12 +104,9 @@ app.use((req, res, next) => {
             }
             next();
         })
-    }
-    else
+    } else
         next();
 })
-// check if an object is empty or not
-
 // whether to include edges in the output or not
 // POST /layout/:format?edges=true 
 // POST /layout/:format?clusters=true
